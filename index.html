@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UNEL-MLK · Universidad Nacional Experimental de Lara "Martín Luther King"</title>
+<meta name="description" content="Portal Académico Oficial de la Universidad Nacional Experimental de Lara 'Martín Luther King' (UNELMLK). Consulta tus calificaciones, gestiona solicitudes, revisa anuncios y comunícate con las autoridades. Barquisimeto, Venezuela.">
+<meta name="keywords" content="UNELMLK, Universidad Nacional Experimental de Lara, Martín Luther King, Barquisimeto, Lara, Venezuela, educación universitaria, portal académico, inscripciones">
+<meta name="author" content="Universidad Nacional Experimental de Lara 'Martín Luther King'">
+<meta property="og:title" content="UNEL-MLK · Portal Académico">
+<meta property="og:description" content="Portal Académico Oficial de la UNELMLK. Calificaciones, solicitudes, anuncios y más.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230b3d91' width='100' height='100' rx='15'/><text x='50' y='65' font-size='48' text-anchor='middle' fill='%23f5a623' font-weight='bold'>M</text></svg>">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#0b3d91; --azul2:#1565c0; --acento:#f5a623;
+  --bg:#eef2f9; --card:#fff; --texto:#1f2733; --gris:#64748b;
+  --borde:#e2e8f0; --ok:#16a34a; --warn:#d97706; --err:#dc2626;
+}
+body.dark{--bg:#0f172a;--card:#1e293b;--texto:#e2e8f0;--gris:#94a3b8;--borde:#334155}
+body.dark .sidebar,body.dark .mini-card,body.dark .tarjeta,body.dark .card{background:#1e293b}
+body.dark .tabla th{background:#0f172a}
+body.dark .tabla tr:hover td{background:#243347}
+body.dark .chat-list{background:#0f172a}
+body.dark .msg{background:#1e293b}
+body.dark .demo{background:#0f172a}
+body.dark .btn-outline{background:#1e293b;color:var(--texto)}
+body.dark .tabs button{background:#1e293b;color:var(--texto)}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--texto);line-height:1.5}
+.hidden{display:none!important}
+h1,h2,h3{line-height:1.25}
+small{font-size:.78rem}
+.muted{color:var(--gris);font-size:.86rem}
+code{background:#eef2f9;padding:1px 6px;border-radius:5px;font-size:.85em;color:#0b3d91}
+body.dark code{background:#0f172a;color:#93c5fd}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;background:linear-gradient(90deg,var(--azul),var(--azul2));color:#fff;box-shadow:0 2px 14px rgba(8,25,60,.25);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logo{width:46px;height:46px;border-radius:11px;background:var(--acento);color:#0b3d91;display:grid;place-items:center;font-weight:800;font-size:.72rem;letter-spacing:.3px;text-align:center;line-height:1.1}
+.brand strong{display:block;font-size:.82rem}
+.brand span{font-size:.7rem;opacity:.85}
+.topnav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.topnav a{cursor:pointer;font-size:.88rem;padding:7px 11px;border-radius:8px;opacity:.92}
+.topnav a:hover{background:rgba(255,255,255,.14)}
+.usuario-chip{font-size:.85rem;background:rgba(255,255,255,.15);padding:7px 13px;border-radius:999px}
+.btn{border:0;cursor:pointer;padding:10px 16px;border-radius:9px;font:inherit;font-size:.88rem;font-weight:600;background:var(--azul2);color:#fff;transition:.15s}
+.btn:hover{filter:brightness(1.09)}
+.btn-acento{background:var(--acento);color:#4a3400}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.55);color:#fff}
+.btn-outline{background:#fff;border:1px solid var(--borde);color:var(--texto)}
+.btn-ok{background:var(--ok)} .btn-err{background:var(--err)}
+.btn-sm{padding:6px 11px;font-size:.78rem}
+.link{background:none;border:0;color:var(--azul2);cursor:pointer;font:inherit;font-size:.85rem;text-decoration:underline;margin-top:12px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--borde);border-radius:9px;font:inherit;background:var(--card);color:var(--texto)}
+input:focus,select:focus,textarea:focus{outline:2px solid #bfdbfe;border-color:var(--azul2)}
+label{display:block;font-size:.8rem;font-weight:700;margin:12px 0 4px;color:var(--gris)}
+.card{background:var(--card);border:1px solid var(--borde);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(15,35,80,.06)}
+.card h3{margin-bottom:12px;font-size:1rem}
+.alerta-err{background:#fee2e2;color:#991b1b;padding:9px 12px;border-radius:9px;font-size:.85rem;margin-top:12px}
+.alerta-ok{background:#dcfce7;color:#166534;padding:9px 12px;border-radius:9px;font-size:.85rem;margin-top:12px}
+.hero{background:linear-gradient(135deg,var(--azul),#1e88e5);color:#fff;padding:64px 22px;text-align:center}
+.hero h1{font-size:2rem;margin-bottom:12px}
+.hero p{max-width:680px;margin:0 auto 24px;opacity:.92}
+.hero .hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.wrap{max-width:1120px;margin:0 auto;padding:36px 20px}
+.titulo-seccion{font-size:1.25rem;margin:26px 0 14px}
+.pie{text-align:center;padding:26px;color:var(--gris);font-size:.82rem;border-top:1px solid var(--borde)}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.mini-card{background:var(--card);border:1px solid var(--borde);border-radius:12px;padding:16px}
+.mini-card h4{font-size:.95rem;margin-bottom:6px}
+.mini-card p{font-size:.85rem;color:var(--gris)}
+.centro{display:grid;place-items:center;min-height:calc(100vh - 70px);padding:30px 16px}
+.login-card{width:100%;max-width:420px}
+.login-card h2{margin-bottom:4px}
+.demo{margin-top:18px;background:#f8fafc;border:1px dashed var(--borde);border-radius:10px;padding:12px;font-size:.8rem;color:var(--gris);line-height:1.8}
+#vista-app{display:grid;grid-template-columns:256px 1fr;min-height:calc(100vh - 64px)}
+.sidebar{background:var(--card);border-right:1px solid var(--borde);padding:16px 12px}
+.side-user{display:flex;gap:10px;align-items:center;padding:10px;border-bottom:1px solid var(--borde);margin-bottom:12px}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--azul);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem;flex:0 0 auto}
+.side-user strong{display:block;font-size:.86rem}
+.side-user span{font-size:.71rem;color:var(--gris);display:block}
+.sidebar a{display:block;padding:10px 12px;border-radius:9px;cursor:pointer;font-size:.88rem;color:var(--texto);margin-bottom:3px}
+.sidebar a:hover{background:#f1f5f9}
+body.dark .sidebar a:hover{background:#334155}
+.sidebar a.activo{background:var(--azul);color:#fff;font-weight:600}
+.contenido{padding:24px;overflow:auto}
+.titulo{font-size:1.5rem;margin-bottom:4px}
+.tarjeta{background:var(--card);border:1px solid var(--borde);border-radius:13px;padding:16px}
+.tarjeta b{display:block;font-size:1.6rem;color:var(--azul2)}
+.tarjeta small{color:var(--gris)}
+.tabla{width:100%;border-collapse:collapse}
+.tabla th,.tabla td{padding:9px 10px;border-bottom:1px solid var(--borde);text-align:left;font-size:.86rem}
+.tabla th{background:#f8fafc;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;color:var(--gris)}
+.tabla tr:hover td{background:#fafcff}
+.tabla-wrap{overflow-x:auto}
+.badge{padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;display:inline-block}
+.b-ok{background:#dcfce7;color:#166534}
+.b-err{background:#fee2e2;color:#991b1b}
+.b-warn{background:#fef3c7;color:#92400e}
+.b-info{background:#dbeafe;color:#1e40af}
+.b-gris{background:#f1f5f9;color:#475569}
+.fila{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--borde)}
+.fila:last-child{border-bottom:0}
+.fila-col{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-bottom:1px dashed var(--borde)}
+.fila-col:last-child{border-bottom:0}
+.nota{font-weight:800}
+.nota.ap{color:var(--ok)} .nota.re{color:var(--err)}
+.barra{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-top:6px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--azul2),#42a5f5)}
+.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.tabs button{border:1px solid var(--borde);background:var(--card);color:var(--texto);padding:8px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:.84rem}
+.tabs button.activo{background:var(--azul);color:#fff;border-color:var(--azul)}
+.chat-box{display:flex;flex-direction:column;height:470px;background:var(--card);border:1px solid var(--borde);border-radius:14px;overflow:hidden}
+.chat-list{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f8fafc}
+.msg{max-width:74%;padding:9px 13px;border-radius:13px;background:var(--card);border:1px solid var(--borde);font-size:.87rem}
+.msg.propio{align-self:flex-end;background:var(--azul2);color:#fff;border-color:var(--azul2)}
+.msg .meta{font-size:.68rem;opacity:.75;display:block;margin-bottom:3px}
+.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--borde);background:var(--card)}
+.chat-input input{flex:1}
+.toast{position:fixed;bottom:22px;right:22px;background:#0f172a;color:#fff;padding:12px 18px;border-radius:11px;font-size:.86rem;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:320px}
+.toast.err{background:var(--err)} .toast.ok{background:var(--ok)} .toast.warn{background:var(--warn)}
+@media print{.topbar,.sidebar,.pie,.no-print{display:none!important}#vista-app{grid-template-columns:1fr}}
+@media (max-width:860px){
+  #vista-app{grid-template-columns:1fr}
+  .sidebar{display:flex;gap:6px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--borde)}
+  .side-user{display:none}
+  .sidebar a{white-space:nowrap;margin-bottom:0}
+  .contenido{padding:16px}
+  .hero h1{font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ BARRA SUPERIOR ============ -->
+<header class="topbar">
+  <div class="brand" onclick="mostrarPantalla('publica')">
+    <div class="logo">UNEL<br>MLK</div>
+    <div>
+      <strong>Universidad Nacional Experimental de Lara</strong>
+      <span>“Martín Luther King” · Portal Académico</span>
+    </div>
+  </div>
+  <nav class="topnav" id="navPublico">
+    <a onclick="mostrarPantalla('publica')">Inicio</a>
+    <a onclick="document.getElementById('sec-anuncios').scrollIntoView({behavior:'smooth'})">Anuncios</a>
+    <a onclick="document.getElementById('sec-info').scrollIntoView({behavior:'smooth'})">Información</a>
+    <a class="btn btn-acento btn-sm" onclick="mostrarPantalla('login')">Acceder al portal</a>
+  </nav>
+  <nav class="topnav hidden" id="navPrivado">
+    <span class="usuario-chip" id="navUsuario"></span>
+    <button class="btn btn-ghost btn-sm" onclick="toggleTema()" title="Modo claro / oscuro">🌓</button>
+    <button class="btn btn-ghost btn-sm" onclick="logout()">Cerrar sesión</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ============ VISTA PÚBLICA ============ -->
+  <section id="vista-publica">
+    <div class="hero">
+      <h1>Bienvenido al Portal Académico UNEL-MLK</h1>
+      <p>Universidad Nacional Experimental de Lara “Martín Luther King” · Formando el Futuro de la Patria.
+         Consulta tus calificaciones, gestiona solicitudes, revisa anuncios y comunícate con las autoridades.</p>
+      <div class="hero-btns">
+        <button class="btn btn-acento" onclick="mostrarPantalla('login')">Ingresar con mi cédula</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('sec-anuncios').scrollIntoView({behavior:'smooth'})">Ver anuncios</button>
+      </div>
+    </div>
+    <div class="wrap">
+
+      <h2 class="titulo-seccion">🏛️ Nuestra Universidad</h2>
+      <div class="grid-3">
+        <div class="mini-card">
+          <h4>Reseña histórica</h4>
+          <p>Fundada el 19 de junio de 2018 mediante Decreto N.º 3.477 (Gaceta Oficial N.º 41.423).
+             Nace dentro del proyecto de la Misión Alma Mater para territorializar la educación universitaria
+             y acercarla a los sectores más desposeídos. Sede en el Complejo Universitario Alma Mater,
+             parroquia Guerrera Ana Soto, municipio Iribarren, Barquisimeto, Estado Lara.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Misión</h4>
+          <p>Construir comunidades de conocimiento y aprendizaje dirigidas a la generación,
+             transformación y apropiación social del conocimiento, en beneficio directo de su área
+             de influencia territorial y el fortalecimiento del poder popular.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Visión</h4>
+          <p>Consolidarse como institución andragógica y humanista de referencia, enfocada en la
+             transformación social de la Patria. Formar profesionales integrales mediante el intercambio
+             de saberes, contribuyendo a la soberanía tecnológica y al desarrollo sustentable.</p>
+        </div>
+      </div>
+
+      <h2 class="titulo-seccion">🎓 Oferta Académica</h2>
+      <div class="grid-2">
+        <div class="mini-card">
+          <h4>Pregrado</h4>
+          <p><b>Área de Salud:</b> Fisioterapia · Odontología · Psicología Social</p>
+          <p><b>Ingeniería y Tecnología:</b> Construcción Civil · Electricidad · Mecánica ·
+             Instrumentación y Control · Transporte Ferroviario</p>
+          <p><b>Ciencias del Agro:</b> Medicina Veterinaria</p>
+          <p><b>Artes:</b> Diseño Integral Comunitario</p>
+        </div>
+        <div class="mini-card">
+          <h4>Postgrado</h4>
+          <p><b>Especializaciones en Salud:</b> Enfocadas en el fortalecimiento técnico y clínico.</p>
+          <p><b>Especializaciones en Ingeniería y Producción:</b> Mecánica, Instrumentación y Control,
+             Construcción Civil.</p>
+          <p><b>Diplomados:</b> Cultura Emprendedora · Formación Docente · Gestión Pública y Comunitaria.</p>
+        </div>
+      </div>
+
+      <h2 class="titulo-seccion">🤝 Servicios estudiantiles</h2>
+      <div class="grid-3">
+        <div class="mini-card"><h4>🏥 Servicio médico</h4><p>Atención primaria y especializada para preservar la salud física de los estudiantes.</p></div>
+        <div class="mini-card"><h4>🦷 Odontología</h4><p>Tratamientos dentales preventivos y correctivos brindados por profesionales.</p></div>
+        <div class="mini-card"><h4>🧠 Atención psicológica</h4><p>Apoyo emocional y terapias individuales para fortalecer la salud mental.</p></div>
+        <div class="mini-card"><h4>🚌 Transporte</h4><p>Rutas que facilitan el acceso al complejo universitario desde distintos sectores.</p></div>
+        <div class="mini-card"><h4>🍽️ Comedor universitario</h4><p>Alimentación balanceada y económica en espacios adecuados para la nutrición estudiantil.</p></div>
+        <div class="mini-card"><h4>🐾 Jornadas veterinarias</h4><p>Actividades de cuidado de mascotas, abiertas a estudiantes y comunidad en general.</p></div>
+      </div>
+
+      <h2 class="titulo-seccion" id="sec-anuncios">📢 Anuncios públicos</h2>
+      <div id="anunciosPublicos" class="grid-3"></div>
+
+      <h2 class="titulo-seccion" id="sec-info">ℹ️ Información importante</h2>
+      <div id="infoPublica" class="grid-3"></div>
+
+      <h2 class="titulo-seccion">📍 Ubicación y contacto</h2>
+      <div class="grid-2">
+        <div class="mini-card">
+          <h4>Sede Principal · Barquisimeto</h4>
+          <p>Complejo Universitario Alma Mater, Edificio Principal, Piso S/N, Barrio La Batalla
+             (Vía El Tostao, diagonal al Monumento La Estrella), Barquisimeto, Estado Lara. Zona Postal 3001.</p>
+          <p class="muted" style="margin-top:6px">Teléfono: 0251-4472593</p>
+        </div>
+        <div class="mini-card">
+          <h4>Núcleo Yaracuy</h4>
+          <p>Edificio Los Carrascosa, Yaritagua, Estado Yaracuy. Edificación de estilo neoclásico
+             que data de 1861, restaurada y con mención especial en la X Bienal de Arquitectura de Venezuela.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="pie">
+      © 2026 Universidad Nacional Experimental de Lara “Martín Luther King” · Barquisimeto, Estado Lara · Venezuela<br>
+      Formando el Futuro de la Patria · Rector: Dr. Jean Piero Yacobucci
+    </footer>
+  </section>
+
+  <!-- ============ VISTA LOGIN ============ -->
+  <section id="vista-login" class="hidden centro">
+    <form class="card login-card" onsubmit="login(event)">
+      <h2>Iniciar sesión</h2>
+      <p class="muted">Ingresa con tu número de cédula y tu contraseña personal.</p>
+      <label for="cedula">Cédula</label>
+      <input id="cedula" placeholder="Ej: 12345678" autocomplete="username" required>
+      <label for="password">Contraseña</label>
+      <input id="password" type="password" placeholder="••••••" autocomplete="current-password" required>
+      <div id="loginError" class="alerta-err hidden"></div>
+      <button class="btn" style="width:100%;margin-top:16px">Entrar</button>
+      <div class="demo">
+        <strong>Usuarios de prueba</strong><br>
+        👩‍🎓 Estudiante · <code>12345678</code> / <code>1234</code><br>
+        👨‍🏫 Profesor · <code>90000001</code> / <code>prof</code><br>
+        🛠️ Administrador · <code>00000000</code> / <code>admin</code>
+      </div>
+      <button type="button" class="link" onclick="mostrarPantalla('publica')">← Volver al inicio</button>
+    </form>
+  </section>
+
+  <!-- ============ VISTA APP ============ -->
+  <section id="vista-app" class="hidden">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="contenido" id="contenido"></div>
+  </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+/* =========================================================
+   1. UTILIDADES
+   ========================================================= */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+};
+const uid    = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const fFecha = ts => new Date(ts).toLocaleString('es-VE', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+const fCorta = ts => new Date(ts).toLocaleDateString('es-VE', {day:'2-digit', month:'short', year:'numeric'});
+const iniciales = n => String(n || '?').replace(/^(Prof\.|Coord\.)\s*/,'')
+  .split(/\s+/).slice(0,2).map(p => p[0]).join('').toUpperCase();
+
+function toast(msg, tipo = 'ok'){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.className = 'toast ' + tipo;
+  clearTimeout(t._tm);
+  t._tm = setTimeout(() => t.className = 'toast hidden', 3000);
+}
+function toggleTema(){
+  document.body.classList.toggle('dark');
+  LS.set('pu_tema', document.body.classList.contains('dark'));
+}
+function imprimirHTML(titulo, cuerpoHTML){
+  const w = window.open('', '_blank', 'width=820,height=900');
+  if(!w){ toast('Permite las ventanas emergentes para imprimir', 'warn'); return; }
+  w.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+  <title>${esc(titulo)}</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,sans-serif;padding:34px;color:#1f2733}
+    h1{font-size:19px;color:#0b3d91;margin-bottom:2px}
+    h2{font-size:14px;color:#64748b;font-weight:500;margin-bottom:22px}
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    th,td{border-bottom:1px solid #e2e8f0;padding:7px;font-size:13px;text-align:left}
+    th{background:#f1f5f9;font-size:11px;text-transform:uppercase}
+    .firma{margin-top:60px;display:flex;justify-content:space-between;gap:40px}
+    .firma div{border-top:1px solid #94a3b8;padding-top:6px;font-size:12px;flex:1;text-align:center}
+    .pie{margin-top:40px;font-size:11px;color:#94a3b8;text-align:center}
+  </style></head><body>${cuerpoHTML}
+  <div class="firma"><div>Control de Estudios</div><div>Coordinación Académica</div></div>
+  <p class="pie">Documento generado automáticamente por el Portal Académico UNEL-MLK · ${fFecha(Date.now())}</p>
+  </body></html>`);
+  w.document.close();
+  setTimeout(() => w.print(), 350);
+}
+
+/* =========================================================
+   2. PLAN DE ESTUDIOS
+   ========================================================= */
+const CARRERAS = [
+  'Fisioterapia','Odontología','Psicología Social','Construcción Civil','Electricidad',
+  'Mecánica','Instrumentación y Control','Transporte Ferroviario','Medicina Veterinaria','Diseño Integral Comunitario'
+];
+
+const PLAN = [
+  {t:1,q:1,cod:'MAT-101',nom:'Matemática I',uc:4},
+  {t:1,q:1,cod:'INF-101',nom:'Introducción a la Informática',uc:3},
+  {t:1,q:1,cod:'INF-102',nom:'Algoritmos y Programación I',uc:4},
+  {t:1,q:1,cod:'LNG-101',nom:'Lenguaje y Comunicación',uc:3},
+  {t:1,q:1,cod:'PRY-101',nom:'Proyecto Socio Tecnológico I',uc:4},
+  {t:1,q:2,cod:'MAT-102',nom:'Matemática II',uc:4},
+  {t:1,q:2,cod:'INF-103',nom:'Programación Orientada a Objetos',uc:4},
+  {t:1,q:2,cod:'INF-104',nom:'Arquitectura del Computador',uc:3},
+  {t:1,q:2,cod:'INF-105',nom:'Matemática Discreta',uc:3},
+  {t:1,q:2,cod:'PRY-102',nom:'Proyecto Socio Tecnológico II',uc:4},
+  {t:2,q:3,cod:'INF-201',nom:'Estructura de Datos',uc:4},
+  {t:2,q:3,cod:'INF-202',nom:'Bases de Datos I',uc:4},
+  {t:2,q:3,cod:'INF-203',nom:'Sistemas Operativos',uc:3},
+  {t:2,q:3,cod:'INF-204',nom:'Estadística Aplicada',uc:3},
+  {t:2,q:3,cod:'PRY-201',nom:'Proyecto Socio Tecnológico III',uc:4},
+  {t:2,q:4,cod:'INF-205',nom:'Redes de Computadoras',uc:4},
+  {t:2,q:4,cod:'INF-206',nom:'Ingeniería de Software',uc:4},
+  {t:2,q:4,cod:'INF-207',nom:'Análisis y Diseño de Sistemas',uc:3},
+  {t:2,q:4,cod:'INF-208',nom:'Desarrollo Web',uc:4},
+  {t:2,q:4,cod:'PRY-202',nom:'Proyecto Socio Tecnológico IV',uc:4},
+  {t:3,q:5,cod:'INF-301',nom:'Bases de Datos Avanzadas',uc:4},
+  {t:3,q:5,cod:'INF-302',nom:'Seguridad Informática',uc:3},
+  {t:3,q:5,cod:'INF-303',nom:'Programación Móvil',uc:4},
+  {t:3,q:5,cod:'INF-304',nom:'Inteligencia Artificial',uc:3},
+  {t:3,q:5,cod:'PRY-301',nom:'Proyecto Socio Tecnológico V',uc:4},
+  {t:3,q:6,cod:'INF-305',nom:'Auditoría de Sistemas',uc:3},
+  {t:3,q:6,cod:'INF-306',nom:'Computación en la Nube',uc:4},
+  {t:3,q:6,cod:'INF-307',nom:'Gestión de Proyectos TI',uc:3},
+  {t:3,q:6,cod:'INF-308',nom:'Electiva I',uc:3},
+  {t:3,q:6,cod:'PRY-302',nom:'Proyecto Socio Tecnológico VI',uc:4},
+  {t:4,q:7,cod:'INF-401',nom:'Big Data y Analítica',uc:4},
+  {t:4,q:7,cod:'INF-402',nom:'Arquitectura de Software',uc:4},
+  {t:4,q:7,cod:'INF-403',nom:'Electiva II',uc:3},
+  {t:4,q:7,cod:'INF-404',nom:'Prácticas Profesionales',uc:6},
+  {t:4,q:8,cod:'PRY-401',nom:'Trabajo de Grado / Proyecto Final',uc:10}
+];
+const UC_TOTALES = PLAN.reduce((a,p) => a + p.uc, 0);
+
+const AUTORIDADES = [
+  {id:'control',     nombre:'Control de Estudios',        desc:'Notas, constancias, inscripciones y récords académicos.'},
+  {id:'coordinacion',nombre:'Coordinación Académica',      desc:'Pensum, secciones, docentes y reclamos de calificaciones.'},
+  {id:'direccion',   nombre:'Dirección de la Carrera',     desc:'Situaciones académicas especiales y permisos.'},
+  {id:'bienestar',   nombre:'Bienestar Estudiantil',       desc:'Becas, comedor, transporte, salud y apoyo psicológico.'},
+  {id:'rectorado',   nombre:'Rectorado',                   desc:'Solicitudes formales, reclamos y atención general.'},
+  {id:'secretaria',  nombre:'Secretaría General',          desc:'Documentos oficiales, certificaciones y archivo.'}
+];
+
+const TIPOS_SOLICITUD = [
+  'Justificativo médico','Constancia de estudios','Constancia de notas','Reclamo de calificación',
+  'Cambio de sección','Diferido de trimestre','Reposición de evaluación','Solicitud de beca',
+  'Solicitud de comedor','Solicitud de transporte'
+];
+
+/* =========================================================
+   3. DATOS SEMILLA
+   ========================================================= */
+const esCursada   = (u,p) => p.t < u.trayecto || (p.t === u.trayecto && p.q < u.trimestre);
+const esCursando  = (u,p) => p.t === u.trayecto && p.q === u.trimestre;
+const esPorCursar = (u,p) => !esCursada(u,p) && !esCursando(u,p);
+
+function seed(){
+  if (LS.get('pu_seed')) return;
+
+  const usuarios = [
+    {cedula:'12345678', nombre:'Ana Pérez', password:'1234', rol:'estudiante',
+     carrera:'Fisioterapia', trayecto:2, trimestre:4,
+     correo:'ana.perez@unelmlk.edu.ve', telefono:'0414-1234567', ingreso:'2023'},
+    {cedula:'23456789', nombre:'Luis Gómez', password:'1234', rol:'estudiante',
+     carrera:'Mecánica', trayecto:1, trimestre:2,
+     correo:'luis.gomez@unelmlk.edu.ve', telefono:'0424-9876543', ingreso:'2025'},
+    {cedula:'34567890', nombre:'María Torres', password:'1234', rol:'estudiante',
+     carrera:'Psicología Social', trayecto:2, trimestre:4,
+     correo:'maria.torres@unelmlk.edu.ve', telefono:'0412-5551122', ingreso:'2023'},
+    {cedula:'45678901', nombre:'José Ramírez', password:'1234', rol:'estudiante',
+     carrera:'Construcción Civil', trayecto:3, trimestre:5,
+     correo:'jose.ramirez@unelmlk.edu.ve', ingreso:'2022'},
+    {cedula:'90000001', nombre:'Prof. Carlos Díaz', password:'prof', rol:'profesor',
+     unidades:['INF-205','INF-208'], correo:'carlos.diaz@unelmlk.edu.ve'},
+    {cedula:'90000002', nombre:'Prof. Yulimar Sánchez', password:'prof', rol:'profesor',
+     unidades:['INF-201','INF-202','INF-206'], correo:'yulimar.sanchez@unelmlk.edu.ve'},
+    {cedula:'00000000', nombre:'Coord. María Rojas', password:'admin', rol:'admin',
+     correo:'coordinacion@unelmlk.edu.ve'}
+  ];
+  LS.set('pu_usuarios', usuarios);
+
+  const notas = {};
+  usuarios.filter(u => u.rol === 'estudiante').forEach(u => {
+    const n = {};
+    PLAN.forEach((p, i) => {
+      if (esCursada(u, p)) n[p.cod] = 10 + ((i * 7 + p.uc * 3) % 11);
+    });
+    notas[u.cedula] = n;
+  });
+  LS.set('pu_notas', notas);
+
+  LS.set('pu_anuncios', [
+    {id:uid(), titulo:'Inscripciones abiertas 2026-I', autor:'Control de Estudios', publico:true,
+     ts:Date.now() - 86400000 * 3,
+     cuerpo:'El proceso de inscripción en línea estará habilitado del 08 al 20 de enero de 2026 a través del portal. Debes estar solvente con las cuotas y no tener materias pendientes de carga.'},
+    {id:uid(), titulo:'Feria de la Ciencia y Tecnología UNEL-MLK', autor:'Rectorado', publico:true,
+     ts:Date.now() - 86400000 * 5,
+     cuerpo:'Se invita a toda la comunidad universitaria a participar en la Feria de la Ciencia y Tecnología los días 12 y 13 de febrero. Inscripciones en la Coordinación de Investigación.'},
+    {id:uid(), titulo:'Entrega de calificaciones del trimestre', autor:'Coordinación Académica', publico:false,
+     ts:Date.now() - 3600000 * 8,
+     cuerpo:'Las calificaciones del trimestre en curso se cargarán en el sistema antes del 30 del mes. Cualquier reclamo debe hacerse por escrito ante Control de Estudios.'},
+    {id:uid(), titulo:'Jornada de vacunación en el campus', autor:'Bienestar Estudiantil', publico:false,
+     ts:Date.now() - 3600000 * 26,
+     cuerpo:'Este viernes de 8:00 a.m. a 2:00 p.m. en el módulo de Bienestar Estudiantil. Dirigida a estudiantes, docentes y personal administrativo.'},
+    {id:uid(), titulo:'Proceso de admisión 2026 (SNI/OPSU)', autor:'Secretaría General', publico:true,
+     ts:Date.now() - 86400000 * 7,
+     cuerpo:'Los aspirantes deben registrarse en el Sistema Nacional de Ingreso (SNI/OPSU) a través de su página oficial y seleccionar el Programa Nacional de Formación de su preferencia.'}
+  ]);
+
+  LS.set('pu_info', [
+    {id:uid(), titulo:'Calendario académico 2026-I',
+     cuerpo:'Inicio de clases: 15/01/2026 · Fin del trimestre: 30/04/2026 · Entrega de notas: 05/05/2026.'},
+    {id:uid(), titulo:'Requisitos para justificativos médicos',
+     cuerpo:'Presentar constancia médica original en un lapso no mayor a 5 días hábiles tras la falta, indicando el reposo y el período de incapacidad.'},
+    {id:uid(), titulo:'Servicios estudiantiles',
+     cuerpo:'Beca comedor, transporte y seguro estudiantil. Atención en Bienestar Estudiantil, piso 2, de 8:00 a.m. a 4:00 p.m.'},
+    {id:uid(), titulo:'Contacto y soporte del portal',
+     cuerpo:'soporte@unelmlk.edu.ve · Teléfono institucional: 0251-4472593 · Lunes a viernes de 8:00 a.m. a 5:00 p.m.'},
+    {id:uid(), titulo:'¿Cómo ingresar a la UNEL-MLK?',
+     cuerpo:'1. Regístrate en el Sistema Nacional de Ingreso (SNI/OPSU). 2. Selecciona tus opciones de estudio. 3. Espera los resultados de la OPSU. 4. Permanece atento al anuncio de fechas de inscripción.'}
+  ]);
+
+  LS.set('pu_chat', [
+    {id:uid(), cedula:'23456789', autor:'Luis Gómez', rol:'estudiante',
+     texto:'¡Buenas! ¿Alguien tiene el material de Redes del prof. Díaz?', ts:Date.now() - 3600000 * 5},
+    {id:uid(), cedula:'90000001', autor:'Prof. Carlos Díaz', rol:'profesor',
+     texto:'Lo subí al aula virtual, revisen la sección de recursos. Cualquier duda la vemos en clase.', ts:Date.now() - 3600000 * 4},
+    {id:uid(), cedula:'34567890', autor:'María Torres', rol:'estudiante',
+     texto:'¿A qué hora es el proyecto socio-tecnológico mañana?', ts:Date.now() - 3600000 * 2}
+  ]);
+
+  LS.set('pu_mensajes', []);
+  LS.set('pu_solicitudes', []);
+  LS.set('pu_seed', true);
+}
+
+/* =========================================================
+   4. ESTADO / SESIÓN
+   ========================================================= */
+let sesion       = LS.get('pu_sesion', null);
+let vistaActual  = 'inicio';
+let filtroPensum = 'cursando';
+
+const usuarioActual = () => LS.get('pu_usuarios', []).find(u => u.cedula === sesion?.cedula) || null;
+const guardarUsuarios = l => LS.set('pu_usuarios', l);
+const notasDe = ced => LS.get('pu_notas', {})[ced] || {};
+const setNota = (ced, cod, val) => {
+  const n = LS.get('pu_notas', {});
+  n[ced] = n[ced] || {};
+  if (val === '' || val === null) delete n[ced][cod]; else n[ced][cod] = Number(val);
+  LS.set('pu_notas', n);
+};
+const etiquetaRol = u => {
+  if (u.rol === 'estudiante') return `${u.carrera} · Trayecto ${u.trayecto} · Trimestre ${u.trimestre}`;
+  if (u.rol === 'profesor')   return 'Docente';
+  return 'Administrador del sistema';
+};
+
+/* =========================================================
+   5. NAVEGACIÓN
+   ========================================================= */
+function mostrarPantalla(id){
+  ['publica', 'login', 'app'].forEach(v =>
+    $('#vista-' + v).classList.toggle('hidden', v !== id));
+
+  const logueado = !!sesion && !!usuarioActual();
+  $('#navPublico').classList.toggle('hidden', logueado);
+  $('#navPrivado').classList.toggle('hidden', !logueado);
+
+  if (logueado) $('#navUsuario').textContent = `${usuarioActual().nombre} · ${usuarioActual().rol}`;
+
+  window.scrollTo(0, 0);
+  if (id === 'publica') pintarPublica();
+  if (id === 'app')     renderApp();
+}
+
+const MENU = {
+  estudiante: [
+    ['inicio',      '🏠 Inicio'],
+    ['notas',       '📊 Calificaciones'],
+    ['pensum',      '📚 Unidades curriculares'],
+    ['solicitudes', '📝 Solicitudes'],
+    ['mensajes',    '✉️ Mensajes a autoridades'],
+    ['chat',        '💬 Chat general'],
+    ['anuncios',    '📢 Anuncios'],
+    ['info',        'ℹ️ Información'],
+    ['perfil',      '👤 Mi perfil']
+  ],
+  profesor: [
+    ['inicio',   '🏠 Inicio'],
+    ['unidades', '📘 Mis unidades'],
+    ['mensajes', '✉️ Mensajes a autoridades'],
+    ['chat',     '💬 Chat general'],
+    ['anuncios', '📢 Anuncios'],
+    ['info',     'ℹ️ Información'],
+    ['perfil',   '👤 Mi perfil']
+  ],
+  admin: [
+    ['inicio',      '🏠 Panel general'],
+    ['usuarios',    '👥 Usuarios'],
+    ['solicitudes', '📝 Solicitudes'],
+    ['anuncios',    '📢 Anuncios'],
+    ['info',        'ℹ️ Información'],
+    ['mensajes',    '✉️ Mensajes recibidos'],
+    ['chat',        '💬 Chat general'],
+    ['perfil',      '👤 Mi perfil']
+  ]
+};
+
+function ir(v){ vistaActual = v; renderApp(); }
+
+function renderApp(){
+  const u = usuarioActual();
+  if (!u) return logout();
+
+  const items = MENU[u.rol] || [];
+  $('#sidebar').innerHTML = `
+    <div class="side-user">
+      <div class="avatar">${esc(iniciales(u.nombre))}</div>
+      <div><strong>${esc(u.nombre)}</strong><span>${esc(etiquetaRol(u))}</span></div>
+    </div>
+    ${items.map(([id, txt]) =>
+      `<a class="${vistaActual === id ? 'activo' : ''}" onclick="ir('${id}')">${txt}</a>`).join('')}
+  `;
+
+  const V = {
+    inicio: vInicio, notas: vNotas, pensum: vPensum, solicitudes: vSolicitudes,
+    mensajes: vMensajes, chat: vChat, anuncios: vAnuncios, info: vInfo,
+    perfil: vPerfil, usuarios: vUsuarios, unidades: vUnidades
+  };
+  $('#contenido').innerHTML = (V[vistaActual] || vInicio)(u);
+}
+
+/* =========================================================
+   6. VISTA PÚBLICA
+   ========================================================= */
+function pintarPublica(){
+  const anuncios = LS.get('pu_anuncios', []).filter(a => a.publico).sort((a,b) => b.ts - a.ts);
+  $('#anunciosPublicos').innerHTML = anuncios.length ? anuncios.map(a => `
+    <div class="mini-card">
+      <h4>${esc(a.titulo)}</h4>
+      <p>${esc(a.cuerpo)}</p>
+      <p class="muted" style="margin-top:8px">${esc(a.autor)} · ${fCorta(a.ts)}</p>
+    </div>`).join('') : '<p class="muted">No hay anuncios publicados.</p>';
+
+  const info = LS.get('pu_info', []);
+  $('#infoPublica').innerHTML = info.length ? info.map(i => `
+    <div class="mini-card"><h4>${esc(i.titulo)}</h4><p>${esc(i.cuerpo)}</p></div>`).join('')
+    : '<p class="muted">Sin información disponible.</p>';
+}
+
+/* =========================================================
+   7. VISTAS DE LA APP
+   ========================================================= */
+function resumenAcademico(u){
+  const n = notasDe(u.cedula);
+  const cursadas  = PLAN.filter(p => esCursada(u, p));
+  const cursando  = PLAN.filter(p => esCursando(u, p));
+  const porCursar = PLAN.filter(p => esPorCursar(u, p));
+
+  const ucAprobadas = cursadas.filter(p => (n[p.cod] ?? 0) >= 10).reduce((a,p) => a + p.uc, 0);
+  const ucCursadas  = cursadas.reduce((a,p) => a + p.uc, 0);
+  const conNota     = cursadas.filter(p => n[p.cod] != null);
+  const promedio    = conNota.length
+    ? (conNota.reduce((a,p) => a + n[p.cod], 0) / conNota.length) : 0;
+  const avance      = Math.round((ucAprobadas / UC_TOTALES) * 100);
+
+  return {n, cursadas, cursando, porCursar, ucAprobadas, ucCursadas, promedio, avance};
+}
+
+function badgeEstado(e){
+  const m = {'Pendiente':'b-warn','En proceso':'b-info','Aprobada':'b-ok','Rechazada':'b-err'};
+  return `<span class="badge ${m[e] || 'b-gris'}">${esc(e)}</span>`;
+}
+
+function vInicio(u){
+  if (u.rol === 'admin') return vInicioAdmin(u);
+  if (u.rol === 'profesor') return vInicioProfesor(u);
+
+  const r = resumenAcademico(u);
+  const anuncios = LS.get('pu_anuncios', []).sort((a,b) => b.ts - a.ts).slice(0, 3);
+  const sols = LS.get('pu_solicitudes', []).filter(s => s.cedula === u.cedula).slice(-3).reverse();
+
+  return `
+    <h1 class="titulo">Hola, ${esc(u.nombre.split(' ')[0])} 👋</h1>
+    <p class="muted">${esc(u.carrera)} · Trayecto ${u.trayecto} · Trimestre ${u.trimestre}</p>
+
+    <div class="grid-4" style="margin-top:20px">
+      <div class="tarjeta"><small>Promedio general</small><b>${r.promedio.toFixed(1)}</b><small>sobre 20 pts</small></div>
+      <div class="tarjeta"><small>UC aprobadas</small><b>${r.ucAprobadas}<span style="font-size:.9rem;color:var(--gris)">/${UC_TOTALES}</span></b><small>unidades crédito</small></div>
+      <div class="tarjeta"><small>Trayecto / Trimestre</small><b>${u.trayecto} · ${u.trimestre}</b><small>período actual</small></div>
+      <div class="tarjeta"><small>Avance de carrera</small><b>${r.avance}%</b>
+        <div class="barra"><i style="width:${r.avance}%"></i></div></div>
+    </div>
+
+    <h2 class="titulo-seccion">📘 Unidades en curso</h2>
+    <div class="card">
+      ${r.cursando.length ? `<div class="tabla-wrap"><table class="tabla">
+        <thead><tr><th>Código</th><th>Unidad curricular</th><th>UC</th><th>Nota</th></tr></thead>
+        <tbody>${r.cursando.map(p => {
+          const nv = r.n[p.cod];
+          return `<tr><td><code>${p.cod}</code></td><td>${esc(p.nom)}</td><td>${p.uc}</td>
+            <td>${nv != null
+              ? `<span class="nota ${nv >= 10 ? 'ap' : 're'}">${nv}</span>`
+              : '<span class="badge b-warn">En curso</span>'}</td></tr>`;
+        }).join('')}</tbody></table></div>`
+      : '<p class="muted">No tienes unidades cargadas en este trimestre.</p>'}
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>📢 Últimos anuncios</h3>
+        ${anuncios.map(a => `<div class="fila-col">
+          <strong style="font-size:.9rem">${esc(a.titulo)}</strong>
+          <span class="muted">${esc(a.autor)} · ${fCorta(a.ts)}</span></div>`).join('') || '<p class="muted">Sin anuncios.</p>'}
+        <button class="link" onclick="ir('anuncios')">Ver todos los anuncios →</button>
+      </div>
+      <div class="card">
+        <h3>📝 Mis solicitudes recientes</h3>
+        ${sols.map(s => `<div class="fila">
+          <div><strong style="font-size:.86rem">${esc(s.tipo)}</strong>
+          <div class="muted">${fCorta(s.ts)}</div></div>
+          ${badgeEstado(s.estado)}
+        </div>`).join('') || '<p class="muted">Sin solicitudes.</p>'}
+        <button class="link" onclick="ir('solicitudes')">Ver todas →</button>
+      </div>
+    </div>
+  `;
+}
+
+function vNotas(u){
+  const r = resumenAcademico(u);
+  const todas = [...r.cursadas, ...r.cursando].sort((a,b) => a.t - b.t || a.q - b.q);
+
+  return `
+    <h1 class="titulo">📊 Calificaciones</h1>
+    <p class="muted">Historial académico · Promedio actual: <b>${r.promedio.toFixed(1)}</b> pts</p>
+
+    <div class="card tabla-wrap" style="margin-top:18px">
+      <table class="tabla">
+        <thead><tr><th>Código</th><th>Unidad curricular</th><th>Trayecto</th><th>Trim.</th><th>UC</th><th>Nota</th><th>Estado</th></tr></thead>
+        <tbody>
+          ${todas.map(p => {
+            const nv = r.n[p.cod];
+            const estado = nv == null ? '<span class="badge b-warn">En curso</span>'
+              : nv >= 10 ? '<span class="badge b-ok">Aprobada</span>' : '<span class="badge b-err">Reprobada</span>';
+            return `<tr>
+              <td><code>${p.cod}</code></td>
+              <td>${esc(p.nom)}</td>
+              <td>${p.t}</td>
+              <td>${p.q}</td>
+              <td>${p.uc}</td>
+              <td>${nv != null ? `<span class="nota ${nv >= 10 ? 'ap' : 're'}">${nv}</span>` : '—'}</td>
+              <td>${estado}</td>
+            </tr>`;
+          }).join('') || '<tr><td colspan="7" class="muted">Sin registros.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:16px" class="no-print">
+      <button class="btn btn-outline" onclick="imprimirConstanciaNotas()">🖨️ Imprimir constancia de notas</button>
+    </div>
+  `;
+}
+
+function imprimirConstanciaNotas(){
+  const u = usuarioActual();
+  const r = resumenAcademico(u);
+  const filas = [...r.cursadas].map(p => {
+    const nv = r.n[p.cod];
+    return `<tr><td>${p.cod}</td><td>${esc(p.nom)}</td><td>${p.uc}</td><td>${nv ?? '—'}</td></tr>`;
+  }).join('');
+  imprimirHTML('Constancia de Notas', `
+    <h1>Universidad Nacional Experimental de Lara “Martín Luther King”</h1>
+    <h2>Constancia de Notas · ${esc(u.nombre)} · C.I. ${esc(u.cedula)}</h2>
+    <p><b>Carrera:</b> ${esc(u.carrera)} · Trayecto ${u.trayecto} · Trimestre ${u.trimestre}</p>
+    <p><b>Promedio general:</b> ${r.promedio.toFixed(1)} pts · UC aprobadas: ${r.ucAprobadas}/${UC_TOTALES}</p>
+    <table><thead><tr><th>Código</th><th>Unidad</th><th>UC</th><th>Nota</th></tr></thead>
+    <tbody>${filas}</tbody></table>
+  `);
+}
+
+function vPensum(u){
+  const r = resumenAcademico(u);
+  const filtros = [
+    {id:'todas', label:'Todas'},
+    {id:'cursadas', label:'Cursadas'},
+    {id:'cursando', label:'En curso'},
+    {id:'porCursar', label:'Por cursar'}
+  ];
+
+  let lista = PLAN;
+  if (filtroPensum === 'cursadas') lista = r.cursadas;
+  if (filtroPensum === 'cursando') lista = r.cursando;
+  if (filtroPensum === 'porCursar') lista = r.porCursar;
+
+  return `
+    <h1 class="titulo">📚 Unidades curriculares</h1>
+    <p class="muted">Plan de estudios · Avance: <b>${r.avance}%</b> · UC aprobadas: ${r.ucAprobadas}/${UC_TOTALES}</p>
+
+    <div class="tabs">
+      ${filtros.map(f => `<button class="${filtroPensum===f.id?'activo':''}" onclick="filtroPensum='${f.id}';renderApp()">${f.label}</button>`).join('')}
+    </div>
+
+    <div class="card tabla-wrap">
+      <table class="tabla">
+        <thead><tr><th>Código</th><th>Unidad curricular</th><th>Trayecto</th><th>Trim.</th><th>UC</th><th>Estado</th></tr></thead>
+        <tbody>
+          ${lista.map(p => {
+            let estado = '';
+            if (esCursada(u,p)) {
+              const nv = r.n[p.cod];
+              estado = nv >= 10 ? '<span class="badge b-ok">Aprobada</span>' : '<span class="badge b-err">Reprobada</span>';
+            } else if (esCursando(u,p)) {
+              estado = '<span class="badge b-warn">En curso</span>';
+            } else {
+              estado = '<span class="badge b-gris">Pendiente</span>';
+            }
+            return `<tr>
+              <td><code>${p.cod}</code></td>
+              <td>${esc(p.nom)}</td>
+              <td>${p.t}</td>
+              <td>${p.q}</td>
+              <td>${p.uc}</td>
+              <td>${estado}</td>
+            </tr>`;
+          }).join('') || '<tr><td colspan="6" class="muted">Sin unidades en este filtro.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+const nombreAutoridad = id => (AUTORIDADES.find(a => a.id === id) || {}).nombre || id;
+
+function vSolicitudes(u){
+  if (u.rol === 'admin') return vSolicitudesAdmin(u);
+  const mias = LS.get('pu_solicitudes', []).filter(s => s.cedula === u.cedula)
+    .sort((a,b) => b.ts - a.ts);
+
+  return `
+    <h1 class="titulo">📝 Solicitudes</h1>
+    <p class="muted">Realiza y haz seguimiento a tus solicitudes académicas y administrativas.</p>
+
+    <div class="grid-2" style="margin-top:18px">
+      <form class="card" onsubmit="crearSolicitud(event)">
+        <h3>Nueva solicitud</h3>
+        <label for="sol-tipo">Tipo de solicitud</label>
+        <select id="sol-tipo" required>
+          ${TIPOS_SOLICITUD.map(t => `<option>${esc(t)}</option>`).join('')}
+        </select>
+        <label for="sol-destino">Dirigida a</label>
+        <select id="sol-destino" required>
+          ${AUTORIDADES.map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}
+        </select>
+        <label for="sol-motivo">Motivo / descripción</label>
+        <textarea id="sol-motivo" rows="4" placeholder="Explica brevemente tu solicitud…" required></textarea>
+        <label for="sol-adjunto">Referencia o número de soporte (opcional)</label>
+        <input id="sol-adjunto" placeholder="Ej: constancia médica N.º 0045">
+        <button class="btn" style="width:100%;margin-top:16px">Enviar solicitud</button>
+      </form>
+
+      <div class="card">
+        <h3>Historial (${mias.length})</h3>
+        ${mias.length ? mias.map(s => `
+          <div class="fila-col">
+            <div class="fila" style="border:0;padding:0">
+              <strong style="font-size:.9rem">${esc(s.tipo)}</strong>
+              ${badgeEstado(s.estado)}
+            </div>
+            <span class="muted">Dirigida a: ${esc(nombreAutoridad(s.destino))} · ${fFecha(s.ts)}</span>
+            <span style="font-size:.85rem">${esc(s.motivo)}</span>
+            ${s.respuesta ? `<span class="badge b-info" style="align-self:flex-start">Respuesta: ${esc(s.respuesta)}</span>` : ''}
+          </div>`).join('') : '<p class="muted">Aún no has realizado solicitudes.</p>'}
+      </div>
+    </div>
+  `;
+}
+
+function crearSolicitud(e){
+  e.preventDefault();
+  const u = usuarioActual();
+  const sol = {
+    id: uid(), cedula: u.cedula, nombre: u.nombre,
+    tipo: $('#sol-tipo').value,
+    destino: $('#sol-destino').value,
+    motivo: $('#sol-motivo').value.trim(),
+    adjunto: $('#sol-adjunto').value.trim(),
+    estado: 'Pendiente', respuesta: '', ts: Date.now()
+  };
+  const lista = LS.get('pu_solicitudes', []);
+  lista.push(sol);
+  LS.set('pu_solicitudes', lista);
+  toast('Solicitud enviada correctamente ✅');
+  renderApp();
+}
+
+function vSolicitudesAdmin(u){
+  const lista = LS.get('pu_solicitudes', []).sort((a,b) => b.ts - a.ts);
+  return `
+    <h1 class="titulo">📝 Gestión de solicitudes</h1>
+    <p class="muted">${lista.length} solicitud(es) registrada(s) en el sistema.</p>
+    <div class="card tabla-wrap" style="margin-top:18px">
+      <table class="tabla">
+        <thead><tr><th>Fecha</th><th>Estudiante</th><th>Tipo</th><th>Dirigida a</th><th>Motivo</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>
+          ${lista.length ? lista.map(s => `
+            <tr>
+              <td>${fCorta(s.ts)}</td>
+              <td>${esc(s.nombre)}<br><span class="muted">C.I. ${esc(s.cedula)}</span></td>
+              <td>${esc(s.tipo)}</td>
+              <td>${esc(nombreAutoridad(s.destino))}</td>
+              <td style="max-width:260px">${esc(s.motivo)}${s.adjunto ? `<br><span class="muted">Ref: ${esc(s.adjunto)}</span>` : ''}</td>
+              <td>${badgeEstado(s.estado)}</td>
+              <td style="white-space:nowrap">
+                <button class="btn btn-ok btn-sm" onclick="responderSolicitud('${s.id}','Aprobada')">✔</button>
+                <button class="btn btn-sm btn-outline" onclick="responderSolicitud('${s.id}','En proceso')">⏳</button>
+                <button class="btn btn-err btn-sm" onclick="responderSolicitud('${s.id}','Rechazada')">✖</button>
+              </td>
+            </tr>`).join('') : '<tr><td colspan="7" class="muted">Sin solicitudes registradas.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function responderSolicitud(id, estado){
+  const lista = LS.get('pu_solicitudes', []);
+  const s = lista.find(x => x.id === id);
+  if (!s) return;
+  const r = prompt(`Respuesta / observación para la solicitud (${estado}):`, s.respuesta || '');
+  if (r === null) return;
+  s.estado = estado;
+  s.respuesta = r.trim();
+  LS.set('pu_solicitudes', lista);
+  toast('Solicitud actualizada: ' + estado);
+  renderApp();
+}
+
+function vMensajes(u){
+  const todos = LS.get('pu_mensajes', []);
+  if (u.rol === 'admin') return vMensajesAdmin(u);
+
+  const mios = todos.filter(m => m.de === u.cedula || m.para === u.cedula).sort((a,b) => a.ts - b.ts);
+
+  return `
+    <h1 class="titulo">✉️ Mensajes a autoridades</h1>
+    <p class="muted">Comunícate directamente con las autoridades de la universidad.</p>
+
+    <div class="grid-2" style="margin-top:18px">
+      <form class="card" onsubmit="enviarMensaje(event)">
+        <h3>Nuevo mensaje</h3>
+        <label for="msg-para">Autoridad destinataria</label>
+        <select id="msg-para" required>
+          ${AUTORIDADES.map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}
+        </select>
+        <label for="msg-asunto">Asunto</label>
+        <input id="msg-asunto" placeholder="Ej: Consulta sobre inscripción" required>
+        <label for="msg-texto">Mensaje</label>
+        <textarea id="msg-texto" rows="5" placeholder="Escribe tu mensaje…" required></textarea>
+        <button class="btn" style="width:100%;margin-top:16px">Enviar mensaje</button>
+      </form>
+
+      <div class="card">
+        <h3>Conversación</h3>
+        <div style="max-height:420px;overflow-y:auto">
+          ${mios.length ? mios.map(m => `
+            <div class="fila-col">
+              <div class="fila" style="border:0;padding:0">
+                <strong style="font-size:.86rem">${esc(m.asunto)}</strong>
+                <span class="muted">${fFecha(m.ts)}</span>
+              </div>
+              <span class="muted">Para: ${esc(nombreAutoridad(m.para))}</span>
+              <span style="font-size:.86rem">${esc(m.texto)}</span>
+              ${m.respuesta ? `<div class="alerta-ok" style="margin-top:6px"><b>Respuesta:</b> ${esc(m.respuesta)}</div>` : '<span class="badge b-warn" style="align-self:flex-start">Sin respuesta</span>'}
+            </div>`).join('') : '<p class="muted">No tienes mensajes aún.</p>'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function enviarMensaje(e){
+  e.preventDefault();
+  const u = usuarioActual();
+  const lista = LS.get('pu_mensajes', []);
+  lista.push({
+    id: uid(), de: u.cedula, deNombre: u.nombre, rol: u.rol,
+    para: $('#msg-para').value,
+    asunto: $('#msg-asunto').value.trim(),
+    texto: $('#msg-texto').value.trim(),
+    respuesta: '', ts: Date.now()
+  });
+  LS.set('pu_mensajes', lista);
+  toast('Mensaje enviado a la autoridad ✅');
+  renderApp();
+}
+
+function vMensajesAdmin(u){
+  const lista = LS.get('pu_mensajes', []).sort((a,b) => b.ts - a.ts);
+  return `
+    <h1 class="titulo">✉️ Mensajes recibidos</h1>
+    <p class="muted">${lista.length} mensaje(s) enviados por la comunidad universitaria.</p>
+    <div class="card tabla-wrap" style="margin-top:18px">
+      <table class="tabla">
+        <thead><tr><th>Fecha</th><th>De</th><th>Para</th><th>Asunto / Mensaje</th><th>Respuesta</th><th></th></tr></thead>
+        <tbody>
+          ${lista.length ? lista.map(m => `
+            <tr>
+              <td>${fCorta(m.ts)}</td>
+              <td>${esc(m.deNombre)}<br><span class="muted">${esc(m.rol)}</span></td>
+              <td>${esc(nombreAutoridad(m.para))}</td>
+              <td style="max-width:300px"><b>${esc(m.asunto)}</b><br><span class="muted">${esc(m.texto)}</span></td>
+              <td style="max-width:220px">${m.respuesta ? esc(m.respuesta) : '<span class="badge b-warn">Pendiente</span>'}</td>
+              <td><button class="btn btn-sm" onclick="responderMensaje('${m.id}')">Responder</button></td>
+            </tr>`).join('') : '<tr><td colspan="6" class="muted">Sin mensajes.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function responderMensaje(id){
+  const lista = LS.get('pu_mensajes', []);
+  const m = lista.find(x => x.id === id);
+  if (!m) return;
+  const r = prompt('Escribe la respuesta:', m.respuesta || '');
+  if (r === null) return;
+  m.respuesta = r.trim();
+  LS.set('pu_mensajes', lista);
+  toast('Respuesta enviada ✅');
+  renderApp();
+}
+
+function vChat(u){
+  const msgs = LS.get('pu_chat', []).sort((a,b) => a.ts - b.ts);
+  return `
+    <h1 class="titulo">💬 Chat general</h1>
+    <p class="muted">Espacio libre para estudiantes, docentes y administradores de la UNEL-MLK.</p>
+
+    <div class="chat-box" style="margin-top:18px">
+      <div class="chat-list" id="chatList">
+        ${msgs.map(m => {
+          const propio = m.cedula === u.cedula;
+          return `<div class="msg ${propio ? 'propio' : ''}">
+            <span class="meta">${esc(m.autor)} · ${esc(m.rol)} · ${fFecha(m.ts)}</span>
+            ${esc(m.texto)}
+            ${(u.rol === 'admin' || propio) ? `<button class="link" style="font-size:.68rem;color:inherit;margin-top:4px" onclick="borrarMensajeChat('${m.id}')">eliminar</button>` : ''}
+          </div>`;
+        }).join('') || '<p class="muted">Sé el primero en escribir.</p>'}
+      </div>
+      <form class="chat-input" onsubmit="enviarChat(event)">
+        <input id="chatTexto" placeholder="Escribe un mensaje para la comunidad…" autocomplete="off" required>
+        <button class="btn">Enviar</button>
+      </form>
+    </div>
+  `;
+}
+
+function enviarChat(e){
+  e.preventDefault();
+  const u = usuarioActual();
+  const txt = $('#chatTexto').value.trim();
+  if (!txt) return;
+  const lista = LS.get('pu_chat', []);
+  lista.push({id: uid(), cedula: u.cedula, autor: u.nombre, rol: u.rol, texto: txt, ts: Date.now()});
+  LS.set('pu_chat', lista);
+  renderApp();
+  const cl = $('#chatList'); if (cl) cl.scrollTop = cl.scrollHeight;
+}
+
+function borrarMensajeChat(id){
+  if (!confirm('¿Eliminar este mensaje del chat?')) return;
+  LS.set('pu_chat', LS.get('pu_chat', []).filter(m => m.id !== id));
+  toast('Mensaje eliminado');
+  renderApp();
+}
+
+function vAnuncios(u){
+  const lista = LS.get('pu_anuncios', []).sort((a,b) => b.ts - a.ts);
+  const visibles = u.rol === 'admin' ? lista : lista.filter(a => a.publico || u.rol !== 'estudiante');
+
+  return `
+    <h1 class="titulo">📢 Anuncios</h1>
+    <p class="muted">Novedades y comunicados oficiales de la universidad.</p>
+
+    ${u.rol === 'admin' ? `
+      <form class="card" style="margin-top:18px" onsubmit="crearAnuncio(event)">
+        <h3>Publicar nuevo anuncio</h3>
+        <label for="an-titulo">Título</label>
+        <input id="an-titulo" required placeholder="Ej: Suspensión de actividades">
+        <label for="an-cuerpo">Contenido</label>
+        <textarea id="an-cuerpo" rows="4" required placeholder="Escribe el comunicado…"></textarea>
+        <label for="an-autor">Autor / dependencia</label>
+        <input id="an-autor" required value="Rectorado">
+        <label><input type="checkbox" id="an-publico" style="width:auto;margin-right:8px">Visible en la página pública</label>
+        <button class="btn" style="margin-top:16px">Publicar anuncio</button>
+      </form>` : ''}
+
+    <div class="grid-2" style="margin-top:18px">
+      ${visibles.length ? visibles.map(a => `
+        <div class="card">
+          <div class="fila" style="border:0;padding:0 0 8px">
+            <h3 style="margin:0">${esc(a.titulo)}</h3>
+            ${a.publico ? '<span class="badge b-info">Público</span>' : '<span class="badge b-gris">Interno</span>'}
+          </div>
+          <p style="font-size:.88rem">${esc(a.cuerpo)}</p>
+          <p class="muted" style="margin-top:10px">${esc(a.autor)} · ${fFecha(a.ts)}</p>
+          ${u.rol === 'admin' ? `<button class="btn btn-err btn-sm" style="margin-top:10px" onclick="borrarAnuncio('${a.id}')">Eliminar</button>` : ''}
+        </div>`).join('') : '<p class="muted">No hay anuncios disponibles.</p>'}
+    </div>
+  `;
+}
+
+function crearAnuncio(e){
+  e.preventDefault();
+  const lista = LS.get('pu_anuncios', []);
+  lista.push({
+    id: uid(), titulo: $('#an-titulo').value.trim(), cuerpo: $('#an-cuerpo').value.trim(),
+    autor: $('#an-autor').value.trim(), publico: $('#an-publico').checked, ts: Date.now()
+  });
+  LS.set('pu_anuncios', lista);
+  toast('Anuncio publicado ✅');
+  renderApp();
+}
+
+function borrarAnuncio(id){
+  if (!confirm('¿Eliminar este anuncio?')) return;
+  LS.set('pu_anuncios', LS.get('pu_anuncios', []).filter(a => a.id !== id));
+  toast('Anuncio eliminado');
+  renderApp();
+}
+
+function vInfo(u){
+  const lista = LS.get('pu_info', []);
+  return `
+    <h1 class="titulo">ℹ️ Información importante</h1>
+    <p class="muted">Datos de interés general para la comunidad universitaria.</p>
+
+    ${u.rol === 'admin' ? `
+      <form class="card" style="margin-top:18px" onsubmit="crearInfo(event)">
+        <h3>Agregar información</h3>
+        <label for="in-titulo">Título</label>
+        <input id="in-titulo" required placeholder="Ej: Proceso de retiro de asignaturas">
+        <label for="in-cuerpo">Contenido</label>
+        <textarea id="in-cuerpo" rows="3" required></textarea>
+        <button class="btn" style="margin-top:16px">Guardar</button>
+      </form>` : ''}
+
+    <div class="grid-2" style="margin-top:18px">
+      ${lista.map(i => `
+        <div class="card">
+          <h3>${esc(i.titulo)}</h3>
+          <p style="font-size:.88rem">${esc(i.cuerpo)}</p>
+          ${u.rol === 'admin' ? `<button class="btn btn-err btn-sm" style="margin-top:10px" onclick="borrarInfo('${i.id}')">Eliminar</button>` : ''}
+        </div>`).join('') || '<p class="muted">Sin información.</p>'}
+    </div>
+  `;
+}
+
+function crearInfo(e){
+  e.preventDefault();
+  const lista = LS.get('pu_info', []);
+  lista.push({id: uid(), titulo: $('#in-titulo').value.trim(), cuerpo: $('#in-cuerpo').value.trim()});
+  LS.set('pu_info', lista);
+  toast('Información guardada ✅');
+  renderApp();
+}
+function borrarInfo(id){
+  if (!confirm('¿Eliminar esta información?')) return;
+  LS.set('pu_info', LS.get('pu_info', []).filter(i => i.id !== id));
+  toast('Información eliminada');
+  renderApp();
+}
+
+function vPerfil(u){
+  return `
+    <h1 class="titulo">👤 Mi perfil</h1>
+    <p class="muted">Datos personales y seguridad de la cuenta.</p>
+
+    <div class="grid-2" style="margin-top:18px">
+      <form class="card" onsubmit="guardarPerfil(event)">
+        <h3>Datos personales</h3>
+        <label>Cédula</label><input value="${esc(u.cedula)}" disabled>
+        <label>Rol</label><input value="${esc(u.rol)}" disabled>
+        <label for="pf-nombre">Nombre completo</label>
+        <input id="pf-nombre" value="${esc(u.nombre)}" required>
+        <label for="pf-correo">Correo institucional</label>
+        <input id="pf-correo" type="email" value="${esc(u.correo || '')}">
+        <label for="pf-telefono">Teléfono</label>
+        <input id="pf-telefono" value="${esc(u.telefono || '')}">
+        ${u.rol === 'estudiante' ? `
+          <label for="pf-carrera">Carrera</label>
+          <select id="pf-carrera">
+            ${CARRERAS.map(c => `<option ${c === u.carrera ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+          </select>` : ''}
+        <button class="btn" style="width:100%;margin-top:16px">Guardar cambios</button>
+      </form>
+
+      <form class="card" onsubmit="cambiarPassword(event)">
+        <h3>Cambiar contraseña</h3>
+        <label for="pw-actual">Contraseña actual</label>
+        <input id="pw-actual" type="password" required>
+        <label for="pw-nueva">Nueva contraseña</label>
+        <input id="pw-nueva" type="password" minlength="4" required>
+        <label for="pw-rep">Repetir nueva contraseña</label>
+        <input id="pw-rep" type="password" minlength="4" required>
+        <div id="pwMsg"></div>
+        <button class="btn" style="width:100%;margin-top:16px">Actualizar contraseña</button>
+
+        <hr style="margin:22px 0;border:0;border-top:1px solid var(--borde)">
+        <h3>Sesión</h3>
+        <p class="muted">Sesión iniciada como <b>${esc(u.nombre)}</b>.</p>
+        <button type="button" class="btn btn-err" style="width:100%;margin-top:12px" onclick="logout()">Cerrar sesión</button>
+      </form>
+    </div>
+  `;
+}
+
+function guardarPerfil(e){
+  e.preventDefault();
+  const u = usuarioActual();
+  guardarUsuarios(LS.get('pu_usuarios', []).map(x => {
+    if (x.cedula !== u.cedula) return x;
+    return {
+      ...x,
+      nombre: $('#pf-nombre').value.trim(),
+      correo: $('#pf-correo').value.trim(),
+      telefono: $('#pf-telefono').value.trim(),
+      carrera: $('#pf-carrera') ? $('#pf-carrera').value : x.carrera
+    };
+  }));
+  toast('Perfil actualizado ✅');
+  renderApp();
+}
+
+function cambiarPassword(e){
+  e.preventDefault();
+  const u = usuarioActual();
+  const msg = $('#pwMsg');
+  if ($('#pw-actual').value !== u.password)
+    return msg.innerHTML = '<div class="alerta-err">La contraseña actual no es correcta.</div>';
+  if ($('#pw-nueva').value !== $('#pw-rep').value)
+    return msg.innerHTML = '<div class="alerta-err">Las contraseñas nuevas no coinciden.</div>';
+
+  guardarUsuarios(LS.get('pu_usuarios', []).map(x =>
+    x.cedula === u.cedula ? {...x, password: $('#pw-nueva').value} : x));
+  msg.innerHTML = '<div class="alerta-ok">Contraseña actualizada correctamente.</div>';
+  toast('Contraseña actualizada ✅');
+}
+
+function vInicioProfesor(u){
+  const alumnos = LS.get('pu_usuarios', []).filter(x => x.rol === 'estudiante');
+  const misUnidades = PLAN.filter(p => (u.unidades || []).includes(p.cod));
+  return `
+    <h1 class="titulo">Hola, ${esc(u.nombre)} 👋</h1>
+    <p class="muted">Panel docente · UNEL-MLK</p>
+
+    <div class="grid-4" style="margin-top:20px">
+      <div class="tarjeta"><small>Unidades asignadas</small><b>${misUnidades.length}</b><small>este trimestre</small></div>
+      <div class="tarjeta"><small>Estudiantes activos</small><b>${alumnos.length}</b><small>en el sistema</small></div>
+      <div class="tarjeta"><small>Solicitudes pendientes</small><b>${LS.get('pu_solicitudes',[]).filter(s=>s.estado==='Pendiente').length}</b><small>por revisar</small></div>
+      <div class="tarjeta"><small>Mensajes</small><b>${LS.get('pu_mensajes',[]).length}</b><small>recibidos</small></div>
+    </div>
+
+    <h2 class="titulo-seccion">📘 Mis unidades</h2>
+    <div class="grid-2">
+      ${misUnidades.map(p => `
+        <div class="card">
+          <h3>${esc(p.nom)}</h3>
+          <p class="muted"><code>${p.cod}</code> · Trayecto ${p.t} · Trimestre ${p.q} · ${p.uc} UC</p>
+          <button class="btn btn-sm" style="margin-top:10px" onclick="ir('unidades')">Cargar calificaciones</button>
+        </div>`).join('') || '<p class="muted">No tienes unidades asignadas.</p>'}
+    </div>
+  `;
+}
+
+function vUnidades(u){
+  const misUnidades = PLAN.filter(p => (u.unidades || []).includes(p.cod));
+  const alumnos = LS.get('pu_usuarios', []).filter(x => x.rol === 'estudiante');
+  const notas = LS.get('pu_notas', {});
+
+  return `
+    <h1 class="titulo">📘 Mis unidades y calificaciones</h1>
+    <p class="muted">Puedes cargar y modificar las notas de tus estudiantes (escala 0–20).</p>
+
+    ${misUnidades.length ? misUnidades.map(p => `
+      <div class="card tabla-wrap" style="margin-top:18px">
+        <h3>${esc(p.nom)} <span class="muted" style="font-weight:400">· <code>${p.cod}</code></span></h3>
+        <table class="tabla">
+          <thead><tr><th>Estudiante</th><th>Cédula</th><th>Trayecto/Trim.</th><th>Nota</th></tr></thead>
+          <tbody>
+            ${alumnos.map(a => {
+              const nv = (notas[a.cedula] || {})[p.cod];
+              return `<tr>
+                <td>${esc(a.nombre)}</td>
+                <td>${esc(a.cedula)}</td>
+                <td>${a.trayecto} · ${a.trimestre}</td>
+                <td>
+                  <input type="number" min="0" max="20" value="${nv ?? ''}" style="width:90px"
+                    onchange="setNota('${a.cedula}','${p.cod}',this.value);toast('Nota guardada')">
+                </td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>`).join('') : '<div class="card" style="margin-top:18px"><p class="muted">No tienes unidades asignadas.</p></div>'}
+  `;
+}
+
+function vInicioAdmin(u){
+  const usuarios = LS.get('pu_usuarios', []);
+  const sols = LS.get('pu_solicitudes', []);
+  return `
+    <h1 class="titulo">🛠️ Panel de administración</h1>
+    <p class="muted">Universidad Nacional Experimental de Lara “Martín Luther King”</p>
+
+    <div class="grid-4" style="margin-top:20px">
+      <div class="tarjeta"><small>Estudiantes</small><b>${usuarios.filter(x=>x.rol==='estudiante').length}</b><small>registrados</small></div>
+      <div class="tarjeta"><small>Docentes</small><b>${usuarios.filter(x=>x.rol==='profesor').length}</b><small>activos</small></div>
+      <div class="tarjeta"><small>Solicitudes pendientes</small><b>${sols.filter(s=>s.estado==='Pendiente').length}</b><small>de ${sols.length}</small></div>
+      <div class="tarjeta"><small>Mensajes del chat</small><b>${LS.get('pu_chat',[]).length}</b><small>publicados</small></div>
+    </div>
+
+    <h2 class="titulo-seccion">⚡ Accesos rápidos</h2>
+    <div class="grid-4">
+      <button class="btn btn-outline" onclick="ir('usuarios')">👥 Gestionar usuarios</button>
+      <button class="btn btn-outline" onclick="ir('solicitudes')">📝 Ver solicitudes</button>
+      <button class="btn btn-outline" onclick="ir('anuncios')">📢 Publicar anuncio</button>
+      <button class="btn btn-outline" onclick="exportarDatos()">💾 Exportar respaldo</button>
+    </div>
+
+    <h2 class="titulo-seccion">📊 Últimas solicitudes</h2>
+    <div class="card tabla-wrap">
+      <table class="tabla">
+        <thead><tr><th>Fecha</th><th>Estudiante</th><th>Tipo</th><th>Estado</th></tr></thead>
+        <tbody>
+          ${sols.slice(-6).reverse().map(s => `<tr>
+            <td>${fCorta(s.ts)}</td><td>${esc(s.nombre)}</td><td>${esc(s.tipo)}</td>
+            <td>${badgeEstado(s.estado)}</td></tr>`).join('')
+            || '<tr><td colspan="4" class="muted">Sin solicitudes.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function vUsuarios(u){
+  const usuarios = LS.get('pu_usuarios', []);
+  return `
+    <h1 class="titulo">👥 Gestión de usuarios</h1>
+    <p class="muted">${usuarios.length} usuario(s) registrados en el sistema.</p>
+
+    <form class="card" style="margin-top:18px" onsubmit="crearUsuario(event)">
+      <h3>Registrar nuevo usuario</h3>
+      <div class="grid-3">
+        <div><label for="nu-cedula">Cédula</label><input id="nu-cedula" required placeholder="12345678"></div>
+        <div><label for="nu-nombre">Nombre completo</label><input id="nu-nombre" required></div>
+        <div><label for="nu-pass">Contraseña</label><input id="nu-pass" required value="1234"></div>
+        <div><label for="nu-rol">Rol</label>
+          <select id="nu-rol" onchange="document.getElementById('nu-campos-est').style.display=this.value==='estudiante'?'block':'none'">
+            <option value="estudiante">Estudiante</option>
+            <option value="profesor">Profesor</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+        <div><label for="nu-correo">Correo</label><input id="nu-correo" type="email"></div>
+      </div>
+      <div id="nu-campos-est" class="grid-3" style="margin-top:6px">
+        <div><label for="nu-carrera">Carrera</label>
+          <select id="nu-carrera">${CARRERAS.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div>
+        <div><label for="nu-trayecto">Trayecto</label>
+          <select id="nu-trayecto">${[1,2,3,4].map(n=>`<option>${n}</option>`).join('')}</select></div>
+        <div><label for="nu-trimestre">Trimestre</label>
+          <select id="nu-trimestre">${[1,2,3,4,5,6,7,8].map(n=>`<option>${n}</option>`).join('')}</select></div>
+      </div>
+      <button class="btn" style="margin-top:16px">Registrar usuario</button>
+    </form>
+
+    <div class="card tabla-wrap" style="margin-top:20px">
+      <table class="tabla">
+        <thead><tr><th>Cédula</th><th>Nombre</th><th>Rol</th><th>Detalle</th><th>Correo</th><th></th></tr></thead>
+        <tbody>
+          ${usuarios.map(x => `<tr>
+            <td>${esc(x.cedula)}</td>
+            <td>${esc(x.nombre)}</td>
+            <td><span class="badge ${x.rol==='estudiante'?'b-info':x.rol==='profesor'?'b-warn':'b-ok'}">${esc(x.rol)}</span></td>
+            <td class="muted">${esc(etiquetaRol(x))}</td>
+            <td class="muted">${esc(x.correo || '—')}</td>
+            <td>${x.cedula === u.cedula ? '' : `<button class="btn btn-err btn-sm" onclick="borrarUsuario('${x.cedula}')">Eliminar</button>`}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function crearUsuario(e){
+  e.preventDefault();
+  const ced = $('#nu-cedula').value.trim();
+  const lista = LS.get('pu_usuarios', []);
+  if (lista.some(x => x.cedula === ced)) return toast('Ya existe un usuario con esa cédula', 'err');
+
+  const rol = $('#nu-rol').value;
+  const nuevo = {
+    cedula: ced, nombre: $('#nu-nombre').value.trim(), password: $('#nu-pass').value,
+    rol, correo: $('#nu-correo').value.trim()
+  };
+  if (rol === 'estudiante'){
+    nuevo.carrera = $('#nu-carrera').value;
+    nuevo.trayecto = Number($('#nu-trayecto').value);
+    nuevo.trimestre = Number($('#nu-trimestre').value);
+  }
+  lista.push(nuevo);
+  guardarUsuarios(lista);
+  toast('Usuario registrado ✅');
+  renderApp();
+}
+
+function borrarUsuario(ced){
+  if (!confirm('¿Eliminar este usuario del sistema?')) return;
+  guardarUsuarios(LS.get('pu_usuarios', []).filter(x => x.cedula !== ced));
+  toast('Usuario eliminado');
+  renderApp();
+}
+
+function exportarDatos(){
+  const data = {};
+  ['pu_usuarios','pu_notas','pu_anuncios','pu_info','pu_chat','pu_mensajes','pu_solicitudes']
+    .forEach(k => data[k] = LS.get(k, []));
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `respaldo-unelmlk-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  toast('Respaldo descargado 💾');
+}
+
+/* =========================================================
+   8. AUTENTICACIÓN
+   ========================================================= */
+function login(e){
+  e.preventDefault();
+  const ced = $('#cedula').value.trim();
+  const pw  = $('#password').value;
+  const err = $('#loginError');
+  const u = LS.get('pu_usuarios', []).find(x => x.cedula === ced && x.password === pw);
+
+  if (!u){
+    err.textContent = 'Cédula o contraseña incorrecta. Verifica tus datos.';
+    err.classList.remove('hidden');
+    return;
+  }
+  err.classList.add('hidden');
+  sesion = {cedula: u.cedula};
+  LS.set('pu_sesion', sesion);
+  vistaActual = 'inicio';
+  toast(`Bienvenido/a, ${u.nombre} 👋`);
+  mostrarPantalla('app');
+}
+
+function logout(){
+  sesion = null;
+  localStorage.removeItem('pu_sesion');
+  $('#cedula').value = '';
+  $('#password').value = '';
+  toast('Sesión cerrada');
+  mostrarPantalla('publica');
+}
+
+/* =========================================================
+   9. INICIALIZACIÓN
+   ========================================================= */
+(function init(){
+  seed();
+  if (LS.get('pu_tema', false)) document.body.classList.add('dark');
+
+  const logueado = sesion && usuarioActual();
+  mostrarPantalla(logueado ? 'app' : 'publica');
+
+  document.addEventListener('keydown', ev => {
+    if (ev.key === 'Escape' && !$('#vista-app').classList.contains('hidden')) {
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+})();
+</script>
+</body>
+</html>
