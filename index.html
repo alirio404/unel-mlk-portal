@@ -1,1436 +1,624 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>UNEL-MLK · Universidad Nacional Experimental de Lara "Martín Luther King"</title>
-<meta name="description" content="Portal Académico Oficial de la Universidad Nacional Experimental de Lara 'Martín Luther King' (UNELMLK). Consulta tus calificaciones, gestiona solicitudes, revisa anuncios y comunícate con las autoridades. Barquisimeto, Venezuela.">
-<meta name="keywords" content="UNELMLK, Universidad Nacional Experimental de Lara, Martín Luther King, Barquisimeto, Lara, Venezuela, educación universitaria, portal académico, inscripciones">
-<meta name="author" content="Universidad Nacional Experimental de Lara 'Martín Luther King'">
-<meta property="og:title" content="UNEL-MLK · Portal Académico">
-<meta property="og:description" content="Portal Académico Oficial de la UNELMLK. Calificaciones, solicitudes, anuncios y más.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Universidad Nacional Experimental de Lara “Martín Luther King”</title>
+<meta name="description" content="Sitio oficial de la Universidad Nacional Experimental de Lara “Martín Luther King” (UNELMLK), Barquisimeto, Venezuela. Oferta académica, admisión y contacto.">
+<meta property="og:title" content="UNELMLK · Universidad Nacional Experimental de Lara “Martín Luther King”">
+<meta property="og:description" content="Oferta académica, admisión y contacto de la UNELMLK, Barquisimeto.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230b3d91' width='100' height='100' rx='15'/><text x='50' y='65' font-size='48' text-anchor='middle' fill='%23f5a623' font-weight='bold'>M</text></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230b3d91' width='100' height='100' rx='15'/%3E%3Ctext x='50' y='66' font-size='48' text-anchor='middle' fill='%23f5a623' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --azul:#0b3d91; --azul2:#1565c0; --acento:#f5a623;
-  --bg:#eef2f9; --card:#fff; --texto:#1f2733; --gris:#64748b;
-  --borde:#e2e8f0; --ok:#16a34a; --warn:#d97706; --err:#dc2626;
+  --navy:#0b3d91;--deep:#082a66;--gold:#f5a623;
+  --bg:#f5f7fb;--card:#fff;--tx:#18202e;--mut:#4d5a70;--bd:#d9e0ec;--link:#0b3d91;--hd:#0b3d91;
+  --serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  color-scheme:light;
 }
-body.dark{--bg:#0f172a;--card:#1e293b;--texto:#e2e8f0;--gris:#94a3b8;--borde:#334155}
-body.dark .sidebar,body.dark .mini-card,body.dark .tarjeta,body.dark .card{background:#1e293b}
-body.dark .tabla th{background:#0f172a}
-body.dark .tabla tr:hover td{background:#243347}
-body.dark .chat-list{background:#0f172a}
-body.dark .msg{background:#1e293b}
-body.dark .demo{background:#0f172a}
-body.dark .btn-outline{background:#1e293b;color:var(--texto)}
-body.dark .tabs button{background:#1e293b;color:var(--texto)}
-body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--texto);line-height:1.5}
-.hidden{display:none!important}
-h1,h2,h3{line-height:1.25}
-small{font-size:.78rem}
-.muted{color:var(--gris);font-size:.86rem}
-code{background:#eef2f9;padding:1px 6px;border-radius:5px;font-size:.85em;color:#0b3d91}
-body.dark code{background:#0f172a;color:#93c5fd}
-.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;background:linear-gradient(90deg,var(--azul),var(--azul2));color:#fff;box-shadow:0 2px 14px rgba(8,25,60,.25);flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
-.logo{width:46px;height:46px;border-radius:11px;background:var(--acento);color:#0b3d91;display:grid;place-items:center;font-weight:800;font-size:.72rem;letter-spacing:.3px;text-align:center;line-height:1.1}
-.brand strong{display:block;font-size:.82rem}
-.brand span{font-size:.7rem;opacity:.85}
-.topnav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.topnav a{cursor:pointer;font-size:.88rem;padding:7px 11px;border-radius:8px;opacity:.92}
-.topnav a:hover{background:rgba(255,255,255,.14)}
-.usuario-chip{font-size:.85rem;background:rgba(255,255,255,.15);padding:7px 13px;border-radius:999px}
-.btn{border:0;cursor:pointer;padding:10px 16px;border-radius:9px;font:inherit;font-size:.88rem;font-weight:600;background:var(--azul2);color:#fff;transition:.15s}
-.btn:hover{filter:brightness(1.09)}
-.btn-acento{background:var(--acento);color:#4a3400}
-.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.55);color:#fff}
-.btn-outline{background:#fff;border:1px solid var(--borde);color:var(--texto)}
-.btn-ok{background:var(--ok)} .btn-err{background:var(--err)}
-.btn-sm{padding:6px 11px;font-size:.78rem}
-.link{background:none;border:0;color:var(--azul2);cursor:pointer;font:inherit;font-size:.85rem;text-decoration:underline;margin-top:12px}
-input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--borde);border-radius:9px;font:inherit;background:var(--card);color:var(--texto)}
-input:focus,select:focus,textarea:focus{outline:2px solid #bfdbfe;border-color:var(--azul2)}
-label{display:block;font-size:.8rem;font-weight:700;margin:12px 0 4px;color:var(--gris)}
-.card{background:var(--card);border:1px solid var(--borde);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(15,35,80,.06)}
-.card h3{margin-bottom:12px;font-size:1rem}
-.alerta-err{background:#fee2e2;color:#991b1b;padding:9px 12px;border-radius:9px;font-size:.85rem;margin-top:12px}
-.alerta-ok{background:#dcfce7;color:#166534;padding:9px 12px;border-radius:9px;font-size:.85rem;margin-top:12px}
-.hero{background:linear-gradient(135deg,var(--azul),#1e88e5);color:#fff;padding:64px 22px;text-align:center}
-.hero h1{font-size:2rem;margin-bottom:12px}
-.hero p{max-width:680px;margin:0 auto 24px;opacity:.92}
-.hero .hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.wrap{max-width:1120px;margin:0 auto;padding:36px 20px}
-.titulo-seccion{font-size:1.25rem;margin:26px 0 14px}
-.pie{text-align:center;padding:26px;color:var(--gris);font-size:.82rem;border-top:1px solid var(--borde)}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-.mini-card{background:var(--card);border:1px solid var(--borde);border-radius:12px;padding:16px}
-.mini-card h4{font-size:.95rem;margin-bottom:6px}
-.mini-card p{font-size:.85rem;color:var(--gris)}
-.centro{display:grid;place-items:center;min-height:calc(100vh - 70px);padding:30px 16px}
-.login-card{width:100%;max-width:420px}
-.login-card h2{margin-bottom:4px}
-.demo{margin-top:18px;background:#f8fafc;border:1px dashed var(--borde);border-radius:10px;padding:12px;font-size:.8rem;color:var(--gris);line-height:1.8}
-#vista-app{display:grid;grid-template-columns:256px 1fr;min-height:calc(100vh - 64px)}
-.sidebar{background:var(--card);border-right:1px solid var(--borde);padding:16px 12px}
-.side-user{display:flex;gap:10px;align-items:center;padding:10px;border-bottom:1px solid var(--borde);margin-bottom:12px}
-.avatar{width:40px;height:40px;border-radius:50%;background:var(--azul);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem;flex:0 0 auto}
-.side-user strong{display:block;font-size:.86rem}
-.side-user span{font-size:.71rem;color:var(--gris);display:block}
-.sidebar a{display:block;padding:10px 12px;border-radius:9px;cursor:pointer;font-size:.88rem;color:var(--texto);margin-bottom:3px}
-.sidebar a:hover{background:#f1f5f9}
-body.dark .sidebar a:hover{background:#334155}
-.sidebar a.activo{background:var(--azul);color:#fff;font-weight:600}
-.contenido{padding:24px;overflow:auto}
-.titulo{font-size:1.5rem;margin-bottom:4px}
-.tarjeta{background:var(--card);border:1px solid var(--borde);border-radius:13px;padding:16px}
-.tarjeta b{display:block;font-size:1.6rem;color:var(--azul2)}
-.tarjeta small{color:var(--gris)}
-.tabla{width:100%;border-collapse:collapse}
-.tabla th,.tabla td{padding:9px 10px;border-bottom:1px solid var(--borde);text-align:left;font-size:.86rem}
-.tabla th{background:#f8fafc;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;color:var(--gris)}
-.tabla tr:hover td{background:#fafcff}
-.tabla-wrap{overflow-x:auto}
-.badge{padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;display:inline-block}
-.b-ok{background:#dcfce7;color:#166534}
-.b-err{background:#fee2e2;color:#991b1b}
-.b-warn{background:#fef3c7;color:#92400e}
-.b-info{background:#dbeafe;color:#1e40af}
-.b-gris{background:#f1f5f9;color:#475569}
-.fila{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--borde)}
-.fila:last-child{border-bottom:0}
-.fila-col{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-bottom:1px dashed var(--borde)}
-.fila-col:last-child{border-bottom:0}
-.nota{font-weight:800}
-.nota.ap{color:var(--ok)} .nota.re{color:var(--err)}
-.barra{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-top:6px}
-.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--azul2),#42a5f5)}
-.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
-.tabs button{border:1px solid var(--borde);background:var(--card);color:var(--texto);padding:8px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:.84rem}
-.tabs button.activo{background:var(--azul);color:#fff;border-color:var(--azul)}
-.chat-box{display:flex;flex-direction:column;height:470px;background:var(--card);border:1px solid var(--borde);border-radius:14px;overflow:hidden}
-.chat-list{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f8fafc}
-.msg{max-width:74%;padding:9px 13px;border-radius:13px;background:var(--card);border:1px solid var(--borde);font-size:.87rem}
-.msg.propio{align-self:flex-end;background:var(--azul2);color:#fff;border-color:var(--azul2)}
-.msg .meta{font-size:.68rem;opacity:.75;display:block;margin-bottom:3px}
-.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--borde);background:var(--card)}
-.chat-input input{flex:1}
-.toast{position:fixed;bottom:22px;right:22px;background:#0f172a;color:#fff;padding:12px 18px;border-radius:11px;font-size:.86rem;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:320px}
-.toast.err{background:var(--err)} .toast.ok{background:var(--ok)} .toast.warn{background:var(--warn)}
-@media print{.topbar,.sidebar,.pie,.no-print{display:none!important}#vista-app{grid-template-columns:1fr}}
-@media (max-width:860px){
-  #vista-app{grid-template-columns:1fr}
-  .sidebar{display:flex;gap:6px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--borde)}
-  .side-user{display:none}
-  .sidebar a{white-space:nowrap;margin-bottom:0}
-  .contenido{padding:16px}
-  .hero h1{font-size:1.5rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1526;--card:#15203a;--tx:#e8edf7;--mut:#a5b2c9;--bd:#2a3757;--link:#8fbaff;--hd:#cfe0ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1526;--card:#15203a;--tx:#e8edf7;--mut:#a5b2c9;--bd:#2a3757;--link:#8fbaff;--hd:#cfe0ff;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);line-height:1.6;min-height:100%}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:#1b1400;padding:8px 14px;border-radius:6px;z-index:99}
+.skip:focus{left:8px}
+h1,h2,h3{font-family:var(--serif);color:var(--hd);line-height:1.2;font-weight:700}
+h2{font-size:1.6rem;margin-bottom:14px}
+h3{font-size:1.1rem;margin-bottom:6px}
+p{max-width:68ch}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+/* cabecera */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--deep);color:#fff;border-bottom:3px solid var(--gold)}
+.top .w{display:flex;align-items:center;gap:16px;justify-content:space-between;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.sello{width:44px;height:44px;border-radius:50%;background:var(--gold);color:#1b1400;display:grid;place-items:center;font:700 .8rem var(--serif);text-align:center;line-height:1}
+.brand b{display:block;font:700 .95rem var(--serif)}
+.brand small{font-size:.75rem;color:#c9d7f2}
+nav{display:flex;gap:2px;align-items:center;overflow-x:auto;max-width:100%}
+nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:6px;font-size:.92rem;white-space:nowrap}
+nav a:hover{background:rgba(255,255,255,.14)}
+nav a[aria-current="page"]{background:rgba(255,255,255,.2);box-shadow:inset 0 -3px 0 var(--gold)}
+#tema{background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:6px;padding:7px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+/* hero */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero .w{padding-top:64px;padding-bottom:64px;display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center}
+.hero h1{color:#fff;font-size:clamp(2rem,5vw,3.3rem)}
+.hero p{margin:18px 0 26px;color:#dbe6fb;font-size:1.08rem}
+.hero svg{width:100%;max-width:300px;justify-self:center;opacity:.95}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:6px;font-weight:700;text-decoration:none;font-size:.95rem;border:2px solid var(--gold);cursor:pointer;font-family:inherit}
+.btn.p{background:var(--gold);color:#1b1400}
+.btn.s{background:transparent;color:#fff}
+.btn.p:hover{filter:brightness(1.08)}
+.btn.s:hover{background:rgba(255,255,255,.12)}
+.btn.d{background:var(--navy);color:#fff;border-color:var(--navy)}
+/* secciones */
+section{padding:44px 0}
+.pageh{background:var(--deep);color:#fff;padding:38px 0}
+.pageh h1{color:#fff;font-size:clamp(1.7rem,4vw,2.4rem)}
+.pageh p{color:#c9d7f2;margin-top:8px}
+.acc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border:1px solid var(--bd);background:var(--card);margin-top:-30px;position:relative;border-radius:10px;overflow:hidden}
+.acc a{padding:22px;text-decoration:none;color:var(--tx);border-right:1px solid var(--bd);border-bottom:1px solid var(--bd);display:block}
+.acc a:hover{background:var(--bg)}
+.acc b{display:block;font:700 1.05rem var(--serif);color:var(--hd)}
+.acc span{font-size:.88rem;color:var(--mut)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.serv{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 32px}
+.serv div{padding:14px 0;border-top:1px solid var(--bd)}
+.serv p{color:var(--mut);font-size:.93rem}
+dl.of div{display:grid;grid-template-columns:200px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--bd)}
+dl.of dt{font:700 1rem var(--serif);color:var(--hd)}
+dl.of dd{color:var(--tx)}
+ol.pasos{list-style:none;counter-reset:p;max-width:68ch}
+ol.pasos li{counter-increment:p;position:relative;padding:14px 0 14px 54px;border-top:1px solid var(--bd)}
+ol.pasos li::before{content:counter(p);position:absolute;left:0;top:12px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 1rem var(--serif)}
+.nota{background:var(--card);border-left:4px solid var(--gold);padding:14px 18px;margin-top:22px;max-width:68ch;border-radius:0 8px 8px 0}
+form.c{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:22px}
+label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 5px}
+input,textarea{width:100%;padding:11px 12px;border:1px solid var(--mut);border-radius:6px;font:inherit;background:var(--bg);color:var(--tx)}
+address{font-style:normal}
+address p+p,.dir p+p{margin-top:8px}
+footer{background:var(--deep);color:#c9d7f2;padding:30px 0;font-size:.9rem;margin-top:20px}
+footer a{color:#fff}
+.vacio{padding:26px;border:1px dashed var(--mut);border-radius:8px;color:var(--mut)}
+@media (max-width:760px){
+  .hero .w{grid-template-columns:1fr;padding-top:44px;padding-bottom:52px}
+  .hero svg{max-width:150px;order:-1;justify-self:start}
+  dl.of div{grid-template-columns:1fr;gap:4px}
 }
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.err{color:#b42318}
+:root[data-theme="dark"] .err{color:#ff9c94}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .err{color:#ff9c94}}
+.tw{overflow-x:auto;margin:10px 0 26px}
+table{border-collapse:collapse;width:100%;min-width:420px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--bd);text-align:left;font-size:.93rem}
+th{color:var(--hd)}
+td input{width:84px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.sm{padding:5px 10px;font-size:.8rem;margin:2px}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.75rem;font-weight:600;margin:1px 3px 1px 0;border:1px solid var(--bd);background:var(--bg);color:var(--hd)}
+.chip.r{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip.a{background:var(--gold);color:#1b1400;border-color:var(--gold)}
+td input[data-o]{width:100%;min-width:170px}
+td input[type=time]{width:120px}
+td input[data-f=aula]{width:120px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.chatbox{background:var(--card);border:1px solid var(--bd);border-radius:10px;height:380px;overflow-y:auto;padding:12px;margin:12px 0}
+.msg{padding:8px 0;border-bottom:1px solid var(--bd)}
+.msg.av{border-left:4px solid var(--gold);padding-left:10px;background:var(--bg)}
+.msg small{color:var(--mut);margin-left:6px}
+.msg p{max-width:none;overflow-wrap:anywhere}
+.cf{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cf input[type=text]{flex:1;min-width:200px}
 </style>
 </head>
 <body>
-
-<!-- ============ BARRA SUPERIOR ============ -->
-<header class="topbar">
-  <div class="brand" onclick="mostrarPantalla('publica')">
-    <div class="logo">UNEL<br>MLK</div>
-    <div>
-      <strong>Universidad Nacional Experimental de Lara</strong>
-      <span>“Martín Luther King” · Portal Académico</span>
-    </div>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="w">
+    <a class="brand" href="#/">
+      <span class="sello" aria-hidden="true">UNEL<br>MLK</span>
+      <span><b>Universidad Nacional Experimental de Lara</b><small>“Martín Luther King” · Barquisimeto</small></span>
+    </a>
+    <nav aria-label="Principal" id="nav">
+      <a href="#/">Inicio</a>
+      <a href="#/institucion">La universidad</a>
+      <a href="#/oferta">Oferta académica</a>
+      <a href="#/admision">Admisión</a>
+      <a href="#/contacto">Contacto</a>
+      <a href="#/portal">Portal</a>
+      <button id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Tema</button>
+    </nav>
   </div>
-  <nav class="topnav" id="navPublico">
-    <a onclick="mostrarPantalla('publica')">Inicio</a>
-    <a onclick="document.getElementById('sec-anuncios').scrollIntoView({behavior:'smooth'})">Anuncios</a>
-    <a onclick="document.getElementById('sec-info').scrollIntoView({behavior:'smooth'})">Información</a>
-    <a class="btn btn-acento btn-sm" onclick="mostrarPantalla('login')">Acceder al portal</a>
-  </nav>
-  <nav class="topnav hidden" id="navPrivado">
-    <span class="usuario-chip" id="navUsuario"></span>
-    <button class="btn btn-ghost btn-sm" onclick="toggleTema()" title="Modo claro / oscuro">🌓</button>
-    <button class="btn btn-ghost btn-sm" onclick="logout()">Cerrar sesión</button>
-  </nav>
 </header>
 
-<main>
-  <!-- ============ VISTA PÚBLICA ============ -->
-  <section id="vista-publica">
-    <div class="hero">
-      <h1>Bienvenido al Portal Académico UNEL-MLK</h1>
-      <p>Universidad Nacional Experimental de Lara “Martín Luther King” · Formando el Futuro de la Patria.
-         Consulta tus calificaciones, gestiona solicitudes, revisa anuncios y comunícate con las autoridades.</p>
-      <div class="hero-btns">
-        <button class="btn btn-acento" onclick="mostrarPantalla('login')">Ingresar con mi cédula</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('sec-anuncios').scrollIntoView({behavior:'smooth'})">Ver anuncios</button>
-      </div>
-    </div>
-    <div class="wrap">
+<main id="contenido" tabindex="-1"></main>
 
-      <h2 class="titulo-seccion">🏛️ Nuestra Universidad</h2>
-      <div class="grid-3">
-        <div class="mini-card">
-          <h4>Reseña histórica</h4>
-          <p>Fundada el 19 de junio de 2018 mediante Decreto N.º 3.477 (Gaceta Oficial N.º 41.423).
-             Nace dentro del proyecto de la Misión Alma Mater para territorializar la educación universitaria
-             y acercarla a los sectores más desposeídos. Sede en el Complejo Universitario Alma Mater,
-             parroquia Guerrera Ana Soto, municipio Iribarren, Barquisimeto, Estado Lara.</p>
-        </div>
-        <div class="mini-card">
-          <h4>Misión</h4>
-          <p>Construir comunidades de conocimiento y aprendizaje dirigidas a la generación,
-             transformación y apropiación social del conocimiento, en beneficio directo de su área
-             de influencia territorial y el fortalecimiento del poder popular.</p>
-        </div>
-        <div class="mini-card">
-          <h4>Visión</h4>
-          <p>Consolidarse como institución andragógica y humanista de referencia, enfocada en la
-             transformación social de la Patria. Formar profesionales integrales mediante el intercambio
-             de saberes, contribuyendo a la soberanía tecnológica y al desarrollo sustentable.</p>
-        </div>
-      </div>
-
-      <h2 class="titulo-seccion">🎓 Oferta Académica</h2>
-      <div class="grid-2">
-        <div class="mini-card">
-          <h4>Pregrado</h4>
-          <p><b>Área de Salud:</b> Fisioterapia · Odontología · Psicología Social</p>
-          <p><b>Ingeniería y Tecnología:</b> Construcción Civil · Electricidad · Mecánica ·
-             Instrumentación y Control · Transporte Ferroviario</p>
-          <p><b>Ciencias del Agro:</b> Medicina Veterinaria</p>
-          <p><b>Artes:</b> Diseño Integral Comunitario</p>
-        </div>
-        <div class="mini-card">
-          <h4>Postgrado</h4>
-          <p><b>Especializaciones en Salud:</b> Enfocadas en el fortalecimiento técnico y clínico.</p>
-          <p><b>Especializaciones en Ingeniería y Producción:</b> Mecánica, Instrumentación y Control,
-             Construcción Civil.</p>
-          <p><b>Diplomados:</b> Cultura Emprendedora · Formación Docente · Gestión Pública y Comunitaria.</p>
-        </div>
-      </div>
-
-      <h2 class="titulo-seccion">🤝 Servicios estudiantiles</h2>
-      <div class="grid-3">
-        <div class="mini-card"><h4>🏥 Servicio médico</h4><p>Atención primaria y especializada para preservar la salud física de los estudiantes.</p></div>
-        <div class="mini-card"><h4>🦷 Odontología</h4><p>Tratamientos dentales preventivos y correctivos brindados por profesionales.</p></div>
-        <div class="mini-card"><h4>🧠 Atención psicológica</h4><p>Apoyo emocional y terapias individuales para fortalecer la salud mental.</p></div>
-        <div class="mini-card"><h4>🚌 Transporte</h4><p>Rutas que facilitan el acceso al complejo universitario desde distintos sectores.</p></div>
-        <div class="mini-card"><h4>🍽️ Comedor universitario</h4><p>Alimentación balanceada y económica en espacios adecuados para la nutrición estudiantil.</p></div>
-        <div class="mini-card"><h4>🐾 Jornadas veterinarias</h4><p>Actividades de cuidado de mascotas, abiertas a estudiantes y comunidad en general.</p></div>
-      </div>
-
-      <h2 class="titulo-seccion" id="sec-anuncios">📢 Anuncios públicos</h2>
-      <div id="anunciosPublicos" class="grid-3"></div>
-
-      <h2 class="titulo-seccion" id="sec-info">ℹ️ Información importante</h2>
-      <div id="infoPublica" class="grid-3"></div>
-
-      <h2 class="titulo-seccion">📍 Ubicación y contacto</h2>
-      <div class="grid-2">
-        <div class="mini-card">
-          <h4>Sede Principal · Barquisimeto</h4>
-          <p>Complejo Universitario Alma Mater, Edificio Principal, Piso S/N, Barrio La Batalla
-             (Vía El Tostao, diagonal al Monumento La Estrella), Barquisimeto, Estado Lara. Zona Postal 3001.</p>
-          <p class="muted" style="margin-top:6px">Teléfono: 0251-4472593</p>
-        </div>
-        <div class="mini-card">
-          <h4>Núcleo Yaracuy</h4>
-          <p>Edificio Los Carrascosa, Yaritagua, Estado Yaracuy. Edificación de estilo neoclásico
-             que data de 1861, restaurada y con mención especial en la X Bienal de Arquitectura de Venezuela.</p>
-        </div>
-      </div>
-    </div>
-    <footer class="pie">
-      © 2026 Universidad Nacional Experimental de Lara “Martín Luther King” · Barquisimeto, Estado Lara · Venezuela<br>
-      Formando el Futuro de la Patria · Rector: Dr. Jean Piero Yacobucci
-    </footer>
-  </section>
-
-  <!-- ============ VISTA LOGIN ============ -->
-  <section id="vista-login" class="hidden centro">
-    <form class="card login-card" onsubmit="login(event)">
-      <h2>Iniciar sesión</h2>
-      <p class="muted">Ingresa con tu número de cédula y tu contraseña personal.</p>
-      <label for="cedula">Cédula</label>
-      <input id="cedula" placeholder="Ej: 12345678" autocomplete="username" required>
-      <label for="password">Contraseña</label>
-      <input id="password" type="password" placeholder="••••••" autocomplete="current-password" required>
-      <div id="loginError" class="alerta-err hidden"></div>
-      <button class="btn" style="width:100%;margin-top:16px">Entrar</button>
-      <div class="demo">
-        <strong>Usuarios de prueba</strong><br>
-        👩‍🎓 Estudiante · <code>12345678</code> / <code>1234</code><br>
-        👨‍🏫 Profesor · <code>90000001</code> / <code>prof</code><br>
-        🛠️ Administrador · <code>00000000</code> / <code>admin</code>
-      </div>
-      <button type="button" class="link" onclick="mostrarPantalla('publica')">← Volver al inicio</button>
-    </form>
-  </section>
-
-  <!-- ============ VISTA APP ============ -->
-  <section id="vista-app" class="hidden">
-    <aside class="sidebar" id="sidebar"></aside>
-    <div class="contenido" id="contenido"></div>
-  </section>
-</main>
-
-<div id="toast" class="toast hidden"></div>
+<footer>
+  <div class="w">
+    <p>© 2026 Universidad Nacional Experimental de Lara “Martín Luther King”. Barquisimeto, estado Lara, Venezuela.</p>
+    <p style="margin-top:6px">Teléfono <a href="tel:+582514472593">0251-4472593</a></p>
+  </div>
+</footer>
 
 <script>
-/* =========================================================
-   1. UTILIDADES
-   ========================================================= */
-const $  = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const esc = s => String(s ?? '').replace(/[&<>"']/g,
-  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ---- Contenido editable: cambia aquí los textos sin tocar el diseño ---- */
+const PREGRADO = [
+  ['Salud', 'Fisioterapia, Odontología, Psicología Social'],
+  ['Ingeniería y tecnología', 'Construcción Civil, Electricidad, Mecánica, Instrumentación y Control, Transporte Ferroviario'],
+  ['Ciencias del agro', 'Medicina Veterinaria'],
+  ['Artes', 'Diseño Integral Comunitario']
+];
+const POSTGRADO = [
+  ['Especializaciones en salud', 'Fortalecimiento técnico y clínico.'],
+  ['Especializaciones en ingeniería y producción', 'Mecánica, Instrumentación y Control, Construcción Civil.'],
+  ['Diplomados', 'Cultura Emprendedora, Formación Docente, Gestión Pública y Comunitaria.']
+];
+const SERVICIOS = [
+  ['Servicio médico', 'Atención primaria y especializada para la salud física de los estudiantes.'],
+  ['Odontología', 'Tratamientos dentales preventivos y correctivos.'],
+  ['Atención psicológica', 'Apoyo emocional y terapias individuales.'],
+  ['Transporte', 'Rutas de acceso al complejo universitario desde distintos sectores.'],
+  ['Comedor universitario', 'Alimentación balanceada y económica.'],
+  ['Jornadas veterinarias', 'Cuidado de mascotas, abiertas a estudiantes y comunidad.']
+];
+let NOTICIAS = []; /* { titulo, fecha, texto }; las publica el administrador desde el portal */
+const CORREO = 'soporte@unelmlk.edu.ve'; /* Verificar con la institución */
+
+const estrella = `<svg viewBox="0 0 200 200" role="img" aria-label="Estrella"><g fill="none" stroke="#f5a623" stroke-width="3"><circle cx="100" cy="100" r="90"/><circle cx="100" cy="100" r="62" stroke-opacity=".5"/></g><path d="M100 18l17 58 60 1-49 36 19 58-47-36-47 36 19-58-49-36 60-1z" fill="#f5a623"/></svg>`;
+const dl = (a) => `<dl class="of">${a.map(([t,d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join('')}</dl>`;
+const cab = (t, s) => `<div class="pageh"><div class="w"><h1>${t}</h1><p>${s}</p></div></div>`;
+
+const RUTAS = {
+  '': {t: 'Inicio', h: () => `
+    <div class="hero"><div class="w">
+      <div>
+        <h1>Formando el futuro de la Patria desde Lara</h1>
+        <p>Universidad pública del proyecto Misión Alma Mater, con carreras de salud, ingeniería, agro y artes en Barquisimeto y Yaritagua.</p>
+        <div class="btns"><a class="btn p" href="#/admision">Cómo ingresar</a><a class="btn s" href="#/oferta">Ver carreras</a></div>
+      </div>${estrella}
+    </div></div>
+    <div class="w"><nav class="acc" aria-label="Accesos rápidos">
+      <a href="#/admision"><b>Admisión</b><span>Pasos para ingresar por el SNI/OPSU</span></a>
+      <a href="#/oferta"><b>Oferta académica</b><span>Pregrado, postgrado y diplomados</span></a>
+      <a href="#/institucion"><b>La universidad</b><span>Historia, misión y visión</span></a>
+      <a href="#/contacto"><b>Contacto</b><span>Dirección, teléfono y mensaje</span></a>
+    </nav></div>
+    <section><div class="w"><h2>Servicios estudiantiles</h2><div class="serv">${SERVICIOS.map(([t,d]) => `<div><h3>${t}</h3><p>${d}</p></div>`).join('')}</div></div></section>
+    <section style="padding-top:0"><div class="w"><h2>Noticias</h2>${
+      NOTICIAS.length ? NOTICIAS.map(n => `<article style="border-top:1px solid var(--bd);padding:14px 0"><h3>${esc(n.titulo)}</h3><p class="mut" style="color:var(--mut);font-size:.85rem">${esc(n.fecha)}</p><p>${esc(n.texto)}</p></article>`).join('')
+      : '<p class="vacio">Aún no hay noticias publicadas. Los comunicados oficiales aparecerán aquí.</p>'}</div></section>`},
+
+  institucion: {t: 'La universidad', h: () => cab('La universidad', 'Historia, misión y visión de la UNELMLK.') + `
+    <section><div class="w cols">
+      <div><h2>Reseña histórica</h2>
+        <p>Fundada el 19 de junio de 2018 mediante Decreto N.º 3.477 (Gaceta Oficial N.º 41.423). Nace dentro del proyecto de la Misión Alma Mater para territorializar la educación universitaria y acercarla a los sectores más desposeídos.</p>
+        <p>Su sede está en el Complejo Universitario Alma Mater, parroquia Guerrera Ana Soto, municipio Iribarren, Barquisimeto, estado Lara.</p></div>
+      <div><h2>Misión</h2>
+        <p>Construir comunidades de conocimiento y aprendizaje dirigidas a la generación, transformación y apropiación social del conocimiento, en beneficio directo de su área de influencia territorial y el fortalecimiento del poder popular.</p>
+        <h2 style="margin-top:28px">Visión</h2>
+        <p>Consolidarse como institución andragógica y humanista de referencia, enfocada en la transformación social de la Patria. Formar profesionales integrales mediante el intercambio de saberes, contribuyendo a la soberanía tecnológica y al desarrollo sustentable.</p></div>
+    </div></section>`},
+
+  oferta: {t: 'Oferta académica', h: () => cab('Oferta académica', 'Programas de pregrado, postgrado y diplomados.') + `
+    <section><div class="w"><h2>Pregrado</h2>${dl(PREGRADO)}<h2 style="margin-top:36px">Postgrado</h2>${dl(POSTGRADO)}</div></section>`},
+
+  admision: {t: 'Admisión', h: () => cab('Cómo ingresar a la UNELMLK', 'El ingreso se gestiona a través del Sistema Nacional de Ingreso.') + `
+    <section><div class="w"><ol class="pasos">
+      <li><h3>Regístrate en el SNI/OPSU</h3>Crea tu cuenta en la página oficial del Sistema Nacional de Ingreso.</li>
+      <li><h3>Selecciona tus opciones de estudio</h3>Elige el Programa Nacional de Formación de tu preferencia.</li>
+      <li><h3>Espera los resultados de la OPSU</h3>La asignación de cupos la publica la OPSU.</li>
+      <li><h3>Inscríbete en la universidad</h3>Consulta las fechas de inscripción en las redes sociales oficiales de la UNELMLK.</li>
+    </ol>
+    <p class="nota">La universidad también realiza un censo interno en agosto y septiembre.</p></div></section>`},
+
+  contacto: {t: 'Contacto', h: () => cab('Contacto', 'Escríbenos o visítanos.') + `
+    <section><div class="w cols">
+      <div class="dir"><h2>Sede principal, Barquisimeto</h2>
+        <address><p>Complejo Universitario Alma Mater, Edificio Principal, Barrio La Batalla (vía El Tostao, diagonal al Monumento La Estrella), Barquisimeto, estado Lara. Zona postal 3001.</p>
+        <p>Teléfono: <a href="tel:+582514472593">0251-4472593</a></p></address>
+        <h2 style="margin-top:28px">Núcleo Yaracuy</h2>
+        <p>Edificio Los Carrascosa, Yaritagua, estado Yaracuy. Edificación neoclásica de 1861, restaurada, con mención especial en la X Bienal de Arquitectura de Venezuela.</p></div>
+      <form class="c" id="fc" aria-labelledby="ft"><h2 id="ft">Envíanos un mensaje</h2>
+        <label for="n">Nombre completo</label><input id="n" autocomplete="name" required>
+        <label for="e">Correo electrónico</label><input id="e" type="email" autocomplete="email" required>
+        <label for="m">Mensaje</label><textarea id="m" rows="5" required></textarea>
+        <button class="btn d" style="margin-top:18px">Abrir mi correo para enviar</button>
+        <p role="status" id="fs" style="margin-top:10px;color:var(--mut);font-size:.9rem"></p>
+      </form>
+    </div></section>`}
+};
+
+/* ---- Portal piloto: cuentas de demostración, datos inventados ----
+   Las contraseñas NO están en el código: solo sus huellas PBKDF2. Los datos viven en el navegador de cada persona. */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LS = {
-  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
-  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+  g: (k, d) => { try { const v = localStorage.getItem('pt_' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  s: (k, v) => { try { localStorage.setItem('pt_' + k, JSON.stringify(v)); } catch (e) {} }
 };
-const uid    = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-const fFecha = ts => new Date(ts).toLocaleString('es-VE', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
-const fCorta = ts => new Date(ts).toLocaleDateString('es-VE', {day:'2-digit', month:'short', year:'numeric'});
-const iniciales = n => String(n || '?').replace(/^(Prof\.|Coord\.)\s*/,'')
-  .split(/\s+/).slice(0,2).map(p => p[0]).join('').toUpperCase();
-
-function toast(msg, tipo = 'ok'){
-  const t = $('#toast');
-  t.textContent = msg;
-  t.className = 'toast ' + tipo;
-  clearTimeout(t._tm);
-  t._tm = setTimeout(() => t.className = 'toast hidden', 3000);
-}
-function toggleTema(){
-  document.body.classList.toggle('dark');
-  LS.set('pu_tema', document.body.classList.contains('dark'));
-}
-function imprimirHTML(titulo, cuerpoHTML){
-  const w = window.open('', '_blank', 'width=820,height=900');
-  if(!w){ toast('Permite las ventanas emergentes para imprimir', 'warn'); return; }
-  w.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
-  <title>${esc(titulo)}</title>
-  <style>
-    body{font-family:system-ui,Segoe UI,Roboto,sans-serif;padding:34px;color:#1f2733}
-    h1{font-size:19px;color:#0b3d91;margin-bottom:2px}
-    h2{font-size:14px;color:#64748b;font-weight:500;margin-bottom:22px}
-    table{width:100%;border-collapse:collapse;margin-top:14px}
-    th,td{border-bottom:1px solid #e2e8f0;padding:7px;font-size:13px;text-align:left}
-    th{background:#f1f5f9;font-size:11px;text-transform:uppercase}
-    .firma{margin-top:60px;display:flex;justify-content:space-between;gap:40px}
-    .firma div{border-top:1px solid #94a3b8;padding-top:6px;font-size:12px;flex:1;text-align:center}
-    .pie{margin-top:40px;font-size:11px;color:#94a3b8;text-align:center}
-  </style></head><body>${cuerpoHTML}
-  <div class="firma"><div>Control de Estudios</div><div>Coordinación Académica</div></div>
-  <p class="pie">Documento generado automáticamente por el Portal Académico UNEL-MLK · ${fFecha(Date.now())}</p>
-  </body></html>`);
-  w.document.close();
-  setTimeout(() => w.print(), 350);
-}
-
-/* =========================================================
-   2. PLAN DE ESTUDIOS
-   ========================================================= */
-const CARRERAS = [
-  'Fisioterapia','Odontología','Psicología Social','Construcción Civil','Electricidad',
-  'Mecánica','Instrumentación y Control','Transporte Ferroviario','Medicina Veterinaria','Diseño Integral Comunitario'
+NOTICIAS = LS.g('noticias', []);
+const SEMILLA = [
+  {ced:'10000001', rol:'admin', nombre:'Rosa Elena Márquez', sal:'aadef4fd6812eac3', h:'8894772e33179a0dcfe220fa91a095b070716612f5635deebff12ebdcc8e9824'},
+  {ced:'10000002', rol:'profesor', nombre:'Andrés Colmenárez', unidades:['PSI-105','PSI-106'], secciones:['Psicología Social|A'], sal:'e8551e582c5ac56f', h:'d2b2827071bc5ed95367fe2597efc28ad187153009684139cdbbec09096d058a'},
+  {ced:'10000003', rol:'estudiante', nombre:'Valentina Ríos', carrera:'Psicología Social', trayecto:1, trimestre:3, seccion:'A', sal:'47c64f1652f58579', h:'83f9bc6f1cc792a71f6d10182ba3252c6703c0c9bb2c2a99b96b4f3e81828002'}
 ];
+let USUARIOS = LS.g('usuarios', SEMILLA);
+const guardarU = () => LS.s('usuarios', USUARIOS);
+const UNIDADES = [['PSI-101','Introducción a la Psicología Social',1],['PSI-102','Comunicación y Lenguaje',1],['PSI-103','Comunidad y Territorio',2],['PSI-104','Teorías Psicológicas',2],['PSI-105','Metodología de la Investigación',3],['PSI-106','Psicología del Desarrollo',3]];
+const NOTAS0 = {'10000003': {'PSI-101':15,'PSI-102':17,'PSI-103':14,'PSI-104':16}};
+const notas = () => LS.g('notas', NOTAS0);
+const sesion = () => { try { return JSON.parse(sessionStorage.getItem('pt_ses')); } catch (e) { return null; } };
+async function huella(p, sal){
+  const enc = new TextEncoder();
+  const k = await crypto.subtle.importKey('raw', enc.encode(p), 'PBKDF2', false, ['deriveBits']);
+  const b = await crypto.subtle.deriveBits({name:'PBKDF2', hash:'SHA-256', salt:enc.encode(sal), iterations:100000}, k, 256);
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+const tabla = (cab, filas) => `<div class="tw"><table><thead><tr>${cab.map(c => `<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${filas.join('')}</tbody></table></div>`;
 
-const PLAN = [
-  {t:1,q:1,cod:'MAT-101',nom:'Matemática I',uc:4},
-  {t:1,q:1,cod:'INF-101',nom:'Introducción a la Informática',uc:3},
-  {t:1,q:1,cod:'INF-102',nom:'Algoritmos y Programación I',uc:4},
-  {t:1,q:1,cod:'LNG-101',nom:'Lenguaje y Comunicación',uc:3},
-  {t:1,q:1,cod:'PRY-101',nom:'Proyecto Socio Tecnológico I',uc:4},
-  {t:1,q:2,cod:'MAT-102',nom:'Matemática II',uc:4},
-  {t:1,q:2,cod:'INF-103',nom:'Programación Orientada a Objetos',uc:4},
-  {t:1,q:2,cod:'INF-104',nom:'Arquitectura del Computador',uc:3},
-  {t:1,q:2,cod:'INF-105',nom:'Matemática Discreta',uc:3},
-  {t:1,q:2,cod:'PRY-102',nom:'Proyecto Socio Tecnológico II',uc:4},
-  {t:2,q:3,cod:'INF-201',nom:'Estructura de Datos',uc:4},
-  {t:2,q:3,cod:'INF-202',nom:'Bases de Datos I',uc:4},
-  {t:2,q:3,cod:'INF-203',nom:'Sistemas Operativos',uc:3},
-  {t:2,q:3,cod:'INF-204',nom:'Estadística Aplicada',uc:3},
-  {t:2,q:3,cod:'PRY-201',nom:'Proyecto Socio Tecnológico III',uc:4},
-  {t:2,q:4,cod:'INF-205',nom:'Redes de Computadoras',uc:4},
-  {t:2,q:4,cod:'INF-206',nom:'Ingeniería de Software',uc:4},
-  {t:2,q:4,cod:'INF-207',nom:'Análisis y Diseño de Sistemas',uc:3},
-  {t:2,q:4,cod:'INF-208',nom:'Desarrollo Web',uc:4},
-  {t:2,q:4,cod:'PRY-202',nom:'Proyecto Socio Tecnológico IV',uc:4},
-  {t:3,q:5,cod:'INF-301',nom:'Bases de Datos Avanzadas',uc:4},
-  {t:3,q:5,cod:'INF-302',nom:'Seguridad Informática',uc:3},
-  {t:3,q:5,cod:'INF-303',nom:'Programación Móvil',uc:4},
-  {t:3,q:5,cod:'INF-304',nom:'Inteligencia Artificial',uc:3},
-  {t:3,q:5,cod:'PRY-301',nom:'Proyecto Socio Tecnológico V',uc:4},
-  {t:3,q:6,cod:'INF-305',nom:'Auditoría de Sistemas',uc:3},
-  {t:3,q:6,cod:'INF-306',nom:'Computación en la Nube',uc:4},
-  {t:3,q:6,cod:'INF-307',nom:'Gestión de Proyectos TI',uc:3},
-  {t:3,q:6,cod:'INF-308',nom:'Electiva I',uc:3},
-  {t:3,q:6,cod:'PRY-302',nom:'Proyecto Socio Tecnológico VI',uc:4},
-  {t:4,q:7,cod:'INF-401',nom:'Big Data y Analítica',uc:4},
-  {t:4,q:7,cod:'INF-402',nom:'Arquitectura de Software',uc:4},
-  {t:4,q:7,cod:'INF-403',nom:'Electiva II',uc:3},
-  {t:4,q:7,cod:'INF-404',nom:'Prácticas Profesionales',uc:6},
-  {t:4,q:8,cod:'PRY-401',nom:'Trabajo de Grado / Proyecto Final',uc:10}
-];
-const UC_TOTALES = PLAN.reduce((a,p) => a + p.uc, 0);
+const rnd = () => [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+const bit = t => { const b = LS.g('bitacora', []); b.unshift(new Date().toLocaleString('es-VE') + ' - ' + t); LS.s('bitacora', b.slice(0, 30)); };
+const yo = () => USUARIOS.find(x => x.ced === (sesion() || {}).ced && !x.baneado);
+const inNota = (c, un, v) => `<input type="number" min="0" max="20" data-c="${c}" data-u="${un[0]}" value="${v ?? ''}" aria-label="Nota de ${esc(un[1])}">`;
 
-const AUTORIDADES = [
-  {id:'control',     nombre:'Control de Estudios',        desc:'Notas, constancias, inscripciones y récords académicos.'},
-  {id:'coordinacion',nombre:'Coordinación Académica',      desc:'Pensum, secciones, docentes y reclamos de calificaciones.'},
-  {id:'direccion',   nombre:'Dirección de la Carrera',     desc:'Situaciones académicas especiales y permisos.'},
-  {id:'bienestar',   nombre:'Bienestar Estudiantil',       desc:'Becas, comedor, transporte, salud y apoyo psicológico.'},
-  {id:'rectorado',   nombre:'Rectorado',                   desc:'Solicitudes formales, reclamos y atención general.'},
-  {id:'secretaria',  nombre:'Secretaría General',          desc:'Documentos oficiales, certificaciones y archivo.'}
-];
+const DIAS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+USUARIOS.forEach(u => { if (u.rol === 'estudiante' && !u.seccion) u.seccion = 'A'; if (u.rol === 'profesor' && !u.secciones) u.secciones = ['Psicología Social|A']; });
+const HOR0 = [{id:'h1', sec:'Psicología Social|A', unidad:'PSI-105', dia:'Lunes', ini:'08:00', fin:'10:00', aula:'Aula 12'}, {id:'h2', sec:'Psicología Social|A', unidad:'PSI-106', dia:'Miércoles', ini:'10:00', fin:'12:00', aula:'Aula 12'}];
+const horarios = () => LS.g('horarios', HOR0);
+const obs = () => LS.g('obs', {});
+const sec = u => `${u.carrera}|${u.seccion}`;
+const nomSec = x => x.replace('|', ', sección ');
+const chip = (t, c = '') => `<span class="chip ${c}">${esc(t)}</span>`;
+const chips = u => chip(u.rol, u.rol === 'admin' ? 'a' : 'r') + (u.rol === 'estudiante' ? chip(u.carrera) + chip('Sección ' + u.seccion) : u.rol === 'profesor' ? secsDe(u).map(x => chip(nomSec(x))).join('') : '');
+const todasSecs = () => [...new Set([...USUARIOS.filter(x => x.rol === 'estudiante').map(sec), ...asigsAll().map(a => a.sec)])].sort();
+const nombreUnidad = c => (UNIDADES.find(x => x[0] === c) || [c, c])[1];
+const opts = (l, sel) => l.map(x => `<option value="${esc(x)}" ${x === sel ? 'selected' : ''}>${esc(x)}</option>`).join('');
 
-const TIPOS_SOLICITUD = [
-  'Justificativo médico','Constancia de estudios','Constancia de notas','Reclamo de calificación',
-  'Cambio de sección','Diferido de trimestre','Reposición de evaluación','Solicitud de beca',
-  'Solicitud de comedor','Solicitud de transporte'
-];
-
-/* =========================================================
-   3. DATOS SEMILLA
-   ========================================================= */
-const esCursada   = (u,p) => p.t < u.trayecto || (p.t === u.trayecto && p.q < u.trimestre);
-const esCursando  = (u,p) => p.t === u.trayecto && p.q === u.trimestre;
-const esPorCursar = (u,p) => !esCursada(u,p) && !esCursando(u,p);
-
-function seed(){
-  if (LS.get('pu_seed')) return;
-
-  const usuarios = [
-    {cedula:'12345678', nombre:'Ana Pérez', password:'1234', rol:'estudiante',
-     carrera:'Fisioterapia', trayecto:2, trimestre:4,
-     correo:'ana.perez@unelmlk.edu.ve', telefono:'0414-1234567', ingreso:'2023'},
-    {cedula:'23456789', nombre:'Luis Gómez', password:'1234', rol:'estudiante',
-     carrera:'Mecánica', trayecto:1, trimestre:2,
-     correo:'luis.gomez@unelmlk.edu.ve', telefono:'0424-9876543', ingreso:'2025'},
-    {cedula:'34567890', nombre:'María Torres', password:'1234', rol:'estudiante',
-     carrera:'Psicología Social', trayecto:2, trimestre:4,
-     correo:'maria.torres@unelmlk.edu.ve', telefono:'0412-5551122', ingreso:'2023'},
-    {cedula:'45678901', nombre:'José Ramírez', password:'1234', rol:'estudiante',
-     carrera:'Construcción Civil', trayecto:3, trimestre:5,
-     correo:'jose.ramirez@unelmlk.edu.ve', ingreso:'2022'},
-    {cedula:'90000001', nombre:'Prof. Carlos Díaz', password:'prof', rol:'profesor',
-     unidades:['INF-205','INF-208'], correo:'carlos.diaz@unelmlk.edu.ve'},
-    {cedula:'90000002', nombre:'Prof. Yulimar Sánchez', password:'prof', rol:'profesor',
-     unidades:['INF-201','INF-202','INF-206'], correo:'yulimar.sanchez@unelmlk.edu.ve'},
-    {cedula:'00000000', nombre:'Coord. María Rojas', password:'admin', rol:'admin',
-     correo:'coordinacion@unelmlk.edu.ve'}
-  ];
-  LS.set('pu_usuarios', usuarios);
-
-  const notas = {};
-  usuarios.filter(u => u.rol === 'estudiante').forEach(u => {
-    const n = {};
-    PLAN.forEach((p, i) => {
-      if (esCursada(u, p)) n[p.cod] = 10 + ((i * 7 + p.uc * 3) % 11);
-    });
-    notas[u.cedula] = n;
-  });
-  LS.set('pu_notas', notas);
-
-  LS.set('pu_anuncios', [
-    {id:uid(), titulo:'Inscripciones abiertas 2026-I', autor:'Control de Estudios', publico:true,
-     ts:Date.now() - 86400000 * 3,
-     cuerpo:'El proceso de inscripción en línea estará habilitado del 08 al 20 de enero de 2026 a través del portal. Debes estar solvente con las cuotas y no tener materias pendientes de carga.'},
-    {id:uid(), titulo:'Feria de la Ciencia y Tecnología UNEL-MLK', autor:'Rectorado', publico:true,
-     ts:Date.now() - 86400000 * 5,
-     cuerpo:'Se invita a toda la comunidad universitaria a participar en la Feria de la Ciencia y Tecnología los días 12 y 13 de febrero. Inscripciones en la Coordinación de Investigación.'},
-    {id:uid(), titulo:'Entrega de calificaciones del trimestre', autor:'Coordinación Académica', publico:false,
-     ts:Date.now() - 3600000 * 8,
-     cuerpo:'Las calificaciones del trimestre en curso se cargarán en el sistema antes del 30 del mes. Cualquier reclamo debe hacerse por escrito ante Control de Estudios.'},
-    {id:uid(), titulo:'Jornada de vacunación en el campus', autor:'Bienestar Estudiantil', publico:false,
-     ts:Date.now() - 3600000 * 26,
-     cuerpo:'Este viernes de 8:00 a.m. a 2:00 p.m. en el módulo de Bienestar Estudiantil. Dirigida a estudiantes, docentes y personal administrativo.'},
-    {id:uid(), titulo:'Proceso de admisión 2026 (SNI/OPSU)', autor:'Secretaría General', publico:true,
-     ts:Date.now() - 86400000 * 7,
-     cuerpo:'Los aspirantes deben registrarse en el Sistema Nacional de Ingreso (SNI/OPSU) a través de su página oficial y seleccionar el Programa Nacional de Formación de su preferencia.'}
-  ]);
-
-  LS.set('pu_info', [
-    {id:uid(), titulo:'Calendario académico 2026-I',
-     cuerpo:'Inicio de clases: 15/01/2026 · Fin del trimestre: 30/04/2026 · Entrega de notas: 05/05/2026.'},
-    {id:uid(), titulo:'Requisitos para justificativos médicos',
-     cuerpo:'Presentar constancia médica original en un lapso no mayor a 5 días hábiles tras la falta, indicando el reposo y el período de incapacidad.'},
-    {id:uid(), titulo:'Servicios estudiantiles',
-     cuerpo:'Beca comedor, transporte y seguro estudiantil. Atención en Bienestar Estudiantil, piso 2, de 8:00 a.m. a 4:00 p.m.'},
-    {id:uid(), titulo:'Contacto y soporte del portal',
-     cuerpo:'soporte@unelmlk.edu.ve · Teléfono institucional: 0251-4472593 · Lunes a viernes de 8:00 a.m. a 5:00 p.m.'},
-    {id:uid(), titulo:'¿Cómo ingresar a la UNEL-MLK?',
-     cuerpo:'1. Regístrate en el Sistema Nacional de Ingreso (SNI/OPSU). 2. Selecciona tus opciones de estudio. 3. Espera los resultados de la OPSU. 4. Permanece atento al anuncio de fechas de inscripción.'}
-  ]);
-
-  LS.set('pu_chat', [
-    {id:uid(), cedula:'23456789', autor:'Luis Gómez', rol:'estudiante',
-     texto:'¡Buenas! ¿Alguien tiene el material de Redes del prof. Díaz?', ts:Date.now() - 3600000 * 5},
-    {id:uid(), cedula:'90000001', autor:'Prof. Carlos Díaz', rol:'profesor',
-     texto:'Lo subí al aula virtual, revisen la sección de recursos. Cualquier duda la vemos en clase.', ts:Date.now() - 3600000 * 4},
-    {id:uid(), cedula:'34567890', autor:'María Torres', rol:'estudiante',
-     texto:'¿A qué hora es el proyecto socio-tecnológico mañana?', ts:Date.now() - 3600000 * 2}
-  ]);
-
-  LS.set('pu_mensajes', []);
-  LS.set('pu_solicitudes', []);
-  LS.set('pu_seed', true);
+function salas(u){
+  const R = [{id:'g', n:'General'}], cs = new Set(), ss = new Set();
+  if (u.rol === 'estudiante') { cs.add(u.carrera); ss.add(sec(u)); }
+  else if (u.rol === 'profesor') secsDe(u).forEach(x => { ss.add(x); cs.add(x.split('|')[0]); });
+  else todasSecs().forEach(x => { ss.add(x); cs.add(x.split('|')[0]); });
+  [...cs].sort().forEach(c => R.push({id:'c:' + c, n:'Carrera: ' + c}));
+  [...ss].sort().forEach(x => R.push({id:'s:' + x, n:nomSec(x)}));
+  return R;
 }
 
-/* =========================================================
-   4. ESTADO / SESIÓN
-   ========================================================= */
-let sesion       = LS.get('pu_sesion', null);
-let vistaActual  = 'inicio';
-let filtroPensum = 'cursando';
-
-const usuarioActual = () => LS.get('pu_usuarios', []).find(u => u.cedula === sesion?.cedula) || null;
-const guardarUsuarios = l => LS.set('pu_usuarios', l);
-const notasDe = ced => LS.get('pu_notas', {})[ced] || {};
-const setNota = (ced, cod, val) => {
-  const n = LS.get('pu_notas', {});
-  n[ced] = n[ced] || {};
-  if (val === '' || val === null) delete n[ced][cod]; else n[ced][cod] = Number(val);
-  LS.set('pu_notas', n);
-};
-const etiquetaRol = u => {
-  if (u.rol === 'estudiante') return `${u.carrera} · Trayecto ${u.trayecto} · Trimestre ${u.trimestre}`;
-  if (u.rol === 'profesor')   return 'Docente';
-  return 'Administrador del sistema';
-};
-
-/* =========================================================
-   5. NAVEGACIÓN
-   ========================================================= */
-function mostrarPantalla(id){
-  ['publica', 'login', 'app'].forEach(v =>
-    $('#vista-' + v).classList.toggle('hidden', v !== id));
-
-  const logueado = !!sesion && !!usuarioActual();
-  $('#navPublico').classList.toggle('hidden', logueado);
-  $('#navPrivado').classList.toggle('hidden', !logueado);
-
-  if (logueado) $('#navUsuario').textContent = `${usuarioActual().nombre} · ${usuarioActual().rol}`;
-
-  window.scrollTo(0, 0);
-  if (id === 'publica') pintarPublica();
-  if (id === 'app')     renderApp();
-}
-
-const MENU = {
-  estudiante: [
-    ['inicio',      '🏠 Inicio'],
-    ['notas',       '📊 Calificaciones'],
-    ['pensum',      '📚 Unidades curriculares'],
-    ['solicitudes', '📝 Solicitudes'],
-    ['mensajes',    '✉️ Mensajes a autoridades'],
-    ['chat',        '💬 Chat general'],
-    ['anuncios',    '📢 Anuncios'],
-    ['info',        'ℹ️ Información'],
-    ['perfil',      '👤 Mi perfil']
-  ],
-  profesor: [
-    ['inicio',   '🏠 Inicio'],
-    ['unidades', '📘 Mis unidades'],
-    ['mensajes', '✉️ Mensajes a autoridades'],
-    ['chat',     '💬 Chat general'],
-    ['anuncios', '📢 Anuncios'],
-    ['info',     'ℹ️ Información'],
-    ['perfil',   '👤 Mi perfil']
-  ],
-  admin: [
-    ['inicio',      '🏠 Panel general'],
-    ['usuarios',    '👥 Usuarios'],
-    ['solicitudes', '📝 Solicitudes'],
-    ['anuncios',    '📢 Anuncios'],
-    ['info',        'ℹ️ Información'],
-    ['mensajes',    '✉️ Mensajes recibidos'],
-    ['chat',        '💬 Chat general'],
-    ['perfil',      '👤 Mi perfil']
-  ]
-};
-
-function ir(v){ vistaActual = v; renderApp(); }
-
-function renderApp(){
-  const u = usuarioActual();
-  if (!u) return logout();
-
-  const items = MENU[u.rol] || [];
-  $('#sidebar').innerHTML = `
-    <div class="side-user">
-      <div class="avatar">${esc(iniciales(u.nombre))}</div>
-      <div><strong>${esc(u.nombre)}</strong><span>${esc(etiquetaRol(u))}</span></div>
-    </div>
-    ${items.map(([id, txt]) =>
-      `<a class="${vistaActual === id ? 'activo' : ''}" onclick="ir('${id}')">${txt}</a>`).join('')}
-  `;
-
-  const V = {
-    inicio: vInicio, notas: vNotas, pensum: vPensum, solicitudes: vSolicitudes,
-    mensajes: vMensajes, chat: vChat, anuncios: vAnuncios, info: vInfo,
-    perfil: vPerfil, usuarios: vUsuarios, unidades: vUnidades
-  };
-  $('#contenido').innerHTML = (V[vistaActual] || vInicio)(u);
-}
-
-/* =========================================================
-   6. VISTA PÚBLICA
-   ========================================================= */
-function pintarPublica(){
-  const anuncios = LS.get('pu_anuncios', []).filter(a => a.publico).sort((a,b) => b.ts - a.ts);
-  $('#anunciosPublicos').innerHTML = anuncios.length ? anuncios.map(a => `
-    <div class="mini-card">
-      <h4>${esc(a.titulo)}</h4>
-      <p>${esc(a.cuerpo)}</p>
-      <p class="muted" style="margin-top:8px">${esc(a.autor)} · ${fCorta(a.ts)}</p>
-    </div>`).join('') : '<p class="muted">No hay anuncios publicados.</p>';
-
-  const info = LS.get('pu_info', []);
-  $('#infoPublica').innerHTML = info.length ? info.map(i => `
-    <div class="mini-card"><h4>${esc(i.titulo)}</h4><p>${esc(i.cuerpo)}</p></div>`).join('')
-    : '<p class="muted">Sin información disponible.</p>';
-}
-
-/* =========================================================
-   7. VISTAS DE LA APP
-   ========================================================= */
-function resumenAcademico(u){
-  const n = notasDe(u.cedula);
-  const cursadas  = PLAN.filter(p => esCursada(u, p));
-  const cursando  = PLAN.filter(p => esCursando(u, p));
-  const porCursar = PLAN.filter(p => esPorCursar(u, p));
-
-  const ucAprobadas = cursadas.filter(p => (n[p.cod] ?? 0) >= 10).reduce((a,p) => a + p.uc, 0);
-  const ucCursadas  = cursadas.reduce((a,p) => a + p.uc, 0);
-  const conNota     = cursadas.filter(p => n[p.cod] != null);
-  const promedio    = conNota.length
-    ? (conNota.reduce((a,p) => a + n[p.cod], 0) / conNota.length) : 0;
-  const avance      = Math.round((ucAprobadas / UC_TOTALES) * 100);
-
-  return {n, cursadas, cursando, porCursar, ucAprobadas, ucCursadas, promedio, avance};
-}
-
-function badgeEstado(e){
-  const m = {'Pendiente':'b-warn','En proceso':'b-info','Aprobada':'b-ok','Rechazada':'b-err'};
-  return `<span class="badge ${m[e] || 'b-gris'}">${esc(e)}</span>`;
-}
-
-function vInicio(u){
-  if (u.rol === 'admin') return vInicioAdmin(u);
-  if (u.rol === 'profesor') return vInicioProfesor(u);
-
-  const r = resumenAcademico(u);
-  const anuncios = LS.get('pu_anuncios', []).sort((a,b) => b.ts - a.ts).slice(0, 3);
-  const sols = LS.get('pu_solicitudes', []).filter(s => s.cedula === u.cedula).slice(-3).reverse();
-
-  return `
-    <h1 class="titulo">Hola, ${esc(u.nombre.split(' ')[0])} 👋</h1>
-    <p class="muted">${esc(u.carrera)} · Trayecto ${u.trayecto} · Trimestre ${u.trimestre}</p>
-
-    <div class="grid-4" style="margin-top:20px">
-      <div class="tarjeta"><small>Promedio general</small><b>${r.promedio.toFixed(1)}</b><small>sobre 20 pts</small></div>
-      <div class="tarjeta"><small>UC aprobadas</small><b>${r.ucAprobadas}<span style="font-size:.9rem;color:var(--gris)">/${UC_TOTALES}</span></b><small>unidades crédito</small></div>
-      <div class="tarjeta"><small>Trayecto / Trimestre</small><b>${u.trayecto} · ${u.trimestre}</b><small>período actual</small></div>
-      <div class="tarjeta"><small>Avance de carrera</small><b>${r.avance}%</b>
-        <div class="barra"><i style="width:${r.avance}%"></i></div></div>
-    </div>
-
-    <h2 class="titulo-seccion">📘 Unidades en curso</h2>
-    <div class="card">
-      ${r.cursando.length ? `<div class="tabla-wrap"><table class="tabla">
-        <thead><tr><th>Código</th><th>Unidad curricular</th><th>UC</th><th>Nota</th></tr></thead>
-        <tbody>${r.cursando.map(p => {
-          const nv = r.n[p.cod];
-          return `<tr><td><code>${p.cod}</code></td><td>${esc(p.nom)}</td><td>${p.uc}</td>
-            <td>${nv != null
-              ? `<span class="nota ${nv >= 10 ? 'ap' : 're'}">${nv}</span>`
-              : '<span class="badge b-warn">En curso</span>'}</td></tr>`;
-        }).join('')}</tbody></table></div>`
-      : '<p class="muted">No tienes unidades cargadas en este trimestre.</p>'}
-    </div>
-
-    <div class="grid-2" style="margin-top:20px">
-      <div class="card">
-        <h3>📢 Últimos anuncios</h3>
-        ${anuncios.map(a => `<div class="fila-col">
-          <strong style="font-size:.9rem">${esc(a.titulo)}</strong>
-          <span class="muted">${esc(a.autor)} · ${fCorta(a.ts)}</span></div>`).join('') || '<p class="muted">Sin anuncios.</p>'}
-        <button class="link" onclick="ir('anuncios')">Ver todos los anuncios →</button>
-      </div>
-      <div class="card">
-        <h3>📝 Mis solicitudes recientes</h3>
-        ${sols.map(s => `<div class="fila">
-          <div><strong style="font-size:.86rem">${esc(s.tipo)}</strong>
-          <div class="muted">${fCorta(s.ts)}</div></div>
-          ${badgeEstado(s.estado)}
-        </div>`).join('') || '<p class="muted">Sin solicitudes.</p>'}
-        <button class="link" onclick="ir('solicitudes')">Ver todas →</button>
-      </div>
-    </div>
-  `;
-}
-
-function vNotas(u){
-  const r = resumenAcademico(u);
-  const todas = [...r.cursadas, ...r.cursando].sort((a,b) => a.t - b.t || a.q - b.q);
-
-  return `
-    <h1 class="titulo">📊 Calificaciones</h1>
-    <p class="muted">Historial académico · Promedio actual: <b>${r.promedio.toFixed(1)}</b> pts</p>
-
-    <div class="card tabla-wrap" style="margin-top:18px">
-      <table class="tabla">
-        <thead><tr><th>Código</th><th>Unidad curricular</th><th>Trayecto</th><th>Trim.</th><th>UC</th><th>Nota</th><th>Estado</th></tr></thead>
-        <tbody>
-          ${todas.map(p => {
-            const nv = r.n[p.cod];
-            const estado = nv == null ? '<span class="badge b-warn">En curso</span>'
-              : nv >= 10 ? '<span class="badge b-ok">Aprobada</span>' : '<span class="badge b-err">Reprobada</span>';
-            return `<tr>
-              <td><code>${p.cod}</code></td>
-              <td>${esc(p.nom)}</td>
-              <td>${p.t}</td>
-              <td>${p.q}</td>
-              <td>${p.uc}</td>
-              <td>${nv != null ? `<span class="nota ${nv >= 10 ? 'ap' : 're'}">${nv}</span>` : '—'}</td>
-              <td>${estado}</td>
-            </tr>`;
-          }).join('') || '<tr><td colspan="7" class="muted">Sin registros.</td></tr>'}
-        </tbody>
-      </table>
-    </div>
-
-    <div style="margin-top:16px" class="no-print">
-      <button class="btn btn-outline" onclick="imprimirConstanciaNotas()">🖨️ Imprimir constancia de notas</button>
-    </div>
-  `;
-}
-
-function imprimirConstanciaNotas(){
-  const u = usuarioActual();
-  const r = resumenAcademico(u);
-  const filas = [...r.cursadas].map(p => {
-    const nv = r.n[p.cod];
-    return `<tr><td>${p.cod}</td><td>${esc(p.nom)}</td><td>${p.uc}</td><td>${nv ?? '—'}</td></tr>`;
-  }).join('');
-  imprimirHTML('Constancia de Notas', `
-    <h1>Universidad Nacional Experimental de Lara “Martín Luther King”</h1>
-    <h2>Constancia de Notas · ${esc(u.nombre)} · C.I. ${esc(u.cedula)}</h2>
-    <p><b>Carrera:</b> ${esc(u.carrera)} · Trayecto ${u.trayecto} · Trimestre ${u.trimestre}</p>
-    <p><b>Promedio general:</b> ${r.promedio.toFixed(1)} pts · UC aprobadas: ${r.ucAprobadas}/${UC_TOTALES}</p>
-    <table><thead><tr><th>Código</th><th>Unidad</th><th>UC</th><th>Nota</th></tr></thead>
-    <tbody>${filas}</tbody></table>
-  `);
-}
-
-function vPensum(u){
-  const r = resumenAcademico(u);
-  const filtros = [
-    {id:'todas', label:'Todas'},
-    {id:'cursadas', label:'Cursadas'},
-    {id:'cursando', label:'En curso'},
-    {id:'porCursar', label:'Por cursar'}
-  ];
-
-  let lista = PLAN;
-  if (filtroPensum === 'cursadas') lista = r.cursadas;
-  if (filtroPensum === 'cursando') lista = r.cursando;
-  if (filtroPensum === 'porCursar') lista = r.porCursar;
-
-  return `
-    <h1 class="titulo">📚 Unidades curriculares</h1>
-    <p class="muted">Plan de estudios · Avance: <b>${r.avance}%</b> · UC aprobadas: ${r.ucAprobadas}/${UC_TOTALES}</p>
-
-    <div class="tabs">
-      ${filtros.map(f => `<button class="${filtroPensum===f.id?'activo':''}" onclick="filtroPensum='${f.id}';renderApp()">${f.label}</button>`).join('')}
-    </div>
-
-    <div class="card tabla-wrap">
-      <table class="tabla">
-        <thead><tr><th>Código</th><th>Unidad curricular</th><th>Trayecto</th><th>Trim.</th><th>UC</th><th>Estado</th></tr></thead>
-        <tbody>
-          ${lista.map(p => {
-            let estado = '';
-            if (esCursada(u,p)) {
-              const nv = r.n[p.cod];
-              estado = nv >= 10 ? '<span class="badge b-ok">Aprobada</span>' : '<span class="badge b-err">Reprobada</span>';
-            } else if (esCursando(u,p)) {
-              estado = '<span class="badge b-warn">En curso</span>';
-            } else {
-              estado = '<span class="badge b-gris">Pendiente</span>';
-            }
-            return `<tr>
-              <td><code>${p.cod}</code></td>
-              <td>${esc(p.nom)}</td>
-              <td>${p.t}</td>
-              <td>${p.q}</td>
-              <td>${p.uc}</td>
-              <td>${estado}</td>
-            </tr>`;
-          }).join('') || '<tr><td colspan="6" class="muted">Sin unidades en este filtro.</td></tr>'}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-const nombreAutoridad = id => (AUTORIDADES.find(a => a.id === id) || {}).nombre || id;
-
-function vSolicitudes(u){
-  if (u.rol === 'admin') return vSolicitudesAdmin(u);
-  const mias = LS.get('pu_solicitudes', []).filter(s => s.cedula === u.cedula)
-    .sort((a,b) => b.ts - a.ts);
-
-  return `
-    <h1 class="titulo">📝 Solicitudes</h1>
-    <p class="muted">Realiza y haz seguimiento a tus solicitudes académicas y administrativas.</p>
-
-    <div class="grid-2" style="margin-top:18px">
-      <form class="card" onsubmit="crearSolicitud(event)">
-        <h3>Nueva solicitud</h3>
-        <label for="sol-tipo">Tipo de solicitud</label>
-        <select id="sol-tipo" required>
-          ${TIPOS_SOLICITUD.map(t => `<option>${esc(t)}</option>`).join('')}
-        </select>
-        <label for="sol-destino">Dirigida a</label>
-        <select id="sol-destino" required>
-          ${AUTORIDADES.map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}
-        </select>
-        <label for="sol-motivo">Motivo / descripción</label>
-        <textarea id="sol-motivo" rows="4" placeholder="Explica brevemente tu solicitud…" required></textarea>
-        <label for="sol-adjunto">Referencia o número de soporte (opcional)</label>
-        <input id="sol-adjunto" placeholder="Ej: constancia médica N.º 0045">
-        <button class="btn" style="width:100%;margin-top:16px">Enviar solicitud</button>
-      </form>
-
-      <div class="card">
-        <h3>Historial (${mias.length})</h3>
-        ${mias.length ? mias.map(s => `
-          <div class="fila-col">
-            <div class="fila" style="border:0;padding:0">
-              <strong style="font-size:.9rem">${esc(s.tipo)}</strong>
-              ${badgeEstado(s.estado)}
-            </div>
-            <span class="muted">Dirigida a: ${esc(nombreAutoridad(s.destino))} · ${fFecha(s.ts)}</span>
-            <span style="font-size:.85rem">${esc(s.motivo)}</span>
-            ${s.respuesta ? `<span class="badge b-info" style="align-self:flex-start">Respuesta: ${esc(s.respuesta)}</span>` : ''}
-          </div>`).join('') : '<p class="muted">Aún no has realizado solicitudes.</p>'}
-      </div>
-    </div>
-  `;
-}
-
-function crearSolicitud(e){
-  e.preventDefault();
-  const u = usuarioActual();
-  const sol = {
-    id: uid(), cedula: u.cedula, nombre: u.nombre,
-    tipo: $('#sol-tipo').value,
-    destino: $('#sol-destino').value,
-    motivo: $('#sol-motivo').value.trim(),
-    adjunto: $('#sol-adjunto').value.trim(),
-    estado: 'Pendiente', respuesta: '', ts: Date.now()
-  };
-  const lista = LS.get('pu_solicitudes', []);
-  lista.push(sol);
-  LS.set('pu_solicitudes', lista);
-  toast('Solicitud enviada correctamente ✅');
-  renderApp();
-}
-
-function vSolicitudesAdmin(u){
-  const lista = LS.get('pu_solicitudes', []).sort((a,b) => b.ts - a.ts);
-  return `
-    <h1 class="titulo">📝 Gestión de solicitudes</h1>
-    <p class="muted">${lista.length} solicitud(es) registrada(s) en el sistema.</p>
-    <div class="card tabla-wrap" style="margin-top:18px">
-      <table class="tabla">
-        <thead><tr><th>Fecha</th><th>Estudiante</th><th>Tipo</th><th>Dirigida a</th><th>Motivo</th><th>Estado</th><th>Acciones</th></tr></thead>
-        <tbody>
-          ${lista.length ? lista.map(s => `
-            <tr>
-              <td>${fCorta(s.ts)}</td>
-              <td>${esc(s.nombre)}<br><span class="muted">C.I. ${esc(s.cedula)}</span></td>
-              <td>${esc(s.tipo)}</td>
-              <td>${esc(nombreAutoridad(s.destino))}</td>
-              <td style="max-width:260px">${esc(s.motivo)}${s.adjunto ? `<br><span class="muted">Ref: ${esc(s.adjunto)}</span>` : ''}</td>
-              <td>${badgeEstado(s.estado)}</td>
-              <td style="white-space:nowrap">
-                <button class="btn btn-ok btn-sm" onclick="responderSolicitud('${s.id}','Aprobada')">✔</button>
-                <button class="btn btn-sm btn-outline" onclick="responderSolicitud('${s.id}','En proceso')">⏳</button>
-                <button class="btn btn-err btn-sm" onclick="responderSolicitud('${s.id}','Rechazada')">✖</button>
-              </td>
-            </tr>`).join('') : '<tr><td colspan="7" class="muted">Sin solicitudes registradas.</td></tr>'}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function responderSolicitud(id, estado){
-  const lista = LS.get('pu_solicitudes', []);
-  const s = lista.find(x => x.id === id);
-  if (!s) return;
-  const r = prompt(`Respuesta / observación para la solicitud (${estado}):`, s.respuesta || '');
-  if (r === null) return;
-  s.estado = estado;
-  s.respuesta = r.trim();
-  LS.set('pu_solicitudes', lista);
-  toast('Solicitud actualizada: ' + estado);
-  renderApp();
-}
-
-function vMensajes(u){
-  const todos = LS.get('pu_mensajes', []);
-  if (u.rol === 'admin') return vMensajesAdmin(u);
-
-  const mios = todos.filter(m => m.de === u.cedula || m.para === u.cedula).sort((a,b) => a.ts - b.ts);
-
-  return `
-    <h1 class="titulo">✉️ Mensajes a autoridades</h1>
-    <p class="muted">Comunícate directamente con las autoridades de la universidad.</p>
-
-    <div class="grid-2" style="margin-top:18px">
-      <form class="card" onsubmit="enviarMensaje(event)">
-        <h3>Nuevo mensaje</h3>
-        <label for="msg-para">Autoridad destinataria</label>
-        <select id="msg-para" required>
-          ${AUTORIDADES.map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}
-        </select>
-        <label for="msg-asunto">Asunto</label>
-        <input id="msg-asunto" placeholder="Ej: Consulta sobre inscripción" required>
-        <label for="msg-texto">Mensaje</label>
-        <textarea id="msg-texto" rows="5" placeholder="Escribe tu mensaje…" required></textarea>
-        <button class="btn" style="width:100%;margin-top:16px">Enviar mensaje</button>
-      </form>
-
-      <div class="card">
-        <h3>Conversación</h3>
-        <div style="max-height:420px;overflow-y:auto">
-          ${mios.length ? mios.map(m => `
-            <div class="fila-col">
-              <div class="fila" style="border:0;padding:0">
-                <strong style="font-size:.86rem">${esc(m.asunto)}</strong>
-                <span class="muted">${fFecha(m.ts)}</span>
-              </div>
-              <span class="muted">Para: ${esc(nombreAutoridad(m.para))}</span>
-              <span style="font-size:.86rem">${esc(m.texto)}</span>
-              ${m.respuesta ? `<div class="alerta-ok" style="margin-top:6px"><b>Respuesta:</b> ${esc(m.respuesta)}</div>` : '<span class="badge b-warn" style="align-self:flex-start">Sin respuesta</span>'}
-            </div>`).join('') : '<p class="muted">No tienes mensajes aún.</p>'}
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function enviarMensaje(e){
-  e.preventDefault();
-  const u = usuarioActual();
-  const lista = LS.get('pu_mensajes', []);
-  lista.push({
-    id: uid(), de: u.cedula, deNombre: u.nombre, rol: u.rol,
-    para: $('#msg-para').value,
-    asunto: $('#msg-asunto').value.trim(),
-    texto: $('#msg-texto').value.trim(),
-    respuesta: '', ts: Date.now()
-  });
-  LS.set('pu_mensajes', lista);
-  toast('Mensaje enviado a la autoridad ✅');
-  renderApp();
-}
-
-function vMensajesAdmin(u){
-  const lista = LS.get('pu_mensajes', []).sort((a,b) => b.ts - a.ts);
-  return `
-    <h1 class="titulo">✉️ Mensajes recibidos</h1>
-    <p class="muted">${lista.length} mensaje(s) enviados por la comunidad universitaria.</p>
-    <div class="card tabla-wrap" style="margin-top:18px">
-      <table class="tabla">
-        <thead><tr><th>Fecha</th><th>De</th><th>Para</th><th>Asunto / Mensaje</th><th>Respuesta</th><th></th></tr></thead>
-        <tbody>
-          ${lista.length ? lista.map(m => `
-            <tr>
-              <td>${fCorta(m.ts)}</td>
-              <td>${esc(m.deNombre)}<br><span class="muted">${esc(m.rol)}</span></td>
-              <td>${esc(nombreAutoridad(m.para))}</td>
-              <td style="max-width:300px"><b>${esc(m.asunto)}</b><br><span class="muted">${esc(m.texto)}</span></td>
-              <td style="max-width:220px">${m.respuesta ? esc(m.respuesta) : '<span class="badge b-warn">Pendiente</span>'}</td>
-              <td><button class="btn btn-sm" onclick="responderMensaje('${m.id}')">Responder</button></td>
-            </tr>`).join('') : '<tr><td colspan="6" class="muted">Sin mensajes.</td></tr>'}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function responderMensaje(id){
-  const lista = LS.get('pu_mensajes', []);
-  const m = lista.find(x => x.id === id);
-  if (!m) return;
-  const r = prompt('Escribe la respuesta:', m.respuesta || '');
-  if (r === null) return;
-  m.respuesta = r.trim();
-  LS.set('pu_mensajes', lista);
-  toast('Respuesta enviada ✅');
-  renderApp();
-}
-
-function vChat(u){
-  const msgs = LS.get('pu_chat', []).sort((a,b) => a.ts - b.ts);
-  return `
-    <h1 class="titulo">💬 Chat general</h1>
-    <p class="muted">Espacio libre para estudiantes, docentes y administradores de la UNEL-MLK.</p>
-
-    <div class="chat-box" style="margin-top:18px">
-      <div class="chat-list" id="chatList">
-        ${msgs.map(m => {
-          const propio = m.cedula === u.cedula;
-          return `<div class="msg ${propio ? 'propio' : ''}">
-            <span class="meta">${esc(m.autor)} · ${esc(m.rol)} · ${fFecha(m.ts)}</span>
-            ${esc(m.texto)}
-            ${(u.rol === 'admin' || propio) ? `<button class="link" style="font-size:.68rem;color:inherit;margin-top:4px" onclick="borrarMensajeChat('${m.id}')">eliminar</button>` : ''}
-          </div>`;
-        }).join('') || '<p class="muted">Sé el primero en escribir.</p>'}
-      </div>
-      <form class="chat-input" onsubmit="enviarChat(event)">
-        <input id="chatTexto" placeholder="Escribe un mensaje para la comunidad…" autocomplete="off" required>
-        <button class="btn">Enviar</button>
-      </form>
-    </div>
-  `;
-}
-
-function enviarChat(e){
-  e.preventDefault();
-  const u = usuarioActual();
-  const txt = $('#chatTexto').value.trim();
-  if (!txt) return;
-  const lista = LS.get('pu_chat', []);
-  lista.push({id: uid(), cedula: u.cedula, autor: u.nombre, rol: u.rol, texto: txt, ts: Date.now()});
-  LS.set('pu_chat', lista);
-  renderApp();
-  const cl = $('#chatList'); if (cl) cl.scrollTop = cl.scrollHeight;
-}
-
-function borrarMensajeChat(id){
-  if (!confirm('¿Eliminar este mensaje del chat?')) return;
-  LS.set('pu_chat', LS.get('pu_chat', []).filter(m => m.id !== id));
-  toast('Mensaje eliminado');
-  renderApp();
-}
-
-function vAnuncios(u){
-  const lista = LS.get('pu_anuncios', []).sort((a,b) => b.ts - a.ts);
-  const visibles = u.rol === 'admin' ? lista : lista.filter(a => a.publico || u.rol !== 'estudiante');
-
-  return `
-    <h1 class="titulo">📢 Anuncios</h1>
-    <p class="muted">Novedades y comunicados oficiales de la universidad.</p>
-
-    ${u.rol === 'admin' ? `
-      <form class="card" style="margin-top:18px" onsubmit="crearAnuncio(event)">
-        <h3>Publicar nuevo anuncio</h3>
-        <label for="an-titulo">Título</label>
-        <input id="an-titulo" required placeholder="Ej: Suspensión de actividades">
-        <label for="an-cuerpo">Contenido</label>
-        <textarea id="an-cuerpo" rows="4" required placeholder="Escribe el comunicado…"></textarea>
-        <label for="an-autor">Autor / dependencia</label>
-        <input id="an-autor" required value="Rectorado">
-        <label><input type="checkbox" id="an-publico" style="width:auto;margin-right:8px">Visible en la página pública</label>
-        <button class="btn" style="margin-top:16px">Publicar anuncio</button>
-      </form>` : ''}
-
-    <div class="grid-2" style="margin-top:18px">
-      ${visibles.length ? visibles.map(a => `
-        <div class="card">
-          <div class="fila" style="border:0;padding:0 0 8px">
-            <h3 style="margin:0">${esc(a.titulo)}</h3>
-            ${a.publico ? '<span class="badge b-info">Público</span>' : '<span class="badge b-gris">Interno</span>'}
-          </div>
-          <p style="font-size:.88rem">${esc(a.cuerpo)}</p>
-          <p class="muted" style="margin-top:10px">${esc(a.autor)} · ${fFecha(a.ts)}</p>
-          ${u.rol === 'admin' ? `<button class="btn btn-err btn-sm" style="margin-top:10px" onclick="borrarAnuncio('${a.id}')">Eliminar</button>` : ''}
-        </div>`).join('') : '<p class="muted">No hay anuncios disponibles.</p>'}
-    </div>
-  `;
-}
-
-function crearAnuncio(e){
-  e.preventDefault();
-  const lista = LS.get('pu_anuncios', []);
-  lista.push({
-    id: uid(), titulo: $('#an-titulo').value.trim(), cuerpo: $('#an-cuerpo').value.trim(),
-    autor: $('#an-autor').value.trim(), publico: $('#an-publico').checked, ts: Date.now()
-  });
-  LS.set('pu_anuncios', lista);
-  toast('Anuncio publicado ✅');
-  renderApp();
-}
-
-function borrarAnuncio(id){
-  if (!confirm('¿Eliminar este anuncio?')) return;
-  LS.set('pu_anuncios', LS.get('pu_anuncios', []).filter(a => a.id !== id));
-  toast('Anuncio eliminado');
-  renderApp();
-}
-
-function vInfo(u){
-  const lista = LS.get('pu_info', []);
-  return `
-    <h1 class="titulo">ℹ️ Información importante</h1>
-    <p class="muted">Datos de interés general para la comunidad universitaria.</p>
-
-    ${u.rol === 'admin' ? `
-      <form class="card" style="margin-top:18px" onsubmit="crearInfo(event)">
-        <h3>Agregar información</h3>
-        <label for="in-titulo">Título</label>
-        <input id="in-titulo" required placeholder="Ej: Proceso de retiro de asignaturas">
-        <label for="in-cuerpo">Contenido</label>
-        <textarea id="in-cuerpo" rows="3" required></textarea>
-        <button class="btn" style="margin-top:16px">Guardar</button>
-      </form>` : ''}
-
-    <div class="grid-2" style="margin-top:18px">
-      ${lista.map(i => `
-        <div class="card">
-          <h3>${esc(i.titulo)}</h3>
-          <p style="font-size:.88rem">${esc(i.cuerpo)}</p>
-          ${u.rol === 'admin' ? `<button class="btn btn-err btn-sm" style="margin-top:10px" onclick="borrarInfo('${i.id}')">Eliminar</button>` : ''}
-        </div>`).join('') || '<p class="muted">Sin información.</p>'}
-    </div>
-  `;
-}
-
-function crearInfo(e){
-  e.preventDefault();
-  const lista = LS.get('pu_info', []);
-  lista.push({id: uid(), titulo: $('#in-titulo').value.trim(), cuerpo: $('#in-cuerpo').value.trim()});
-  LS.set('pu_info', lista);
-  toast('Información guardada ✅');
-  renderApp();
-}
-function borrarInfo(id){
-  if (!confirm('¿Eliminar esta información?')) return;
-  LS.set('pu_info', LS.get('pu_info', []).filter(i => i.id !== id));
-  toast('Información eliminada');
-  renderApp();
-}
-
-function vPerfil(u){
-  return `
-    <h1 class="titulo">👤 Mi perfil</h1>
-    <p class="muted">Datos personales y seguridad de la cuenta.</p>
-
-    <div class="grid-2" style="margin-top:18px">
-      <form class="card" onsubmit="guardarPerfil(event)">
-        <h3>Datos personales</h3>
-        <label>Cédula</label><input value="${esc(u.cedula)}" disabled>
-        <label>Rol</label><input value="${esc(u.rol)}" disabled>
-        <label for="pf-nombre">Nombre completo</label>
-        <input id="pf-nombre" value="${esc(u.nombre)}" required>
-        <label for="pf-correo">Correo institucional</label>
-        <input id="pf-correo" type="email" value="${esc(u.correo || '')}">
-        <label for="pf-telefono">Teléfono</label>
-        <input id="pf-telefono" value="${esc(u.telefono || '')}">
-        ${u.rol === 'estudiante' ? `
-          <label for="pf-carrera">Carrera</label>
-          <select id="pf-carrera">
-            ${CARRERAS.map(c => `<option ${c === u.carrera ? 'selected' : ''}>${esc(c)}</option>`).join('')}
-          </select>` : ''}
-        <button class="btn" style="width:100%;margin-top:16px">Guardar cambios</button>
-      </form>
-
-      <form class="card" onsubmit="cambiarPassword(event)">
-        <h3>Cambiar contraseña</h3>
-        <label for="pw-actual">Contraseña actual</label>
-        <input id="pw-actual" type="password" required>
-        <label for="pw-nueva">Nueva contraseña</label>
-        <input id="pw-nueva" type="password" minlength="4" required>
-        <label for="pw-rep">Repetir nueva contraseña</label>
-        <input id="pw-rep" type="password" minlength="4" required>
-        <div id="pwMsg"></div>
-        <button class="btn" style="width:100%;margin-top:16px">Actualizar contraseña</button>
-
-        <hr style="margin:22px 0;border:0;border-top:1px solid var(--borde)">
-        <h3>Sesión</h3>
-        <p class="muted">Sesión iniciada como <b>${esc(u.nombre)}</b>.</p>
-        <button type="button" class="btn btn-err" style="width:100%;margin-top:12px" onclick="logout()">Cerrar sesión</button>
-      </form>
-    </div>
-  `;
-}
-
-function guardarPerfil(e){
-  e.preventDefault();
-  const u = usuarioActual();
-  guardarUsuarios(LS.get('pu_usuarios', []).map(x => {
-    if (x.cedula !== u.cedula) return x;
-    return {
-      ...x,
-      nombre: $('#pf-nombre').value.trim(),
-      correo: $('#pf-correo').value.trim(),
-      telefono: $('#pf-telefono').value.trim(),
-      carrera: $('#pf-carrera') ? $('#pf-carrera').value : x.carrera
-    };
-  }));
-  toast('Perfil actualizado ✅');
-  renderApp();
-}
-
-function cambiarPassword(e){
-  e.preventDefault();
-  const u = usuarioActual();
-  const msg = $('#pwMsg');
-  if ($('#pw-actual').value !== u.password)
-    return msg.innerHTML = '<div class="alerta-err">La contraseña actual no es correcta.</div>';
-  if ($('#pw-nueva').value !== $('#pw-rep').value)
-    return msg.innerHTML = '<div class="alerta-err">Las contraseñas nuevas no coinciden.</div>';
-
-  guardarUsuarios(LS.get('pu_usuarios', []).map(x =>
-    x.cedula === u.cedula ? {...x, password: $('#pw-nueva').value} : x));
-  msg.innerHTML = '<div class="alerta-ok">Contraseña actualizada correctamente.</div>';
-  toast('Contraseña actualizada ✅');
-}
-
-function vInicioProfesor(u){
-  const alumnos = LS.get('pu_usuarios', []).filter(x => x.rol === 'estudiante');
-  const misUnidades = PLAN.filter(p => (u.unidades || []).includes(p.cod));
-  return `
-    <h1 class="titulo">Hola, ${esc(u.nombre)} 👋</h1>
-    <p class="muted">Panel docente · UNEL-MLK</p>
-
-    <div class="grid-4" style="margin-top:20px">
-      <div class="tarjeta"><small>Unidades asignadas</small><b>${misUnidades.length}</b><small>este trimestre</small></div>
-      <div class="tarjeta"><small>Estudiantes activos</small><b>${alumnos.length}</b><small>en el sistema</small></div>
-      <div class="tarjeta"><small>Solicitudes pendientes</small><b>${LS.get('pu_solicitudes',[]).filter(s=>s.estado==='Pendiente').length}</b><small>por revisar</small></div>
-      <div class="tarjeta"><small>Mensajes</small><b>${LS.get('pu_mensajes',[]).length}</b><small>recibidos</small></div>
-    </div>
-
-    <h2 class="titulo-seccion">📘 Mis unidades</h2>
-    <div class="grid-2">
-      ${misUnidades.map(p => `
-        <div class="card">
-          <h3>${esc(p.nom)}</h3>
-          <p class="muted"><code>${p.cod}</code> · Trayecto ${p.t} · Trimestre ${p.q} · ${p.uc} UC</p>
-          <button class="btn btn-sm" style="margin-top:10px" onclick="ir('unidades')">Cargar calificaciones</button>
-        </div>`).join('') || '<p class="muted">No tienes unidades asignadas.</p>'}
-    </div>
-  `;
-}
-
-function vUnidades(u){
-  const misUnidades = PLAN.filter(p => (u.unidades || []).includes(p.cod));
-  const alumnos = LS.get('pu_usuarios', []).filter(x => x.rol === 'estudiante');
-  const notas = LS.get('pu_notas', {});
-
-  return `
-    <h1 class="titulo">📘 Mis unidades y calificaciones</h1>
-    <p class="muted">Puedes cargar y modificar las notas de tus estudiantes (escala 0–20).</p>
-
-    ${misUnidades.length ? misUnidades.map(p => `
-      <div class="card tabla-wrap" style="margin-top:18px">
-        <h3>${esc(p.nom)} <span class="muted" style="font-weight:400">· <code>${p.cod}</code></span></h3>
-        <table class="tabla">
-          <thead><tr><th>Estudiante</th><th>Cédula</th><th>Trayecto/Trim.</th><th>Nota</th></tr></thead>
-          <tbody>
-            ${alumnos.map(a => {
-              const nv = (notas[a.cedula] || {})[p.cod];
-              return `<tr>
-                <td>${esc(a.nombre)}</td>
-                <td>${esc(a.cedula)}</td>
-                <td>${a.trayecto} · ${a.trimestre}</td>
-                <td>
-                  <input type="number" min="0" max="20" value="${nv ?? ''}" style="width:90px"
-                    onchange="setNota('${a.cedula}','${p.cod}',this.value);toast('Nota guardada')">
-                </td>
-              </tr>`;
-            }).join('')}
-          </tbody>
-        </table>
-      </div>`).join('') : '<div class="card" style="margin-top:18px"><p class="muted">No tienes unidades asignadas.</p></div>'}
-  `;
-}
-
-function vInicioAdmin(u){
-  const usuarios = LS.get('pu_usuarios', []);
-  const sols = LS.get('pu_solicitudes', []);
-  return `
-    <h1 class="titulo">🛠️ Panel de administración</h1>
-    <p class="muted">Universidad Nacional Experimental de Lara “Martín Luther King”</p>
-
-    <div class="grid-4" style="margin-top:20px">
-      <div class="tarjeta"><small>Estudiantes</small><b>${usuarios.filter(x=>x.rol==='estudiante').length}</b><small>registrados</small></div>
-      <div class="tarjeta"><small>Docentes</small><b>${usuarios.filter(x=>x.rol==='profesor').length}</b><small>activos</small></div>
-      <div class="tarjeta"><small>Solicitudes pendientes</small><b>${sols.filter(s=>s.estado==='Pendiente').length}</b><small>de ${sols.length}</small></div>
-      <div class="tarjeta"><small>Mensajes del chat</small><b>${LS.get('pu_chat',[]).length}</b><small>publicados</small></div>
-    </div>
-
-    <h2 class="titulo-seccion">⚡ Accesos rápidos</h2>
-    <div class="grid-4">
-      <button class="btn btn-outline" onclick="ir('usuarios')">👥 Gestionar usuarios</button>
-      <button class="btn btn-outline" onclick="ir('solicitudes')">📝 Ver solicitudes</button>
-      <button class="btn btn-outline" onclick="ir('anuncios')">📢 Publicar anuncio</button>
-      <button class="btn btn-outline" onclick="exportarDatos()">💾 Exportar respaldo</button>
-    </div>
-
-    <h2 class="titulo-seccion">📊 Últimas solicitudes</h2>
-    <div class="card tabla-wrap">
-      <table class="tabla">
-        <thead><tr><th>Fecha</th><th>Estudiante</th><th>Tipo</th><th>Estado</th></tr></thead>
-        <tbody>
-          ${sols.slice(-6).reverse().map(s => `<tr>
-            <td>${fCorta(s.ts)}</td><td>${esc(s.nombre)}</td><td>${esc(s.tipo)}</td>
-            <td>${badgeEstado(s.estado)}</td></tr>`).join('')
-            || '<tr><td colspan="4" class="muted">Sin solicitudes.</td></tr>'}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function vUsuarios(u){
-  const usuarios = LS.get('pu_usuarios', []);
-  return `
-    <h1 class="titulo">👥 Gestión de usuarios</h1>
-    <p class="muted">${usuarios.length} usuario(s) registrados en el sistema.</p>
-
-    <form class="card" style="margin-top:18px" onsubmit="crearUsuario(event)">
-      <h3>Registrar nuevo usuario</h3>
-      <div class="grid-3">
-        <div><label for="nu-cedula">Cédula</label><input id="nu-cedula" required placeholder="12345678"></div>
-        <div><label for="nu-nombre">Nombre completo</label><input id="nu-nombre" required></div>
-        <div><label for="nu-pass">Contraseña</label><input id="nu-pass" required value="1234"></div>
-        <div><label for="nu-rol">Rol</label>
-          <select id="nu-rol" onchange="document.getElementById('nu-campos-est').style.display=this.value==='estudiante'?'block':'none'">
-            <option value="estudiante">Estudiante</option>
-            <option value="profesor">Profesor</option>
-            <option value="admin">Administrador</option>
-          </select>
-        </div>
-        <div><label for="nu-correo">Correo</label><input id="nu-correo" type="email"></div>
-      </div>
-      <div id="nu-campos-est" class="grid-3" style="margin-top:6px">
-        <div><label for="nu-carrera">Carrera</label>
-          <select id="nu-carrera">${CARRERAS.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div>
-        <div><label for="nu-trayecto">Trayecto</label>
-          <select id="nu-trayecto">${[1,2,3,4].map(n=>`<option>${n}</option>`).join('')}</select></div>
-        <div><label for="nu-trimestre">Trimestre</label>
-          <select id="nu-trimestre">${[1,2,3,4,5,6,7,8].map(n=>`<option>${n}</option>`).join('')}</select></div>
-      </div>
-      <button class="btn" style="margin-top:16px">Registrar usuario</button>
-    </form>
-
-    <div class="card tabla-wrap" style="margin-top:20px">
-      <table class="tabla">
-        <thead><tr><th>Cédula</th><th>Nombre</th><th>Rol</th><th>Detalle</th><th>Correo</th><th></th></tr></thead>
-        <tbody>
-          ${usuarios.map(x => `<tr>
-            <td>${esc(x.cedula)}</td>
-            <td>${esc(x.nombre)}</td>
-            <td><span class="badge ${x.rol==='estudiante'?'b-info':x.rol==='profesor'?'b-warn':'b-ok'}">${esc(x.rol)}</span></td>
-            <td class="muted">${esc(etiquetaRol(x))}</td>
-            <td class="muted">${esc(x.correo || '—')}</td>
-            <td>${x.cedula === u.cedula ? '' : `<button class="btn btn-err btn-sm" onclick="borrarUsuario('${x.cedula}')">Eliminar</button>`}</td>
-          </tr>`).join('')}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function crearUsuario(e){
-  e.preventDefault();
-  const ced = $('#nu-cedula').value.trim();
-  const lista = LS.get('pu_usuarios', []);
-  if (lista.some(x => x.cedula === ced)) return toast('Ya existe un usuario con esa cédula', 'err');
-
-  const rol = $('#nu-rol').value;
-  const nuevo = {
-    cedula: ced, nombre: $('#nu-nombre').value.trim(), password: $('#nu-pass').value,
-    rol, correo: $('#nu-correo').value.trim()
-  };
-  if (rol === 'estudiante'){
-    nuevo.carrera = $('#nu-carrera').value;
-    nuevo.trayecto = Number($('#nu-trayecto').value);
-    nuevo.trimestre = Number($('#nu-trimestre').value);
+function cuerpoDe(u){
+  const n = notas(), ob = obs();
+  if (u.rol === 'estudiante') {
+    const mias = n[u.ced] || {}, v = UNIDADES.filter(x => mias[x[0]] != null).map(x => mias[x[0]]);
+    return `<p>${chips(u)}</p><h2>Calificaciones, trayecto ${esc(u.trayecto)}, trimestre ${esc(u.trimestre)}</h2>
+      ${tabla(['Unidad curricular','Trimestre','Nota','Observación del profesor'], UNIDADES.map(x => `<tr><td>${esc(x[1])}</td><td>${x[2]}</td><td>${mias[x[0]] ?? 'Sin nota'}</td><td>${esc((ob[u.ced] || {})[x[0]] || '')}</td></tr>`))}
+      <p>Promedio de las unidades con nota: <b>${v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : '—'}</b> sobre 20.</p>`;
   }
-  lista.push(nuevo);
-  guardarUsuarios(lista);
-  toast('Usuario registrado ✅');
-  renderApp();
-}
-
-function borrarUsuario(ced){
-  if (!confirm('¿Eliminar este usuario del sistema?')) return;
-  guardarUsuarios(LS.get('pu_usuarios', []).filter(x => x.cedula !== ced));
-  toast('Usuario eliminado');
-  renderApp();
-}
-
-function exportarDatos(){
-  const data = {};
-  ['pu_usuarios','pu_notas','pu_anuncios','pu_info','pu_chat','pu_mensajes','pu_solicitudes']
-    .forEach(k => data[k] = LS.get(k, []));
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `respaldo-unelmlk-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-  toast('Respaldo descargado 💾');
-}
-
-/* =========================================================
-   8. AUTENTICACIÓN
-   ========================================================= */
-function login(e){
-  e.preventDefault();
-  const ced = $('#cedula').value.trim();
-  const pw  = $('#password').value;
-  const err = $('#loginError');
-  const u = LS.get('pu_usuarios', []).find(x => x.cedula === ced && x.password === pw);
-
-  if (!u){
-    err.textContent = 'Cédula o contraseña incorrecta. Verifica tus datos.';
-    err.classList.remove('hidden');
-    return;
+  if (u.rol === 'profesor') {
+    return `<p>${chips(u)}</p>` + (asigsDe(u).map(a => { const un = UNIDADES.find(x => x[0] === a.unidad); if (!un) return '';
+      const est = USUARIOS.filter(x => x.rol === 'estudiante' && !x.baneado && sec(x) === a.sec);
+      return `<h2>${esc(un[1])}, ${esc(nomSec(a.sec))}</h2>` + tabla(['Estudiante','Cédula','Nota (0 a 20)','Observación'], est.map(e => `<tr><td>${esc(e.nombre)}<br>${chips(e)}</td><td>${e.ced}</td><td>${inNota(e.ced, un, (n[e.ced] || {})[a.unidad])}</td>
+        <td><input data-o="${e.ced}" data-u="${a.unidad}" maxlength="200" value="${esc((ob[e.ced] || {})[a.unidad] || '')}" aria-label="Observación para ${esc(e.nombre)}"></td></tr>`)); }).join('') || '<p class="vacio">Sin asignaciones. Pide al administrador que te asigne unidades y secciones.</p>');
   }
-  err.classList.add('hidden');
-  sesion = {cedula: u.cedula};
-  LS.set('pu_sesion', sesion);
-  vistaActual = 'inicio';
-  toast(`Bienvenido/a, ${u.nombre} 👋`);
-  mostrarPantalla('app');
+  return `<p>${chips(u)}</p>`;
 }
 
-function logout(){
-  sesion = null;
-  localStorage.removeItem('pu_sesion');
-  $('#cedula').value = '';
-  $('#password').value = '';
-  toast('Sesión cerrada');
-  mostrarPantalla('publica');
+function horHtml(u){
+  const ed = u.rol !== 'estudiante', H = horarios();
+  const mios = H.filter(h => u.rol === 'admin' || (u.rol === 'profesor' ? tieneAsig(u, h.sec, h.unidad) : h.sec === sec(u)))
+    .sort((a, b) => DIAS.indexOf(a.dia) - DIAS.indexOf(b.dia) || a.ini.localeCompare(b.ini));
+  const fila = h => ed ? `<tr><td>${esc(nomSec(h.sec))}</td><td>${esc(nombreUnidad(h.unidad))}</td>
+    <td><select data-h="${h.id}" data-f="dia" aria-label="Día">${opts(DIAS, h.dia)}</select></td>
+    <td><input type="time" data-h="${h.id}" data-f="ini" value="${h.ini}" aria-label="Inicio"></td><td><input type="time" data-h="${h.id}" data-f="fin" value="${h.fin}" aria-label="Fin"></td>
+    <td><input data-h="${h.id}" data-f="aula" value="${esc(h.aula)}" aria-label="Aula"></td><td><button class="btn d sm ac" data-a="dh" data-i="${h.id}">Quitar</button></td></tr>`
+    : `<tr><td>${h.dia}</td><td>${h.ini} a ${h.fin}</td><td>${esc(nombreUnidad(h.unidad))}</td><td>${esc(h.aula)}</td></tr>`;
+  const secs = u.rol === 'admin' ? todasSecs() : secsDe(u), uns = u.rol === 'admin' ? UNIDADES.map(x => x[0]) : unsDe(u);
+  return `<h2>Horario de clases</h2>` + (mios.length ? tabla(ed ? ['Sección','Unidad','Día','Inicio','Fin','Aula',''] : ['Día','Hora','Unidad','Aula'], mios.map(fila)) : '<p class="vacio">No hay clases programadas.</p>') +
+    (ed ? `<h2 style="margin-top:24px">Agregar clase</h2><form class="c" id="fh" style="max-width:560px">
+    <label for="hs">Sección</label><select id="hs">${opts(secs)}</select><label for="hu">Unidad</label><select id="hu">${opts(uns)}</select>
+    <label for="hd">Día</label><select id="hd">${opts(DIAS)}</select><label for="hi">Inicio</label><input id="hi" type="time" value="08:00" required>
+    <label for="hf">Fin</label><input id="hf" type="time" value="10:00" required><label for="ha">Aula</label><input id="ha" required>
+    <p class="err" id="hm" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Agregar al horario</button></form>` : '');
 }
 
-/* =========================================================
-   9. INICIALIZACIÓN
-   ========================================================= */
-(function init(){
-  seed();
-  if (LS.get('pu_tema', false)) document.body.classList.add('dark');
+function chatHtml(u){
+  const R = salas(u); let sel = sessionStorage.getItem('pt_sala'); if (!R.some(r => r.id === sel)) sel = 'g';
+  const msgs = LS.g('chat', []).filter(m => m.sala === sel), mod = u.rol === 'admin' || (u.rol === 'profesor' && sel !== 'g');
+  return `<div class="bar"><span><label for="sa" style="display:inline;margin-right:8px">Sala</label><select id="sa">${R.map(r => `<option value="${esc(r.id)}" ${r.id === sel ? 'selected' : ''}>${esc(r.n)}</option>`).join('')}</select></span>
+    ${u.rol === 'admin' ? '<button class="btn d sm ac" data-a="vaciar">Vaciar sala</button>' : ''}</div>
+    <div class="chatbox" id="cl" role="log" aria-live="polite">${msgs.map(m => { const a = USUARIOS.find(x => x.ced === m.ced) || {rol: '', nombre: m.ced};
+      return `<div class="msg ${m.aviso ? 'av' : ''}"><div><b>${esc(a.nombre)}</b> ${a.rol ? chips(a) : ''}${m.aviso ? chip('Aviso', 'a') : ''}<small>${new Date(m.ts).toLocaleString('es-VE')}</small>
+      ${(mod || m.ced === u.ced) ? `<button class="btn d sm ac" data-a="dm" data-i="${m.id}">Borrar</button>` : ''}</div><p>${esc(m.texto)}</p></div>`; }).join('') || '<p class="vacio">Aún no hay mensajes en esta sala.</p>'}</div>
+    ${u.silenciado ? '<p class="vacio">Tu cuenta está silenciada por la administración.</p>' : `<form class="cf" id="fch"><input type="text" id="ct" maxlength="500" required aria-label="Mensaje">
+    <button class="btn d">Enviar</button>${u.rol !== 'estudiante' ? '<label style="margin:0"><input type="checkbox" id="cav" style="width:auto"> Marcar como aviso</label>' : ''}</form>`}`;
+}
 
-  const logueado = sesion && usuarioActual();
-  mostrarPantalla(logueado ? 'app' : 'publica');
+function editHtml(t, propio){
+  const n = notas()[t.ced] || {}, campo = (id, et, v, x = '') => `<label for="${id}">${et}</label><input id="${id}" value="${esc(v ?? '')}" ${x}>`;
+  return `<p><button class="btn d sm ac" data-a="volver">Volver al panel</button></p><h2>Editar a ${esc(t.nombre)} (${t.ced})</h2><p>${chips(t)}</p>
+    <form class="c" id="fed" data-e="${t.ced}" style="max-width:560px">
+    ${campo('en', 'Nombre completo', t.nombre, 'required')}
+    <label for="er">Rol</label><select id="er" ${propio ? 'disabled' : ''}>${opts(['estudiante','profesor','admin'], t.rol)}</select>
+    ${t.rol === 'estudiante' ? campo('eca', 'Carrera', t.carrera) + campo('ese', 'Sección', t.seccion) + campo('etr', 'Trayecto', t.trayecto, 'type="number" min="1" max="4"') + campo('eti', 'Trimestre', t.trimestre, 'type="number" min="1" max="12"') : ''}
+    ${t.rol === 'profesor' ? '<p>Las unidades y secciones de este profesor se gestionan en la pestaña Asignaciones.</p>' : ''}
+    <label for="ep">Nueva contraseña (opcional, mínimo 8 caracteres)</label><input id="ep" type="password" autocomplete="new-password">
+    <p class="err" id="em" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Guardar cambios</button></form>
+    ${t.rol === 'estudiante' ? '<h2 style="margin-top:28px">Calificaciones</h2>' + tabla(['Unidad','Nota'], UNIDADES.map(x => `<tr><td>${esc(x[1])}</td><td>${inNota(t.ced, x, n[x[0]])}</td></tr>`)) : ''}`;
+}
 
-  document.addEventListener('keydown', ev => {
-    if (ev.key === 'Escape' && !$('#vista-app').classList.contains('hidden')) {
-      window.scrollTo({top:0, behavior:'smooth'});
+function usrHtml(){
+  const ver = USUARIOS.find(x => x.ced === sessionStorage.getItem('pt_ver')), ed = USUARIOS.find(x => x.ced === sessionStorage.getItem('pt_edit'));
+  if (ver) return `<p><button class="btn d sm ac" data-a="volver">Volver al panel</button></p><h2>Viendo el perfil de ${esc(ver.nombre)}${ver.baneado ? ' <span class="err">(suspendida)</span>' : ''}</h2>` + cuerpoDe(ver);
+  if (ed) return editHtml(ed, ed.ced === yo().ced);
+  const me = yo().ced, cnt = r => USUARIOS.filter(x => x.rol === r).length;
+  return `<p>${cnt('estudiante')} estudiantes, ${cnt('profesor')} profesores, ${LS.g('chat', []).length} mensajes en los chats.</p><h2>Usuarios</h2>${tabla(['Cédula','Nombre','Identificación','Estado','Acciones'], USUARIOS.map(x => `<tr><td>${x.ced}</td><td>${esc(x.nombre)}</td><td>${chips(x)}</td>
+    <td>${x.baneado ? '<b class="err">Suspendida</b>' : x.silenciado ? '<b class="err">Silenciada</b>' : 'Activa'}</td><td style="white-space:nowrap">
+    <button class="btn d sm ac" data-a="ver" data-c="${x.ced}">Ver perfil</button><button class="btn d sm ac" data-a="edit" data-c="${x.ced}">Editar</button>
+    ${x.ced === me ? '' : `<button class="btn d sm ac" data-a="mute" data-c="${x.ced}">${x.silenciado ? 'Dar voz' : 'Silenciar'}</button><button class="btn d sm ac" data-a="ban" data-c="${x.ced}">${x.baneado ? 'Reactivar' : 'Suspender'}</button><button class="btn d sm ac" data-a="del" data-c="${x.ced}">Eliminar</button>`}</td></tr>`))}
+    <h2>Crear cuenta</h2><form class="c" id="fcu" style="max-width:560px">
+    <label for="uc">Cédula (solo números)</label><input id="uc" inputmode="numeric" required><label for="un">Nombre completo</label><input id="un" required>
+    <label for="ur">Rol</label><select id="ur">${opts(['estudiante','profesor','admin'])}</select>
+    <label for="uca">Carrera (estudiantes)</label><input id="uca" value="Psicología Social"><label for="use">Sección</label><input id="use" value="A">
+    <label for="utr">Trayecto</label><input id="utr" type="number" min="1" max="4" value="1"><label for="uti">Trimestre</label><input id="uti" type="number" min="1" max="12" value="1">
+    <label for="up">Contraseña inicial (mínimo 8 caracteres)</label><input id="up" type="password" autocomplete="new-password" required>
+    <p class="err" id="um" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Crear cuenta</button></form>`;
+}
+
+function cmsHtml(){
+  return `<h2>Publicar noticia</h2><form class="c" id="fn" style="max-width:560px"><label for="nt">Título</label><input id="nt" required>
+    <label for="nx">Texto</label><textarea id="nx" rows="4" required></textarea><button class="btn d" style="margin-top:16px">Publicar en el inicio</button></form>
+    <h2 style="margin-top:28px">Noticias publicadas</h2>${NOTICIAS.length ? NOTICIAS.map((x, i) => `<p style="margin-bottom:8px">${esc(x.titulo)} <button class="btn d sm dn" data-i="${i}">Eliminar</button></p>`).join('') : '<p class="vacio">No hay noticias.</p>'}
+    <h2 style="margin-top:28px">Bitácora de acciones</h2>${LS.g('bitacora', []).map(x => `<p style="font-size:.88rem;color:var(--mut)">${esc(x)}</p>`).join('') || '<p class="vacio">Sin acciones registradas.</p>'}`;
+}
+
+const TIPOS = ['Constancia de estudios','Constancia de notas','Reclamo de calificación','Cambio de sección','Justificativo médico','Reposición de evaluación','Solicitud de beca'];
+const sols = () => LS.g('sols', []);
+const asigsAll = () => { let a = LS.g('asigs', null);
+  if (!a) { a = USUARIOS.filter(x => x.rol === 'profesor').flatMap(p => (p.secciones || []).flatMap(s => (p.unidades || []).map(un => ({id: rnd(), prof: p.ced, sec: s, unidad: un})))); LS.s('asigs', a); }
+  return a; };
+const asigsDe = u => asigsAll().filter(a => a.prof === u.ced);
+const secsDe = u => [...new Set(asigsDe(u).map(a => a.sec))].sort();
+const unsDe = u => [...new Set(asigsDe(u).map(a => a.unidad))];
+const tieneAsig = (u, s, un) => asigsDe(u).some(a => a.sec === s && a.unidad === un);
+const puede = (u, ced, un) => { const e = USUARIOS.find(x => x.ced === ced); return !!e && tieneAsig(u, sec(e), un); };
+const TABS = {estudiante: [['perfil','Mis notas'],['hor','Horario'],['asis','Asistencia'],['sol','Solicitudes'],['chat','Chats']],
+  profesor: [['notas','Notas y estudiantes'],['asis','Asistencia'],['hor','Horarios'],['chat','Chats']],
+  admin: [['usr','Usuarios'],['hor','Horarios'],['sol','Solicitudes'],['chat','Chats'],['asg','Asignaciones'],['cms','Noticias y bitácora'],['sis','Sistema']]};
+
+function solHtml(u){
+  const L = sols().sort((a, b) => b.ts - a.ts);
+  if (u.rol === 'admin') return `<h2>Solicitudes (${L.length})</h2>` + (L.length ? tabla(['Fecha','Estudiante','Tipo y motivo','Estado','Acciones'], L.map(s => { const e = USUARIOS.find(x => x.ced === s.ced) || {nombre: s.ced};
+    return `<tr><td>${new Date(s.ts).toLocaleDateString('es-VE')}</td><td>${esc(e.nombre)}<br>${e.rol ? chips(e) : ''}</td><td><b>${esc(s.tipo)}</b><br>${esc(s.texto)}${s.resp ? `<br><i>Respuesta: ${esc(s.resp)}</i>` : ''}</td><td>${chip(s.estado, s.estado === 'Aprobada' ? 'a' : s.estado === 'En proceso' ? 'r' : '')}</td>
+    <td style="white-space:nowrap">${['Aprobada','En proceso','Rechazada'].map(x => `<button class="btn d sm ac" data-a="sr" data-i="${s.id}" data-c="${x}">${x}</button>`).join('')}</td></tr>`; })) : '<p class="vacio">No hay solicitudes.</p>');
+  const mias = L.filter(s => s.ced === u.ced);
+  return `<h2>Nueva solicitud</h2><form class="c" id="fso" style="max-width:560px"><label for="sot">Tipo</label><select id="sot">${opts(TIPOS)}</select>
+    <label for="som">Motivo</label><textarea id="som" rows="4" required></textarea><button class="btn d" style="margin-top:14px">Enviar solicitud</button></form>
+    <h2 style="margin-top:28px">Mis solicitudes</h2>` + (mias.length ? mias.map(s => `<p style="margin-bottom:10px"><b>${esc(s.tipo)}</b> ${chip(s.estado, s.estado === 'Aprobada' ? 'a' : s.estado === 'En proceso' ? 'r' : '')}<br>${esc(s.texto)}${s.resp ? `<br><i>Respuesta: ${esc(s.resp)}</i>` : ''}</p>`).join('') : '<p class="vacio">No has enviado solicitudes.</p>');
+}
+
+function asisHtml(u){
+  const A = LS.g('asis', {});
+  if (u.rol === 'estudiante') {
+    const filas = UNIDADES.map(x => { const ses = Object.entries(A).filter(([k, v]) => k.startsWith(x[0] + '|') && v[u.ced]), c = t => ses.filter(([k, v]) => v[u.ced] === t).length;
+      return ses.length ? `<tr><td>${esc(x[1])}</td><td>${ses.length}</td><td>${c('P')}</td><td>${c('A')}</td><td>${c('J')}</td><td>${Math.round((c('P') + c('J')) / ses.length * 100)}%</td></tr>` : ''; }).join('');
+    return '<h2>Mi asistencia</h2>' + (filas ? tabla(['Unidad','Clases','Presente','Ausente','Justificado','Asistencia'], [filas]) : '<p class="vacio">Aún no hay asistencia registrada.</p>');
+  }
+  const AS = asigsDe(u); if (!AS.length) return '<p class="vacio">No tienes asignaciones.</p>';
+  const cur = AS.find(a => a.id === sessionStorage.getItem('pt_au')) || AS[0], fe = sessionStorage.getItem('pt_af') || new Date().toISOString().slice(0, 10);
+  const reg = A[cur.unidad + '|' + fe] || {}, est = USUARIOS.filter(x => x.rol === 'estudiante' && !x.baneado && sec(x) === cur.sec);
+  return `<h2>Pasar lista</h2><div class="bar"><span><label for="au" style="display:inline">Clase </label><select id="au">${AS.map(a => `<option value="${a.id}" ${a.id === cur.id ? 'selected' : ''}>${esc(nombreUnidad(a.unidad))}, ${esc(nomSec(a.sec))}</option>`).join('')}</select></span>
+    <span><label for="af" style="display:inline">Fecha </label><input id="af" type="date" value="${fe}" style="width:auto"></span></div>` +
+    tabla(['Estudiante','Asistencia'], est.map(e => `<tr><td>${esc(e.nombre)}<br>${chips(e)}</td><td><select data-as="${e.ced}" aria-label="Asistencia de ${esc(e.nombre)}">${[['','Sin registrar'],['P','Presente'],['A','Ausente'],['J','Justificado']].map(([v, t]) => `<option value="${v}" ${(reg[e.ced] || '') === v ? 'selected' : ''}>${t}</option>`).join('')}</select></td></tr>`));
+}
+
+function asgHtml(){
+  const P = USUARIOS.filter(x => x.rol === 'profesor'), A = asigsAll();
+  return `<h2>Nueva asignación</h2><form class="c" id="fas" style="max-width:560px"><label for="ap">Profesor</label><select id="ap">${P.map(p => `<option value="${p.ced}">${esc(p.nombre)}</option>`).join('')}</select>
+    <label for="asx">Carrera y sección</label><select id="asx">${todasSecs().map(x => `<option value="${esc(x)}">${esc(nomSec(x))}</option>`).join('')}</select>
+    <label for="aun">Unidad curricular</label><select id="aun">${UNIDADES.map(x => `<option value="${x[0]}">${esc(x[1])}</option>`).join('')}</select>
+    <p class="err" id="am" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Asignar</button></form>
+    <h2 style="margin-top:28px">Asignaciones actuales (${A.length})</h2>` + (A.length ? tabla(['Profesor','Unidad','Carrera y sección',''], A.map(a => { const p = USUARIOS.find(x => x.ced === a.prof);
+    return `<tr><td>${esc(p ? p.nombre : a.prof)}</td><td>${esc(nombreUnidad(a.unidad))}</td><td>${esc(nomSec(a.sec))}</td><td><button class="btn d sm ac" data-a="da" data-i="${a.id}">Quitar</button></td></tr>`; })) : '<p class="vacio">No hay asignaciones.</p>');
+}
+
+function sisHtml(){
+  const est = USUARIOS.filter(x => x.rol === 'estudiante'), N = notas();
+  const prom = l => { const v = l.flatMap(e => Object.values(N[e.ced] || {})); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : '—'; };
+  const filas = todasSecs().map(x => { const e = est.filter(y => sec(y) === x), pr = USUARIOS.filter(y => (y.secciones || []).includes(x)).length;
+    return `<tr><td>${esc(x.split('|')[0])}</td><td>${esc(x.split('|')[1])}</td><td>${e.length}</td><td>${pr}</td><td>${prom(e)}</td></tr>`; });
+  return `<h2>Estadísticas por carrera y sección</h2>` + tabla(['Carrera','Sección','Estudiantes','Profesores','Promedio'], filas) +
+    `<p>Solicitudes pendientes: <b>${sols().filter(s => s.estado === 'Pendiente').length}</b>. Mensajes en los chats: <b>${LS.g('chat', []).length}</b>.</p>
+    <h2 style="margin-top:28px">Respaldo de datos</h2><p>Genera el texto para guardarlo, o pega un respaldo para restaurarlo.</p>
+    <textarea id="bkt" rows="5" aria-label="Respaldo" style="max-width:640px"></textarea>
+    <div class="btns" style="margin-top:10px"><button class="btn d ac" data-a="bk">Generar respaldo</button><button class="btn d ac" data-a="bi">Restaurar desde el texto</button></div><p class="err" id="bkm" role="alert" style="margin-top:8px"></p>`;
+}
+
+function portalHtml(){
+  const u = yo();
+  if (!u) return cab('Portal académico', 'Ingresa con tu cédula y tu contraseña.') + `<section><div class="w">
+    <form class="c" id="fl" style="max-width:420px"><h2>Iniciar sesión</h2>
+    <label for="lc">Cédula</label><input id="lc" inputmode="numeric" autocomplete="username" required>
+    <label for="lp">Contraseña</label><input id="lp" type="password" autocomplete="current-password" required>
+    <p class="err" id="le" role="alert" style="margin-top:10px;font-size:.9rem"></p>
+    <button class="btn d" style="margin-top:14px">Entrar</button></form></div></section>`;
+  const T = TABS[u.rol]; let tab = sessionStorage.getItem('pt_tab'); if (!T.some(t => t[0] === tab)) tab = T[0][0];
+  const cont = {perfil: () => cuerpoDe(u), notas: () => cuerpoDe(u), hor: () => horHtml(u), chat: () => chatHtml(u), usr: usrHtml, cms: cmsHtml, asg: asgHtml, sol: () => solHtml(u), asis: () => asisHtml(u), sis: sisHtml}[tab]();
+  return cab('Portal académico', `${esc(u.nombre)}`) + `<section><div class="w"><div class="bar"><nav class="tabs" aria-label="Secciones del portal" style="margin:0">${T.map(t => `<button class="btn ${t[0] === tab ? 'p' : 'd'} sm ac" data-a="tab" data-c="${t[0]}">${t[1]}</button>`).join('')}</nav>
+    <button class="btn d" id="so">Cerrar sesión</button></div>${cont}</div></section>`;
+}
+
+RUTAS.portal = {t: 'Portal académico', h: portalHtml, after(){
+  const $ = i => document.getElementById(i), val = i => $(i).value.trim();
+  const f = $('fl');
+  if (f) f.onsubmit = async ev => {
+    ev.preventDefault();
+    const e = $('le'), bloq = +sessionStorage.getItem('pt_bloq') || 0;
+    if (Date.now() < bloq) { e.textContent = 'Demasiados intentos. Espera 30 segundos.'; return; }
+    const u = USUARIOS.find(x => x.ced === val('lc'));
+    const hh = await huella($('lp').value, u ? u.sal : 'x');
+    if (u && hh === u.h) {
+      if (u.baneado) { e.textContent = 'Cuenta suspendida. Comunícate con la administración.'; return; }
+      sessionStorage.setItem('pt_ses', JSON.stringify({ced: u.ced})); sessionStorage.removeItem('pt_fallos'); ir(); return;
     }
+    const n = (+sessionStorage.getItem('pt_fallos') || 0) + 1;
+    sessionStorage.setItem('pt_fallos', n);
+    if (n >= 5) { sessionStorage.setItem('pt_bloq', Date.now() + 30000); sessionStorage.setItem('pt_fallos', 0); }
+    e.textContent = 'Cédula o contraseña incorrecta.';
+  };
+  const u = yo(); if (!u) return;
+  const adm = u.rol === 'admin', prof = u.rol === 'profesor', staff = adm || prof;
+  if ($('so')) $('so').onclick = () => { ['pt_ses','pt_ver','pt_edit','pt_tab','pt_sala'].forEach(k => sessionStorage.removeItem(k)); ir(); };
+  const cl = $('cl'); if (cl) cl.scrollTop = cl.scrollHeight;
+  if ($('sa')) $('sa').onchange = () => { sessionStorage.setItem('pt_sala', $('sa').value); ir(); };
+  document.querySelectorAll('input[data-c]').forEach(i => i.onchange = () => {
+    if (!staff || (prof && !puede(u, i.dataset.c, i.dataset.u))) return;
+    const n = notas(), c = i.dataset.c, k = i.dataset.u, v = i.value === '' ? null : Math.min(20, Math.max(0, +i.value));
+    n[c] = n[c] || {}; if (v === null) delete n[c][k]; else n[c][k] = v;
+    LS.s('notas', n); if (adm) bit(`Cambió la nota de ${c} en ${k} a ${v ?? 'sin nota'}`);
   });
-})();
+  document.querySelectorAll('input[data-o]').forEach(i => i.onchange = () => {
+    if (!staff || (prof && !puede(u, i.dataset.o, i.dataset.u))) return;
+    const o = obs(), c = i.dataset.o; o[c] = o[c] || {}; o[c][i.dataset.u] = i.value.trim(); LS.s('obs', o);
+  });
+  document.querySelectorAll('[data-h]').forEach(i => i.onchange = () => {
+    const H = horarios(), h = H.find(x => x.id === i.dataset.h); if (!h || !staff) return;
+    if (prof && !(tieneAsig(u, h.sec, h.unidad))) return;
+    h[i.dataset.f] = i.value.trim(); LS.s('horarios', H); if (adm) bit(`Editó el horario de ${h.unidad}`);
+  });
+  if ($('fh')) $('fh').onsubmit = ev => {
+    ev.preventDefault();
+    if (val('hi') >= val('hf')) { $('hm').textContent = 'La hora de fin debe ser posterior a la de inicio.'; return; }
+    if (!val('hs')) { $('hm').textContent = 'No tienes secciones asignadas.'; return; }
+    if (prof && !tieneAsig(u, $('hs').value, $('hu').value)) { $('hm').textContent = 'No tienes asignada esa unidad en esa sección.'; return; }
+    const H = horarios(); H.push({id: rnd(), sec: $('hs').value, unidad: $('hu').value, dia: $('hd').value, ini: val('hi'), fin: val('hf'), aula: val('ha')});
+    LS.s('horarios', H); if (adm) bit('Agregó una clase al horario'); ir();
+  };
+  if ($('fch')) $('fch').onsubmit = ev => {
+    ev.preventDefault();
+    const sala = $('sa').value; if (u.silenciado || !salas(u).some(r => r.id === sala)) return;
+    const c = LS.g('chat', []); c.push({id: rnd(), sala, ced: u.ced, texto: val('ct'), aviso: !!($('cav') && $('cav').checked), ts: Date.now()});
+    LS.s('chat', c.slice(-300)); sessionStorage.setItem('pt_sala', sala); ir();
+  };
+  if ($('fso')) $('fso').onsubmit = ev => {
+    ev.preventDefault(); if (u.rol !== 'estudiante') return;
+    const S = sols(); S.push({id: rnd(), ced: u.ced, tipo: $('sot').value, texto: val('som'), estado: 'Pendiente', resp: '', ts: Date.now()}); LS.s('sols', S); ir();
+  };
+  if ($('au')) {
+    $('au').onchange = () => { sessionStorage.setItem('pt_au', $('au').value); ir(); };
+    $('af').onchange = () => { sessionStorage.setItem('pt_af', $('af').value); ir(); };
+  }
+  document.querySelectorAll('select[data-as]').forEach(i => i.onchange = () => {
+    const as = asigsDe(u).find(x => x.id === $('au').value), e = USUARIOS.find(x => x.ced === i.dataset.as);
+    if (!prof || !as || !e || sec(e) !== as.sec) return;
+    const A = LS.g('asis', {}), k = as.unidad + '|' + $('af').value; A[k] = A[k] || {};
+    if (i.value) A[k][i.dataset.as] = i.value; else delete A[k][i.dataset.as];
+    LS.s('asis', A);
+  });
+  main.onclick = ev => {
+    const b = ev.target.closest('.ac'); if (!b) return;
+    const a = b.dataset.a, c = b.dataset.c, i = b.dataset.i, t = USUARIOS.find(x => x.ced === c);
+    if (a === 'tab') { ['pt_ver','pt_edit'].forEach(k => sessionStorage.removeItem(k)); sessionStorage.setItem('pt_tab', c); return ir(); }
+    if (a === 'volver') { sessionStorage.removeItem('pt_ver'); sessionStorage.removeItem('pt_edit'); return ir(); }
+    if (a === 'dm') { const sala = $('sa').value, M = LS.g('chat', []), m = M.find(x => x.id === i);
+      if (m && (adm || m.ced === u.ced || (prof && sala !== 'g'))) { LS.s('chat', M.filter(x => x.id !== i)); if (adm) bit('Borró un mensaje del chat'); ir(); } return; }
+    if (a === 'dh') { const H = horarios(), h = H.find(x => x.id === i);
+      if (h && (adm || (prof && tieneAsig(u, h.sec, h.unidad)))) { LS.s('horarios', H.filter(x => x.id !== i)); if (adm) bit('Quitó una clase del horario'); ir(); } return; }
+    if (!adm) return;
+    if (a === 'da') { LS.s('asigs', asigsAll().filter(x => x.id !== i)); bit('Quitó una asignación'); return ir(); }
+    if (a === 'sr') { const S = sols(), x = S.find(y => y.id === i); if (!x) return;
+      const r = prompt(`Respuesta para el estudiante (${c}):`, x.resp || ''); if (r === null) return;
+      x.estado = c; x.resp = r.trim(); LS.s('sols', S); bit(`Marcó una solicitud como ${c}`); return ir(); }
+    if (a === 'bk') { const d = {}; Object.keys(localStorage).filter(k => k.startsWith('pt_')).forEach(k => d[k] = localStorage.getItem(k));
+      $('bkt').value = JSON.stringify(d); $('bkt').select(); $('bkm').textContent = 'Respaldo generado. Cópialo y guárdalo en un lugar seguro.'; return; }
+    if (a === 'bi') { try { const d = JSON.parse($('bkt').value); if (!confirm('Se reemplazarán los datos actuales. ¿Continuar?')) return;
+      Object.entries(d).forEach(([k, v]) => { if (/^pt_(usuarios|notas|obs|horarios|chat|sols|asis|noticias|bitacora|asigs)$/.test(k) && typeof v === 'string') { JSON.parse(v); localStorage.setItem(k, v); } });
+      USUARIOS = LS.g('usuarios', SEMILLA); NOTICIAS = LS.g('noticias', []); bit('Restauró un respaldo'); ir(); } catch (e) { $('bkm').textContent = 'El texto no es un respaldo válido.'; } return; }
+    if (a === 'vaciar') { if (!confirm('¿Vaciar todos los mensajes de esta sala?')) return; const sala = $('sa').value;
+      LS.s('chat', LS.g('chat', []).filter(x => x.sala !== sala)); bit('Vació la sala ' + sala); return ir(); }
+    if (!t) return;
+    if (a === 'ver') { sessionStorage.setItem('pt_ver', c); return ir(); }
+    if (a === 'edit') { sessionStorage.setItem('pt_edit', c); return ir(); }
+    const otros = USUARIOS.filter(x => x.rol === 'admin' && !x.baneado && x.ced !== c).length;
+    if ((a === 'ban' || a === 'del') && t.rol === 'admin' && !otros) return alert('No puedes dejar el sistema sin un administrador activo.');
+    if (a === 'mute') { t.silenciado = !t.silenciado; bit((t.silenciado ? 'Silenció a ' : 'Devolvió la voz a ') + c); }
+    if (a === 'ban') { t.baneado = !t.baneado; bit((t.baneado ? 'Suspendió' : 'Reactivó') + ' la cuenta ' + c); }
+    if (a === 'del') { if (!confirm('¿Eliminar la cuenta de ' + t.nombre + '? No se puede deshacer.')) return;
+      USUARIOS = USUARIOS.filter(x => x.ced !== c); LS.s('asigs', asigsAll().filter(x => x.prof !== c)); bit('Eliminó la cuenta ' + c); }
+    guardarU(); ir();
+  };
+  if (!adm) return;
+  if ($('fas')) $('fas').onsubmit = ev => {
+    ev.preventDefault();
+    const A = asigsAll(), n = {id: rnd(), prof: $('ap').value, sec: $('asx').value, unidad: $('aun').value};
+    if (!n.prof || !n.sec) { $('am').textContent = 'Elige profesor y sección.'; return; }
+    if (A.some(x => x.prof === n.prof && x.sec === n.sec && x.unidad === n.unidad)) { $('am').textContent = 'Esa asignación ya existe.'; return; }
+    A.push(n); LS.s('asigs', A); bit(`Asignó ${n.unidad} a ${n.prof} en ${n.sec}`); ir();
+  };
+  if ($('fcu')) $('fcu').onsubmit = async ev => {
+    ev.preventDefault();
+    const m = $('um'), ced = val('uc'), p = $('up').value, rol = val('ur');
+    if (!/^\d{6,10}$/.test(ced)) { m.textContent = 'La cédula debe tener entre 6 y 10 dígitos.'; return; }
+    if (USUARIOS.some(x => x.ced === ced)) { m.textContent = 'Ya existe una cuenta con esa cédula.'; return; }
+    if (p.length < 8) { m.textContent = 'La contraseña debe tener al menos 8 caracteres.'; return; }
+    const sal = rnd(), nu = {ced, rol, nombre: val('un'), sal, h: await huella(p, sal)};
+    if (rol === 'estudiante') Object.assign(nu, {carrera: val('uca'), seccion: val('use') || 'A', trayecto: +val('utr') || 1, trimestre: +val('uti') || 1});
+    USUARIOS.push(nu); guardarU(); bit(`Creó la cuenta ${ced} (${rol})`); ir();
+  };
+  if ($('fed')) $('fed').onsubmit = async ev => {
+    ev.preventDefault();
+    const t = USUARIOS.find(x => x.ced === $('fed').dataset.e), p = $('ep').value;
+    if (!t) return;
+    if (p && p.length < 8) { $('em').textContent = 'La contraseña debe tener al menos 8 caracteres.'; return; }
+    t.nombre = val('en');
+    if (t.ced !== u.ced) t.rol = $('er').value;
+    if ($('eca')) Object.assign(t, {carrera: val('eca'), seccion: val('ese') || 'A', trayecto: +val('etr') || 1, trimestre: +val('eti') || 1});
+    if (p) { t.sal = rnd(); t.h = await huella(p, t.sal); }
+    guardarU(); bit(`Editó la cuenta ${t.ced}${p ? ' y restableció su contraseña' : ''}`);
+    sessionStorage.removeItem('pt_edit'); ir();
+  };
+  if ($('fn')) $('fn').onsubmit = ev => {
+    ev.preventDefault();
+    NOTICIAS.unshift({titulo: val('nt'), texto: val('nx'), fecha: new Date().toLocaleDateString('es-VE')});
+    LS.s('noticias', NOTICIAS); bit('Publicó una noticia'); ir();
+  };
+  document.querySelectorAll('.dn').forEach(x => x.onclick = () => { NOTICIAS.splice(+x.dataset.i, 1); LS.s('noticias', NOTICIAS); bit('Eliminó una noticia'); ir(); });
+}};
+
+const main = document.getElementById('contenido');
+function ir(){
+  const k = (location.hash.replace(/^#\/?/, '') || '').split('?')[0];
+  const r = RUTAS[k] || RUTAS[''];
+  main.innerHTML = typeof r.h === 'function' ? r.h() : r.h;
+  document.title = (r.t === 'Inicio' ? 'UNELMLK' : r.t + ' · UNELMLK') + ' · Universidad Nacional Experimental de Lara';
+  document.querySelectorAll('#nav a').forEach(a => {
+    const on = a.getAttribute('href') === '#/' + k;
+    on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+  });
+  window.scrollTo(0, 0);
+  main.focus({preventScroll: true});
+  if (r.after) r.after();
+  const f = document.getElementById('fc');
+  if (f) f.onsubmit = ev => {
+    ev.preventDefault();
+    const cuerpo = `${document.getElementById('m').value}\n\n${document.getElementById('n').value} (${document.getElementById('e').value})`;
+    location.href = `mailto:${CORREO}?subject=${encodeURIComponent('Consulta desde el sitio web')}&body=${encodeURIComponent(cuerpo)}`;
+    document.getElementById('fs').textContent = 'Se abrió tu aplicación de correo. Envía el mensaje desde allí.';
+  };
+}
+window.addEventListener('hashchange', ir);
+ir();
+
+document.getElementById('tema').onclick = () => {
+  const r = document.documentElement;
+  const oscuro = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  r.dataset.theme = oscuro ? 'light' : 'dark';
+  try { localStorage.setItem('tema', r.dataset.theme); } catch (e) {}
+};
+try { const t = localStorage.getItem('tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
 </script>
 </body>
 </html>
