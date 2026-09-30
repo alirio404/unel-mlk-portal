@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<!-- IMPORTANTE: sube el archivo "logo.jpg" (logo de la universidad) a la MISMA carpeta que este index.html.
+     Sin ese archivo el logo no se mostrará. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Universidad Nacional Experimental de Lara “Martín Luther King”</title>
+<meta name="description" content="Sitio oficial de la Universidad Nacional Experimental de Lara “Martín Luther King” (UNELMLK), Barquisimeto, Venezuela. Oferta académica, admisión y contacto.">
+<meta property="og:title" content="UNELMLK · Universidad Nacional Experimental de Lara “Martín Luther King”">
+<meta property="og:description" content="Oferta académica, admisión y contacto de la UNELMLK, Barquisimeto.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230b3d91' width='100' height='100' rx='15'/%3E%3Ctext x='50' y='66' font-size='48' text-anchor='middle' fill='%23f5a623' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('tema');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --navy:#0b3d91;--deep:#082a66;--gold:#f5a623;
+  --bg:#f5f7fb;--card:#fff;--tx:#18202e;--mut:#4d5a70;--bd:#d9e0ec;--link:#0b3d91;--hd:#0b3d91;
+  --serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1526;--card:#15203a;--tx:#e8edf7;--mut:#a5b2c9;--bd:#2a3757;--link:#8fbaff;--hd:#cfe0ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1526;--card:#15203a;--tx:#e8edf7;--mut:#a5b2c9;--bd:#2a3757;--link:#8fbaff;--hd:#cfe0ff;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);line-height:1.6;min-height:100%}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:#1b1400;padding:8px 14px;border-radius:6px;z-index:99}
+.skip:focus{left:8px}
+h1,h2,h3{font-family:var(--serif);color:var(--hd);line-height:1.2;font-weight:700}
+h2{font-size:1.6rem;margin-bottom:14px}
+h3{font-size:1.1rem;margin-bottom:6px}
+p{max-width:68ch}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+/* cabecera */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--deep);color:#fff;border-bottom:3px solid var(--gold)}
+.top .w{display:flex;align-items:center;gap:16px;justify-content:space-between;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.sello{width:44px;height:44px;border-radius:50%;background:var(--gold);color:#1b1400;display:grid;place-items:center;font:700 .8rem var(--serif);text-align:center;line-height:1}
+.brand b{display:block;font:700 .95rem var(--serif)}
+.brand small{font-size:.75rem;color:#c9d7f2}
+nav{display:flex;gap:2px;align-items:center;overflow-x:auto;max-width:100%}
+nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:6px;font-size:.92rem;white-space:nowrap}
+nav a:hover{background:rgba(255,255,255,.14)}
+nav a[aria-current="page"]{background:rgba(255,255,255,.2);box-shadow:inset 0 -3px 0 var(--gold)}
+#tema{background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:6px;padding:7px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+/* hero */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero .w{padding-top:64px;padding-bottom:64px;display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center}
+.hero h1{color:#fff;font-size:clamp(2rem,5vw,3.3rem)}
+.hero p{margin:18px 0 26px;color:#dbe6fb;font-size:1.08rem}
+.hero svg{width:100%;max-width:300px;justify-self:center;opacity:.95}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:6px;font-weight:700;text-decoration:none;font-size:.95rem;border:2px solid var(--gold);cursor:pointer;font-family:inherit}
+.btn.p{background:var(--gold);color:#1b1400}
+.btn.s{background:transparent;color:#fff}
+.btn.p:hover{filter:brightness(1.08)}
+.btn.s:hover{background:rgba(255,255,255,.12)}
+.btn.d{background:var(--navy);color:#fff;border-color:var(--navy)}
+/* secciones */
+section{padding:44px 0}
+.pageh{background:var(--deep);color:#fff;padding:38px 0}
+.pageh h1{color:#fff;font-size:clamp(1.7rem,4vw,2.4rem)}
+.pageh p{color:#c9d7f2;margin-top:8px}
+.acc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border:1px solid var(--bd);background:var(--card);margin-top:-30px;position:relative;border-radius:10px;overflow:hidden}
+.acc a{padding:22px;text-decoration:none;color:var(--tx);border-right:1px solid var(--bd);border-bottom:1px solid var(--bd);display:block}
+.acc a:hover{background:var(--bg)}
+.acc b{display:block;font:700 1.05rem var(--serif);color:var(--hd)}
+.acc span{font-size:.88rem;color:var(--mut)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.serv{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 32px}
+.serv div{padding:14px 0;border-top:1px solid var(--bd)}
+.serv p{color:var(--mut);font-size:.93rem}
+dl.of div{display:grid;grid-template-columns:200px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--bd)}
+dl.of dt{font:700 1rem var(--serif);color:var(--hd)}
+dl.of dd{color:var(--tx)}
+ol.pasos{list-style:none;counter-reset:p;max-width:68ch}
+ol.pasos li{counter-increment:p;position:relative;padding:14px 0 14px 54px;border-top:1px solid var(--bd)}
+ol.pasos li::before{content:counter(p);position:absolute;left:0;top:12px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 1rem var(--serif)}
+.nota{background:var(--card);border-left:4px solid var(--gold);padding:14px 18px;margin-top:22px;max-width:68ch;border-radius:0 8px 8px 0}
+form.c{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:22px}
+label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 5px}
+input,textarea{width:100%;padding:11px 12px;border:1px solid var(--mut);border-radius:6px;font:inherit;background:var(--bg);color:var(--tx)}
+address{font-style:normal}
+address p+p,.dir p+p{margin-top:8px}
+footer{background:var(--deep);color:#c9d7f2;padding:30px 0;font-size:.9rem;margin-top:20px}
+footer a{color:#fff}
+.vacio{padding:26px;border:1px dashed var(--mut);border-radius:8px;color:var(--mut)}
+@media (max-width:760px){
+  .hero .w{grid-template-columns:1fr;padding-top:44px;padding-bottom:52px}
+  .hero svg{max-width:150px;order:-1;justify-self:start}
+  dl.of div{grid-template-columns:1fr;gap:4px}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.err{color:#b42318}
+:root[data-theme="dark"] .err{color:#ff9c94}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .err{color:#ff9c94}}
+.tw{overflow-x:auto;margin:10px 0 26px}
+table{border-collapse:collapse;width:100%;min-width:420px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--bd);text-align:left;font-size:.93rem}
+th{color:var(--hd)}
+td input{width:84px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.sm{padding:5px 10px;font-size:.8rem;margin:2px}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.75rem;font-weight:600;margin:1px 3px 1px 0;border:1px solid var(--bd);background:var(--bg);color:var(--hd)}
+.chip.r{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip.a{background:var(--gold);color:#1b1400;border-color:var(--gold)}
+td input[data-o]{width:100%;min-width:170px}
+td input[type=time]{width:120px}
+td input[data-f=aula]{width:120px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.chatbox{background:var(--card);border:1px solid var(--bd);border-radius:10px;height:380px;overflow-y:auto;padding:12px;margin:12px 0}
+.msg{padding:8px 0;border-bottom:1px solid var(--bd)}
+.msg.av{border-left:4px solid var(--gold);padding-left:10px;background:var(--bg)}
+.msg small{color:var(--mut);margin-left:6px}
+.msg p{max-width:none;overflow-wrap:anywhere}
+.cf{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cf input[type=text]{flex:1;min-width:200px}
+.logo{height:52px;width:auto;background:#fff;border-radius:8px;padding:3px 6px}
+.hero .lg{background:#fff;border-radius:14px;padding:14px;max-width:320px;width:100%;justify-self:center}
+.hero .lg img{display:block;width:100%;height:auto}
+table.gr{min-width:900px;table-layout:fixed}
+table.gr th,table.gr td{border:1px solid var(--bd);padding:3px 4px;vertical-align:top;font-size:.75rem}
+table.gr th[scope=row]{width:64px;position:sticky;left:0;background:var(--card)}
+.cl{background:var(--navy);color:#fff;border-radius:5px;padding:4px 6px;margin:2px 0;line-height:1.3}
+.cl small{display:block;color:#dbe6fb}
+.cl.cont{background:var(--gold);color:#1b1400;font-size:.7rem}
+select{padding:8px 10px;border:1px solid var(--mut);border-radius:6px;font:inherit;background:var(--bg);color:var(--tx);max-width:100%}
+td input[data-f=tema]{min-width:160px;width:100%}
+label select,label input{margin-top:5px}
+@media (max-width:760px){.hero .lg{order:-1;max-width:180px;justify-self:start}.brand small{display:none}}
+.err{white-space:pre-line}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="top">
+  <div class="w">
+    <a class="brand" href="#/">
+      <img class="logo" id="logo" alt="Logo de la Universidad Nacional Experimental de Lara Martin Luther King" src="logo.jpg">
+      <span><b>Universidad Nacional Experimental de Lara</b><small>“Martín Luther King” · Barquisimeto</small></span>
+    </a>
+    <nav aria-label="Principal" id="nav">
+      <a href="#/">Inicio</a>
+      <a href="#/institucion">La universidad</a>
+      <a href="#/oferta">Oferta académica</a>
+      <a href="#/admision">Admisión</a>
+      <a href="#/contacto">Contacto</a>
+      <a href="#/portal">Portal</a>
+      <button id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Tema</button>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido" tabindex="-1"></main>
+
+<footer>
+  <div class="w">
+    <p>© 2026 Universidad Nacional Experimental de Lara “Martín Luther King”. Barquisimeto, estado Lara, Venezuela.</p>
+    <p style="margin-top:6px">Teléfono <a href="tel:+582514472593">0251-4472593</a></p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   SUPABASE: fuente de verdad del portal
+   - Supabase Auth gestiona identidad, sesiones y contraseñas.
+   - Postgres/RLS gestiona permisos y persistencia.
+   - localStorage queda únicamente como caché de renderizado; nunca como fuente de autenticación.
+   - Supabase Realtime refleja cambios de la base de datos entre dispositivos.
+   ===================================================================== */
+const TITULO0 = document.title; /* título original: se restaura en la ruta Inicio */
+if (!window.crypto || !window.crypto.subtle) {
+  alert('Este portal requiere HTTPS para funcionar correctamente. Asegúrate de abrirlo desde https://');
+}
+/* ---- Contenido editable: cambia aquí los textos sin tocar el diseño ---- */
+const PREGRADO = [
+  ['Salud', 'Fisioterapia, Odontología, Psicología Social'],
+  ['Ingeniería y tecnología', 'Construcción Civil, Electricidad, Mecánica, Instrumentación y Control, Transporte Ferroviario'],
+  ['Ciencias del agro', 'Medicina Veterinaria'],
+  ['Artes', 'Diseño Integral Comunitario']
+];
+const POSTGRADO = [
+  ['Especializaciones en salud', 'Fortalecimiento técnico y clínico.'],
+  ['Especializaciones en ingeniería y producción', 'Mecánica, Instrumentación y Control, Construcción Civil.'],
+  ['Diplomados', 'Cultura Emprendedora, Formación Docente, Gestión Pública y Comunitaria.']
+];
+const SERVICIOS = [
+  ['Servicio médico', 'Atención primaria y especializada para la salud física de los estudiantes.'],
+  ['Odontología', 'Tratamientos dentales preventivos y correctivos.'],
+  ['Atención psicológica', 'Apoyo emocional y terapias individuales.'],
+  ['Transporte', 'Rutas de acceso al complejo universitario desde distintos sectores.'],
+  ['Comedor universitario', 'Alimentación balanceada y económica.'],
+  ['Jornadas veterinarias', 'Cuidado de mascotas, abiertas a estudiantes y comunidad.']
+];
+let NOTICIAS = []; /* { titulo, fecha, texto }; las publica el administrador desde el portal */
+const CORREO = 'soporte@unelmlk.edu.ve';
+
+const LOGO = document.getElementById('logo').src;
+const estrella = `<svg viewBox="0 0 200 200" role="img" aria-label="Estrella"><g fill="none" stroke="#f5a623" stroke-width="3"><circle cx="100" cy="100" r="90"/><circle cx="100" cy="100" r="62" stroke-opacity=".5"/></g><path d="M100 18l17 58 60 1-49 36 19 58-47-36-47 36 19-58-49-36 60-1z" fill="#f5a623"/></svg>`;
+const dl = (a) => `<dl class="of">${a.map(([t,d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join('')}</dl>`;
+const cab = (t, s) => `<div class="pageh"><div class="w"><h1>${t}</h1><p>${s}</p></div></div>`;
+
+const RUTAS = {
+  '': {t: 'Inicio', h: () => `
+    <div class="hero"><div class="w">
+      <div>
+        <h1>Formando el futuro de la Patria desde Lara</h1>
+        <p>Universidad pública del proyecto Misión Alma Mater, con carreras de salud, ingeniería, agro y artes en Barquisimeto y Yaritagua.</p>
+        <div class="btns"><a class="btn p" href="#/admision">Cómo ingresar</a><a class="btn s" href="#/oferta">Ver carreras</a></div>
+      </div><div class="lg"><img src="${LOGO}" alt="Logo de la Universidad Nacional Experimental de Lara Martin Luther King"></div>
+    </div></div>
+    <div class="w"><nav class="acc" aria-label="Accesos rápidos">
+      <a href="#/admision"><b>Admisión</b><span>Pasos para ingresar por el SNI/OPSU</span></a>
+      <a href="#/oferta"><b>Oferta académica</b><span>Pregrado, postgrado y diplomados</span></a>
+      <a href="#/institucion"><b>La universidad</b><span>Historia, misión y visión</span></a>
+      <a href="#/contacto"><b>Contacto</b><span>Dirección, teléfono y mensaje</span></a>
+    </nav></div>
+    <section><div class="w"><h2>Servicios estudiantiles</h2><div class="serv">${SERVICIOS.map(([t,d]) => `<div><h3>${t}</h3><p>${d}</p></div>`).join('')}</div></div></section>
+    <section style="padding-top:0"><div class="w"><h2>Noticias</h2>${
+      NOTICIAS.length ? NOTICIAS.map(n => `<article style="border-top:1px solid var(--bd);padding:14px 0"><h3>${esc(n.titulo)}</h3><p class="mut" style="color:var(--mut);font-size:.85rem">${esc(n.fecha)}</p><p>${esc(n.texto)}</p></article>`).join('')
+      : '<p class="vacio">Aún no hay noticias publicadas. Los comunicados oficiales aparecerán aquí.</p>'}</div></section>`},
+
+  institucion: {t: 'La universidad', h: () => cab('La universidad', 'Historia, misión y visión de la UNELMLK.') + `
+    <section><div class="w cols">
+      <div><h2>Reseña histórica</h2>
+        <p>Fundada el 19 de junio de 2018 mediante Decreto N.º 3.477 (Gaceta Oficial N.º 41.423). Nace dentro del proyecto de la Misión Alma Mater para territorializar la educación universitaria y acercarla a los sectores más desposeídos.</p>
+        <p>Su sede está en el Complejo Universitario Alma Mater, parroquia Guerrera Ana Soto, municipio Iribarren, Barquisimeto, estado Lara.</p></div>
+      <div><h2>Misión</h2>
+        <p>Construir comunidades de conocimiento y aprendizaje dirigidas a la generación, transformación y apropiación social del conocimiento, en beneficio directo de su área de influencia territorial y el fortalecimiento del poder popular.</p>
+        <h2 style="margin-top:28px">Visión</h2>
+        <p>Consolidarse como institución andragógica y humanista de referencia, enfocada en la transformación social de la Patria. Formar profesionales integrales mediante el intercambio de saberes, contribuyendo a la soberanía tecnológica y al desarrollo sustentable.</p></div>
+    </div></section>`},
+
+  oferta: {t: 'Oferta académica', h: () => cab('Oferta académica', 'Programas de pregrado, postgrado y diplomados.') + `
+    <section><div class="w"><h2>Pregrado</h2>${dl(PREGRADO)}<h2 style="margin-top:36px">Postgrado</h2>${dl(POSTGRADO)}</div></section>`},
+
+  admision: {t: 'Admisión', h: () => cab('Cómo ingresar a la UNELMLK', 'El ingreso se gestiona a través del Sistema Nacional de Ingreso.') + `
+    <section><div class="w"><ol class="pasos">
+      <li><h3>Regístrate en el SNI/OPSU</h3>Crea tu cuenta en la página oficial del Sistema Nacional de Ingreso.</li>
+      <li><h3>Selecciona tus opciones de estudio</h3>Elige el Programa Nacional de Formación de tu preferencia.</li>
+      <li><h3>Espera los resultados de la OPSU</h3>La asignación de cupos la publica la OPSU.</li>
+      <li><h3>Inscríbete en la universidad</h3>Consulta las fechas de inscripción en las redes sociales oficiales de la UNELMLK.</li>
+    </ol>
+    <p class="nota">La universidad también realiza un censo interno en agosto y septiembre.</p></div></section>`},
+
+  contacto: {t: 'Contacto', h: () => cab('Contacto', 'Escríbenos o visítanos.') + `
+    <section><div class="w cols">
+      <div class="dir"><h2>Sede principal, Barquisimeto</h2>
+        <address><p>Complejo Universitario Alma Mater, Edificio Principal, Barrio La Batalla (vía El Tostao, diagonal al Monumento La Estrella), Barquisimeto, estado Lara. Zona postal 3001.</p>
+        <p>Teléfono: <a href="tel:+582514472593">0251-4472593</a></p></address>
+        <h2 style="margin-top:28px">Núcleo Yaracuy</h2>
+        <p>Edificio Los Carrascosa, Yaritagua, estado Yaracuy. Edificación neoclásica de 1861, restaurada, con mención especial en la X Bienal de Arquitectura de Venezuela.</p></div>
+      <form class="c" id="fc" aria-labelledby="ft"><h2 id="ft">Envíanos un mensaje</h2>
+        <label for="n">Nombre completo</label><input id="n" autocomplete="name" required>
+        <label for="e">Correo electrónico</label><input id="e" type="email" autocomplete="email" required>
+        <label for="m">Mensaje</label><textarea id="m" rows="5" required></textarea>
+        <button class="btn d" style="margin-top:18px">Abrir mi correo para enviar</button>
+        <p role="status" id="fs" style="margin-top:10px;color:var(--mut);font-size:.9rem"></p>
+      </form>
+    </div></section>`}
+};
+
+/* ---- Portal académico: Supabase como fuente de verdad ----
+   El navegador conserva una caché de UI en localStorage, pero la autenticación,
+   los usuarios y los datos académicos viven en Supabase. Nunca se almacenan
+   contraseñas ni hashes de contraseñas en el cliente. */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* escAttr: para valores de atributos HTML generados dinámicamente (además de esc, neutraliza acentos graves y saltos de línea) */
+const escAttr = s => esc(s).replace(/`/g, '&#96;').replace(/\r?\n/g, ' ');
+const LS = {
+  g: (k, d) => { try { const v = localStorage.getItem('pt_' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  s: (k, v) => { try { localStorage.setItem('pt_' + k, JSON.stringify(v)); } catch (e) {} }
+};
+let USUARIOS = [];
+const guardarU = () => setLocal('usuarios', USUARIOS);
+/* Catálogos editables por el administrador desde Portal > Catálogos (se guardan en el navegador) */
+const CAT0 = {
+  carreras: [],
+  unidades: [],
+  aulas: [],
+  periodos: [],
+  secciones: []
+};
+const cat = k => LS.g(k, CAT0[k]);
+let UNIDADES = cat('unidades'); /* [código, nombre, trimestre del plan, carrera] */
+const perDe = un => { const P = cat('periodos'), x = UNIDADES.find(y => y[0] === un); return P[((x && x[2]) || 1) - 1] || P[0]; };
+const mig = o => Object.fromEntries(Object.entries(o).map(([c, m]) => [c, Object.fromEntries(Object.entries(m).map(([u, v]) => [u + '|' + perDe(u), v]))]));
+let NOTAS_MEM = null, OBS_MEM = null; /* se cargan y migran UNA sola vez en cargarMem() */
+const notas = () => NOTAS_MEM;
+const guardarNotas = () => LS.s('hnotas', NOTAS_MEM);
+const sesion = () => { try { return JSON.parse(sessionStorage.getItem('pt_ses')); } catch (e) { return null; } };
+function limpiarSesionCompleta(){
+  try { Object.keys(localStorage).filter(k => /^pt_(usuarios|noticias|carreras|carreras_meta|unidades|aulas|aulas_meta|periodos|periodos_meta|secciones|secciones_meta|hnotas|hobs|horarios|asigs|asis|chat|sols)$/.test(k)).forEach(k => localStorage.removeItem(k)); } catch (e) {}
+  try { sessionStorage.clear(); } catch (e) {}
+  location.hash = '#/'; location.reload();
+}
+/* CSV: escape de celdas (comillas, comas, saltos de línea) y protección contra fórmulas de Excel (=, +, -, @) */
+const csvCell = v => { let t = String(v ?? ''); if (/^[=+\-@\t\r]/.test(t) && isNaN(Number(t))) t = "'" + t; return /[",;\r\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+function descargarCSV(nombre, rows){
+  const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob(['\ufeff' + rows.map(r => r.map(csvCell).join(',')).join('\r\n')], {type: 'text/csv;charset=utf-8'}));
+  l.download = nombre; document.body.appendChild(l); l.click(); l.remove(); setTimeout(() => URL.revokeObjectURL(l.href), 1000);
+}
+/* Separa una línea CSV respetando comillas; el separador puede ser coma, punto y coma o tabulador */
+function csvSplit(l){
+  const d = l.includes('\t') ? '\t' : (l.split(';').length > l.split(',').length ? ';' : ','), out = []; let cur = '', q = false;
+  for (let i = 0; i < l.length; i++) { const ch = l[i];
+    if (q) { if (ch === '"') { if (l[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; }
+    else if (ch === '"') q = true; else if (ch === d) { out.push(cur.trim()); cur = ''; } else cur += ch; }
+  out.push(cur.trim()); return out;
+}
+const tabla = (cab, filas) => `<div class="tw"><table><thead><tr>${cab.map(c => `<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${filas.join('')}</tbody></table></div>`;
+
+const rnd = () => [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+const bit = t => { const b = LS.g('bitacora', []); b.unshift(new Date().toLocaleString('es-VE') + ' - ' + t); LS.s('bitacora', b.slice(0, 30)); };
+const yo = () => { const id = (sesion() || {}).id; return USUARIOS.find(x => x.id === id && x.activo !== false && !x.baneado); };
+const inNota = (c, un, v) => `<input type="number" min="0" max="20" data-c="${c}" data-u="${escAttr(un[0])}" data-p="${escAttr(curPer())}" value="${v ?? ''}" aria-label="Nota de ${escAttr(un[1])}">`;
+
+const DIAS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+const horarios = () => LS.g('horarios', []).map(h => Object.assign({tema: '', prof: ''}, h));
+const obs = () => OBS_MEM;
+function cargarMem(){
+  UNIDADES = cat('unidades');
+  let n = LS.g('hnotas', {});
+  let o = LS.g('hobs', {});
+  NOTAS_MEM = n || {}; OBS_MEM = o || {};
+}
+cargarMem();
+const sec = u => `${u.carrera}|${u.seccion}`;
+const nomSec = x => x.replace('|', ', sección ');
+const chip = (t, c = '') => `<span class="chip ${c}">${esc(t)}</span>`;
+const chips = u => chip(u.rol, u.rol === 'admin' ? 'a' : 'r') + (u.rol === 'estudiante' ? chip(u.carrera) + chip('Sección ' + u.seccion) : u.rol === 'profesor' ? secsDe(u).map(x => chip(nomSec(x))).join('') : '');
+const todasSecs = () => [...new Set([
+  ...USUARIOS.filter(x => x.rol === 'estudiante' && x.carrera && x.seccion).map(sec), /* secciones de estudiantes */
+  ...asigsAll().map(a => a.sec),                                                        /* secciones de asignaciones */
+  ...cat('secciones'),                                                                  /* secciones del catálogo */
+  ...horarios().map(h => h.sec)                                                         /* secciones de horarios */
+].filter(x => typeof x === 'string' && x.includes('|') && !x.startsWith('|') && !x.endsWith('|')))].sort((a, b) => a.localeCompare(b, 'es'));
+const nombreUnidad = c => (UNIDADES.find(x => x[0] === c) || [c, c])[1];
+const opts = (l, sel) => l.map(x => `<option value="${escAttr(x)}" ${x === sel ? 'selected' : ''}>${esc(x)}</option>`).join('');
+
+function salas(u){
+  const R = [{id:'general', n:'General'}], cs = new Set(), ss = new Set();
+  if (u.rol === 'estudiante') { cs.add(u.carrera); ss.add(sec(u)); }
+  else if (u.rol === 'profesor') secsDe(u).forEach(x => { ss.add(x); cs.add(x.split('|')[0]); });
+  else todasSecs().forEach(x => { ss.add(x); cs.add(x.split('|')[0]); });
+  [...cs].sort().forEach(c => R.push({id:'c:' + c, n:'Carrera: ' + c}));
+  [...ss].sort().forEach(x => R.push({id:'s:' + x, n:nomSec(x)}));
+  return R;
+}
+
+const curPer = () => { const P = cat('periodos'), v = sessionStorage.getItem('pt_per'), a = localStorage.getItem('pt_periodo_actual'); return P.includes(v) ? v : P.includes(a) ? a : P[P.length - 1] || ''; };
+const carrerasMeta = () => LS.g('carreras_meta', []);
+const seccionesMeta = () => LS.g('secciones_meta', []);
+const salonesMeta = () => LS.g('aulas_meta', []);
+const periodosMeta = () => LS.g('periodos_meta', []);
+const unidadesDeSec = secV => { const carrera = String(secV || '').split('|')[0]; const own = UNIDADES.filter(x => x[3] === carrera); return own.length ? own : UNIDADES; };
+const nombrePeriodo = c => (periodosMeta().find(x => x.codigo === c) || {}).nombre || c;
+const prom = l => l.length ? (l.reduce((a, b) => a + b, 0) / l.length).toFixed(1) : '—';
+const selPer = () => `<label for="pp" style="display:inline;margin-right:8px">Período</label><select id="pp">${opts(cat('periodos'), curPer())}</select>`;
+function histHtml(t){
+  const n = notas()[t.ced] || {}, ob = obs()[t.ced] || {}, P = cat('periodos');
+  const R = Object.entries(n).map(([k, v]) => { const [un, per] = k.split('|'); return {k, un, per, v}; })
+    .sort((a, b) => P.indexOf(a.per) - P.indexOf(b.per) || a.un.localeCompare(b.un));
+  if (!R.length) return '<p class="vacio">Aún no hay calificaciones registradas.</p>';
+  const filas = [...new Set(R.map(r => r.per))].flatMap(p => { const g = R.filter(r => r.per === p);
+    return g.map(r => `<tr><td>${esc(p)}</td><td>${esc(nombreUnidad(r.un))}</td><td>${r.v}</td><td>${esc(ob[r.k] || '')}</td></tr>`)
+      .concat(`<tr><td colspan="2"><b>Promedio del período ${esc(p)}</b></td><td><b>${prom(g.map(r => r.v))}</b></td><td></td></tr>`); });
+  return tabla(['Período','Unidad curricular','Nota','Observación del profesor'], filas) +
+    `<p>Promedio global (calculado automáticamente): <b>${prom(R.map(r => r.v))}</b> sobre 20, en ${R.length} unidades curriculares.</p>`;
+}
+function cuerpoDe(u){
+  if (u.rol === 'estudiante') return `<p>${chips(u)}</p><h2>Historial de calificaciones</h2>${histHtml(u)}`;
+  if (u.rol === 'profesor') {
+    const n = notas(), ob = obs(), per = curPer();
+    return `<p>${chips(u)}</p><div class="bar"><span>${selPer()}</span></div>` + (asigsDe(u).map(a => { const un = UNIDADES.find(x => x[0] === a.unidad); if (!un) return '';
+      const est = USUARIOS.filter(x => x.rol === 'estudiante' && !x.baneado && sec(x) === a.sec), k = a.unidad + '|' + per;
+      return `<h2>${esc(un[1])}, ${esc(nomSec(a.sec))}</h2>` + tabla(['Estudiante','Cédula','Nota (0 a 20)','Observación'], est.map(e => `<tr><td>${esc(e.nombre)}<br>${chips(e)}</td><td>${e.ced}</td><td>${inNota(e.ced, un, (n[e.ced] || {})[k])}</td>
+        <td><input data-o="${e.ced}" data-u="${escAttr(a.unidad)}" data-p="${escAttr(per)}" maxlength="200" value="${escAttr((ob[e.ced] || {})[k] || '')}" aria-label="Observación para ${escAttr(e.nombre)}"></td></tr>`)); }).join('') || '<p class="vacio">Sin asignaciones. Pide al administrador que te asigne unidades y secciones.</p>');
+  }
+  return `<p>${chips(u)}</p>`;
+}
+
+const H24 = [...Array(24).keys()], hhmm = n => String(n).padStart(2, '0') + ':00', mins = t => { const [a, b] = String(t).split(':'); return +a * 60 + +(b || 0); };
+const nomProf = c => (USUARIOS.find(x => x.ced === c) || {nombre: c || 'Sin asignar'}).nombre;
+const ordenH = (a, b) => DIAS.indexOf(a.dia) - DIAS.indexOf(b.dia) || a.ini.localeCompare(b.ini);
+const COLH = ['Sección','Unidad','Día','Inicio','Fin','Tema','Profesor','Aula',''];
+const canEd = (u, h) => u.rol === 'admin' || (u.rol === 'profesor' && (h.prof === u.ced || (!h.prof && tieneAsig(u, h.sec, h.unidad))));
+function choque(n){
+  const per=n.periodo||curPer(), sol=(a,b)=>a.dia===b.dia&&a.id!==b.id&&(b.periodo||curPer())===per&&mins(a.ini)<mins(b.fin)&&mins(b.ini)<mins(a.fin);
+  const det=h=>`«${nombreUnidad(h.unidad)}» (${nomSec(h.sec)}), ${h.dia} de ${h.ini} a ${h.fin}${h.aula?', salón '+h.aula:''}`;
+  const M=[];for(const h of horarios()){if(!sol(n,h))continue;
+    if(h.sec===n.sec)M.push('Conflicto de SECCIÓN: '+nomSec(n.sec)+' ya tiene '+det(h)+'.');
+    if(n.prof&&h.prof===n.prof)M.push('Conflicto de PROFESOR: '+nomProf(n.prof)+' ya dicta '+det(h)+(h.sec.split('|')[0]!==n.sec.split('|')[0]?' (en otra carrera)':'')+'.');
+    if(n.aula&&h.aula===n.aula)M.push('Conflicto de SALÓN: '+n.aula+' ya está ocupado por '+det(h)+'.');}
+  return M.join('\n');
+}
+function grid(L, modo){
+  return `<div class="tw"><table class="gr"><thead><tr><th scope="col">Hora</th>${DIAS.map(d => `<th scope="col">${d}</th>`).join('')}</tr></thead><tbody>${H24.map(h => `<tr><th scope="row">${hhmm(h)}</th>${DIAS.map(d =>
+    `<td>${L.filter(x => x.dia === d && mins(x.ini) < (h + 1) * 60 && mins(x.fin) > h * 60).map(x => Math.floor(mins(x.ini) / 60) === h
+      ? `<div class="cl"><b>${esc(nombreUnidad(x.unidad))}</b><small>${esc(x.ini)} a ${esc(x.fin)}${x.tema ? ' · ' + esc(x.tema) : ''}<br>${esc(modo === 'doc' ? nomSec(x.sec) : nomProf(x.prof))} · ${esc(x.aula)}</small></div>`
+      : `<div class="cl cont">↓ ${esc(x.unidad)}</div>`).join('')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function filaH(h, u, ro){
+  const adm = u.rol === 'admin' && !ro, ed = !ro && canEd(u, h), at = k => `data-h="${h.id}" data-f="${k}" aria-label="${k}"`;
+  const sl = (k, html, txt) => ed ? `<select ${at(k)}>${html}</select>` : esc(txt);
+  const inp = (k, t, v) => ed ? `<input type="${t}" ${at(k)} value="${escAttr(v)}"${k === 'tema' ? ' maxlength="160"' : ''}>` : esc(v);
+  return `<tr><td>${esc(nomSec(h.sec))}</td>
+    <td>${adm ? `<select ${at('unidad')}>${UNIDADES.map(x => `<option value="${escAttr(x[0])}" ${x[0] === h.unidad ? 'selected' : ''}>${esc(x[0] + ' · ' + x[1])}</option>`).join('')}</select>` : esc(nombreUnidad(h.unidad))}</td>
+    <td>${sl('dia', opts(DIAS, h.dia), h.dia)}</td><td>${inp('ini', 'time', h.ini)}</td><td>${inp('fin', 'time', h.fin)}</td><td>${inp('tema', 'text', h.tema || '')}</td>
+    <td>${adm ? `<select ${at('prof')}><option value="">Sin asignar</option>${USUARIOS.filter(x => x.rol === 'profesor').map(p => `<option value="${p.ced}" ${p.ced === h.prof ? 'selected' : ''}>${esc(p.nombre)}</option>`).join('')}</select>` : esc(nomProf(h.prof))}</td>
+    <td>${sl('aula', opts([...new Set([...cat('aulas'), h.aula])], h.aula), h.aula)}</td>
+    <td>${adm ? `<button class="btn d sm ac" data-a="dh" data-i="${h.id}">Quitar</button>` : ''}</td></tr>`;
+}
+const formH = cur => {
+  const units = unidadesDeSec(cur);
+  return `<h2 style="margin-top:24px">Agregar clase · ${esc(curPer())}</h2><form class="c" id="fh" style="max-width:620px">
+  <label for="hs">Sección</label><select id="hs">${opts(todasSecs(),cur)}</select>
+  <label for="hu">Unidad curricular</label><select id="hu">${units.length ? units.map(x=>`<option value="${escAttr(x[0])}">${esc(x[0]+' · '+x[1])}</option>`).join('') : '<option value="">No hay unidades curriculares para esta carrera</option>'}</select>
+  <label for="hd">Día</label><select id="hd">${opts(DIAS)}</select>
+  <label for="hi">Hora de inicio</label><input id="hi" type="time" value="08:00" required>
+  <label for="hf">Hora de fin</label><input id="hf" type="time" value="10:00" required>
+  <label for="ht">Tema de la clase</label><input id="ht" maxlength="160">
+  <label for="hp">Profesor</label><select id="hp"><option value="">Sin asignar</option>${USUARIOS.filter(x=>x.rol==='profesor'&&x.activo&&!x.baneado).map(p=>`<option value="${p.ced}">${esc(p.nombre)}</option>`).join('')}</select>
+  <label for="ha">Salón</label><select id="ha"><option value="">Sin asignar</option>${opts(cat('aulas'))}</select>
+  <p class="err" id="hm" role="alert" style="margin-top:8px;white-space:pre-line"></p><button class="btn d" ${units.length?'':'disabled'} style="margin-top:12px">Agregar al horario</button></form>`;
+};
+function horHtml(u){
+  const adm=u.rol==='admin', staff=u.rol!=='estudiante', periodo=curPer(), H=horarios();
+  const secs=!staff?[sec(u)]:adm?todasSecs():secsDe(u);
+  if(!secs.length) return '<p class="vacio">No hay secciones disponibles. Créalas en Sistema y asígnalas antes de programar clases.</p>';
+  let cur=sessionStorage.getItem('pt_hsec');if(!secs.includes(cur))cur=secs[0];
+  const L=H.filter(h=>h.sec===cur&&(h.periodo||periodo)===periodo).sort(ordenH);
+  return `<h2>Horario semanal</h2><div class="bar"><span>${selPer()}</span>${staff?`<span><label for="hsel" style="display:inline;margin-right:8px">Sección</label><select id="hsel">${secs.map(x=>`<option value="${escAttr(x)}" ${x===cur?'selected':''}>${esc(nomSec(x))}</option>`).join('')}</select></span>`:`<span>${chips(u)}</span>`}</div>
+    <p class="nota">Período seleccionado: <b>${esc(nombrePeriodo(periodo))}</b> (${esc(periodo)}). Los datos de esta pantalla provienen de Supabase.</p>
+    ${grid(L,'sec')}
+    ${staff?`<h2 style="margin-top:24px">Clases de la sección</h2>${L.length?tabla(COLH,L.map(h=>filaH(h,u))):'<p class="vacio">Esta sección no tiene clases en este período.</p>'}${adm?formH(cur):'<p class="nota">Solo los administradores agregan clases; los profesores pueden editar día, horas, tema y salón de las clases que les corresponden.</p>'}`:''}`;
+}
+function docHtml(u){
+  if (u.rol === 'estudiante') return '';
+  const P = USUARIOS.filter(x => x.rol === 'profesor' && !x.baneado);
+  if (!P.length) return '<p class="vacio">No hay profesores registrados.</p>';
+  let c = sessionStorage.getItem('pt_dp'); if (!P.some(p => p.ced === c)) c = P.some(p => p.ced === u.ced) ? u.ced : P[0].ced;
+  const p = P.find(x => x.ced === c), L = horarios().filter(h => h.prof === c && (h.periodo || curPer()) === curPer()).sort(ordenH), ro = !(c === u.ced || u.rol === 'admin');
+  return `<h2>Horario docente</h2><div class="bar"><span>${selPer()}</span><span><label for="dsel" style="display:inline;margin-right:8px">Profesor</label><select id="dsel">${P.map(x => `<option value="${x.ced}" ${x.ced === c ? 'selected' : ''}>${esc(x.nombre)}${x.ced === u.ced ? ' (yo)' : ''}</option>`).join('')}</select></span></div>
+    <p>${chips(p)}</p><p class="nota" style="margin-top:0">Este horario solo lo ven profesores y administradores. ${ro ? 'Estás en modo lectura.' : 'Puedes editar día, horas, tema y salón.'}</p>
+    <h3>Unidades curriculares y carreras que imparte</h3><p>${asigsDe(p).map(a => chip(nombreUnidad(a.unidad) + ' · ' + nomSec(a.sec))).join('') || 'Sin asignaciones.'}</p>` +
+    grid(L, 'doc') + (L.length ? tabla(COLH, L.map(h => filaH(h, u, ro))) : '<p class="vacio">Este profesor no tiene clases en el horario. El administrador las agrega desde Horarios.</p>');
+}
+
+function chatHtml(u){
+  const R=salas(u);let sel=sessionStorage.getItem('pt_sala');if(!R.some(r=>r.id===sel))sel='general';
+  const msgs=LS.g('chat',[]).filter(m=>m.sala===sel),mod=u.rol==='admin';
+  return `<div class="bar"><span><label for="sa" style="display:inline;margin-right:8px">Sala</label><select id="sa">${R.map(r=>`<option value="${escAttr(r.id)}" ${r.id===sel?'selected':''}>${esc(r.n)}</option>`).join('')}</select></span><span id="rtstate" role="status" aria-live="polite">○ Conectando…</span>
+    ${mod?'<button class="btn d sm ac" data-a="vaciar">Vaciar sala</button>':''}</div>
+    <div class="chatbox" id="cl" role="log" aria-live="polite">${msgs.map(m=>{const a=USUARIOS.find(x=>x.ced===m.ced)||{rol:'',nombre:m.nombre||m.ced};return `<div class="msg ${m.aviso?'av':''}"><div><b>${esc(m.nombre||a.nombre||'Usuario')}</b> ${a.rol?chips(a):''}${m.aviso?chip('Aviso','a'):''}<small>${new Date(m.ts).toLocaleString('es-VE')}</small>${(mod||m.ced===u.ced)?` <button class="btn d sm ac" data-a="dm" data-i="${m.id}">Borrar</button>`:''}</div><p>${esc(m.texto)}</p></div>`;}).join('')||'<p class="vacio">Aún no hay mensajes en esta sala.</p>'}</div>
+    ${u.silenciado?'<p class="vacio">Tu cuenta está silenciada por la administración.</p>':`<form class="cf" id="fch"><input type="text" id="ct" maxlength="2000" required aria-label="Mensaje"><button class="btn d">Enviar</button>${mod?'<label style="margin:0"><input type="checkbox" id="cav" style="width:auto"> Marcar como aviso</label>':''}</form>`}`;
+}
+
+/* Operación especial: cambia la cédula y actualiza TODAS las referencias (notas, asistencia, asignaciones, horarios, chat, solicitudes) */
+async function cambiarCedula(t){
+  const nueva=(prompt('Cédula actual: '+t.ced+'\nEscribe la NUEVA cédula (6 a 12 dígitos):','')||'').trim();
+  if(!nueva)return;
+  if(!/^\d{6,12}$/.test(nueva))return alert('La cédula debe tener entre 6 y 12 dígitos.');
+  if(nueva===t.ced)return alert('La nueva cédula es igual a la actual.');
+  if(USUARIOS.some(x=>x.ced===nueva))return alert('Ya existe una cuenta con esa cédula.');
+  if(!confirm('Cambiar la cédula de '+t.nombre+' de '+t.ced+' a '+nueva+'?'))return;
+  try{
+    const {data,error}=await SB.functions.invoke('admin-usuarios',{body:{accion:'cambiar_cedula',id:t.id,cedula:nueva}});
+    if(error)throw error;if(data?.error)throw new Error(data.error);
+    if(sessionStorage.getItem('pt_ver')===t.ced)sessionStorage.setItem('pt_ver',nueva);
+    if(sessionStorage.getItem('pt_edit')===t.ced)sessionStorage.setItem('pt_edit',nueva);
+    await cargarSupabase();ir();
+  }catch(err){alert('No se pudo cambiar la cédula: '+(err.message||err));}
+}
+
+function editHtml(t, propio){
+  const n = notas()[t.ced] || {}, per = curPer(), campo = (id, et, v, x = '') => `<label for="${id}">${et}</label><input id="${id}" value="${escAttr(v ?? '')}" ${x}>`;
+  const us = UNIDADES.filter(x => x[3] === t.carrera), U = us.length ? us : UNIDADES;
+  return `<p><button class="btn d sm ac" data-a="volver">Volver al panel</button></p><h2>Editar a ${esc(t.nombre)} (${t.ced})</h2><p>${chips(t)}</p>
+    <form class="c" id="fed" data-e="${t.ced}" style="max-width:560px">
+    ${campo('en', 'Nombre completo', t.nombre, 'required')}
+    ${campo('ec', 'Cédula (solo lectura)', t.ced, 'readonly aria-readonly="true"')}
+    <label for="er">Rol</label><select id="er" ${propio ? 'disabled' : ''}>${opts(['estudiante','profesor','admin'], t.rol)}</select>
+    ${t.rol === 'estudiante' ? `<label for="eca">Carrera</label><select id="eca">${opts([...new Set([...cat('carreras'), t.carrera])], t.carrera)}</select>` + campo('ese', 'Sección', t.seccion) + campo('etr', 'Trayecto', t.trayecto, 'type="number" min="1" max="4"') + campo('eti', 'Trimestre', t.trimestre, 'type="number" min="1" max="12"') : ''}
+    ${t.rol === 'profesor' ? '<p>Las unidades y secciones de este profesor se gestionan en la pestaña Asignaciones.</p>' : ''}
+    <label for="ep">Nueva contraseña (opcional, mínimo 8 caracteres)</label><input id="ep" type="password" autocomplete="new-password">
+    <p class="err" id="em" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Guardar cambios</button></form>
+    <p style="margin-top:14px"><button class="btn d sm ac" data-a="cc" data-c="${t.ced}">Cambiar cédula (operación especial)</button></p>
+    ${t.rol === 'estudiante' ? `<h2 style="margin-top:28px">Cargar calificaciones</h2><div class="bar"><span>${selPer()}</span></div>` + tabla(['Unidad','Nota'], U.map(x => `<tr><td>${esc(x[1])}</td><td>${inNota(t.ced, x, n[x[0] + '|' + per])}</td></tr>`)) + '<h2>Historial</h2>' + histHtml(t) : ''}`;
+}
+
+function usrHtml(){
+  const ver = USUARIOS.find(x => x.ced === sessionStorage.getItem('pt_ver')), ed = USUARIOS.find(x => x.ced === sessionStorage.getItem('pt_edit'));
+  if (ver) return `<p><button class="btn d sm ac" data-a="volver">Volver al panel</button></p><h2>Viendo el perfil de ${esc(ver.nombre)}${ver.baneado ? ' <span class="err">(suspendida)</span>' : ''}</h2>` + cuerpoDe(ver);
+  if (ed) return editHtml(ed, ed.ced === (yo() || {}).ced);
+  const me = (yo() || {}).ced, cnt = r => USUARIOS.filter(x => x.rol === r).length;
+  return `<p>${cnt('estudiante')} estudiantes, ${cnt('profesor')} profesores, ${LS.g('chat', []).length} mensajes en los chats.</p><h2>Usuarios</h2>${tabla(['Cédula','Nombre','Identificación','Estado','Acciones'], USUARIOS.map(x => `<tr><td>${x.ced}</td><td>${esc(x.nombre)}</td><td>${chips(x)}</td>
+    <td>${x.baneado ? '<b class="err">Suspendida</b>' : x.silenciado ? '<b class="err">Silenciada</b>' : 'Activa'}</td><td style="white-space:nowrap">
+    <button class="btn d sm ac" data-a="ver" data-c="${x.ced}">Ver perfil</button><button class="btn d sm ac" data-a="edit" data-c="${x.ced}">Editar</button>
+    ${x.ced === me ? '' : `<button class="btn d sm ac" data-a="mute" data-c="${x.ced}">${x.silenciado ? 'Dar voz' : 'Silenciar'}</button><button class="btn d sm ac" data-a="ban" data-c="${x.ced}">${x.baneado ? 'Reactivar' : 'Suspender'}</button><button class="btn d sm ac" data-a="del" data-c="${x.ced}">Eliminar</button>`}</td></tr>`))}
+    <h2>Crear cuenta</h2><form class="c" id="fcu" style="max-width:560px">
+    <label for="uc">Cédula (solo números)</label><input id="uc" inputmode="numeric" required><label for="un">Nombre completo</label><input id="un" required>
+    <label for="ur">Rol</label><select id="ur">${opts(['estudiante','profesor','admin'])}</select>
+    <label for="uca">Carrera (estudiantes)</label><select id="uca">${opts(cat('carreras'), 'Psicología Social')}</select><label for="use">Sección</label><input id="use" value="A">
+    <label for="utr">Trayecto</label><input id="utr" type="number" min="1" max="4" value="1"><label for="uti">Trimestre</label><input id="uti" type="number" min="1" max="12" value="1">
+    <label for="up">Contraseña inicial (mínimo 8 caracteres)</label><input id="up" type="password" autocomplete="new-password" required>
+    <p class="err" id="um" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Crear cuenta</button></form>`;
+}
+
+function cmsHtml(){
+  return `<h2>Publicar noticia</h2><form class="c" id="fn" style="max-width:560px"><label for="nt">Título</label><input id="nt" required>
+    <label for="nx">Texto</label><textarea id="nx" rows="4" required></textarea><button class="btn d" style="margin-top:16px">Publicar en el inicio</button></form>
+    <h2 style="margin-top:28px">Noticias publicadas</h2>${NOTICIAS.length ? NOTICIAS.map((x, i) => `<p style="margin-bottom:8px">${esc(x.titulo)} <button class="btn d sm dn" data-i="${i}">Eliminar</button></p>`).join('') : '<p class="vacio">No hay noticias.</p>'}
+    <h2 style="margin-top:28px">Bitácora de acciones</h2>${LS.g('bitacora', []).map(x => `<p style="font-size:.88rem;color:var(--mut)">${esc(x)}</p>`).join('') || '<p class="vacio">Sin acciones registradas.</p>'}`;
+}
+
+const TIPOS = ['Constancia de estudios','Constancia de notas','Reclamo de calificación','Cambio de sección','Justificativo médico','Reposición de evaluación','Solicitud de beca'];
+const sols = () => LS.g('sols', []);
+const asigsAll = () => { let a = LS.g('asigs', null);
+  if (!a) { a = USUARIOS.filter(x => x.rol === 'profesor').flatMap(p => (p.secciones || []).flatMap(s => (p.unidades || []).map(un => ({id: rnd(), prof: p.ced, sec: s, unidad: un})))); LS.s('asigs', a); }
+  return a; };
+const asigsDe = u => asigsAll().filter(a => a.prof === u.ced);
+const secsDe = u => [...new Set(asigsDe(u).map(a => a.sec))].sort();
+const unsDe = u => [...new Set(asigsDe(u).map(a => a.unidad))];
+const tieneAsig = (u, s, un) => asigsDe(u).some(a => a.sec === s && a.unidad === un);
+const puede = (u, ced, un) => { const e = USUARIOS.find(x => x.ced === ced); return !!e && tieneAsig(u, sec(e), un); };
+const TABS = {estudiante: [['perfil','Mis notas'],['hor','Horario'],['asis','Asistencia'],['sol','Solicitudes'],['chat','Chats']],
+  profesor: [['notas','Notas y estudiantes'],['asis','Asistencia'],['hor','Horarios'],['doc','Horario docente'],['chat','Chats']],
+  admin: [['usr','Usuarios'],['bd','Base de datos'],['hor','Horarios'],['doc','Horarios docentes'],['sol','Solicitudes'],['chat','Chats'],['asg','Asignaciones'],['cms','Noticias y bitácora'],['sis','Sistema']]};
+
+function solHtml(u){
+  const L = sols().sort((a, b) => b.ts - a.ts);
+  if (u.rol === 'admin') return `<h2>Solicitudes (${L.length})</h2>` + (L.length ? tabla(['Fecha','Estudiante','Tipo y motivo','Estado','Acciones'], L.map(s => { const e = USUARIOS.find(x => x.ced === s.ced) || {nombre: s.ced};
+    return `<tr><td>${new Date(s.ts).toLocaleDateString('es-VE')}</td><td>${esc(e.nombre)}<br>${e.rol ? chips(e) : ''}</td><td><b>${esc(s.tipo)}</b><br>${esc(s.texto)}${s.resp ? `<br><i>Respuesta: ${esc(s.resp)}</i>` : ''}</td><td>${chip(s.estado, s.estado === 'Aprobada' ? 'a' : s.estado === 'En proceso' ? 'r' : '')}</td>
+    <td style="white-space:nowrap">${['Aprobada','En proceso','Rechazada'].map(x => `<button class="btn d sm ac" data-a="sr" data-i="${s.id}" data-c="${x}">${x}</button>`).join('')}</td></tr>`; })) : '<p class="vacio">No hay solicitudes.</p>');
+  const mias = L.filter(s => s.ced === u.ced);
+  return `<h2>Nueva solicitud</h2><form class="c" id="fso" style="max-width:560px"><label for="sot">Tipo</label><select id="sot">${opts(TIPOS)}</select>
+    <label for="som">Motivo</label><textarea id="som" rows="4" required></textarea><button class="btn d" style="margin-top:14px">Enviar solicitud</button></form>
+    <h2 style="margin-top:28px">Mis solicitudes</h2>` + (mias.length ? mias.map(s => `<p style="margin-bottom:10px"><b>${esc(s.tipo)}</b> ${chip(s.estado, s.estado === 'Aprobada' ? 'a' : s.estado === 'En proceso' ? 'r' : '')}<br>${esc(s.texto)}${s.resp ? `<br><i>Respuesta: ${esc(s.resp)}</i>` : ''}</p>`).join('') : '<p class="vacio">No has enviado solicitudes.</p>');
+}
+
+function asisHtml(u){
+  const A = LS.g('asis', {});
+  if (u.rol === 'estudiante') {
+    const filas = UNIDADES.map(x => { const ses = Object.entries(A).filter(([k, v]) => k.startsWith(x[0] + '|') && v[u.ced]), c = t => ses.filter(([k, v]) => v[u.ced] === t).length;
+      return ses.length ? `<tr><td>${esc(x[1])}</td><td>${ses.length}</td><td>${c('P')}</td><td>${c('A')}</td><td>${c('J')}</td><td>${Math.round((c('P') + c('J')) / ses.length * 100)}%</td></tr>` : ''; }).join('');
+    return '<h2>Mi asistencia</h2>' + (filas ? tabla(['Unidad','Clases','Presente','Ausente','Justificado','Asistencia'], [filas]) : '<p class="vacio">Aún no hay asistencia registrada.</p>');
+  }
+  const AS = asigsDe(u); if (!AS.length) return '<p class="vacio">No tienes asignaciones.</p>';
+  const cur = AS.find(a => a.id === sessionStorage.getItem('pt_au')) || AS[0], fe = sessionStorage.getItem('pt_af') || new Date().toISOString().slice(0, 10);
+  const reg = A[cur.unidad + '|' + fe] || {}, est = USUARIOS.filter(x => x.rol === 'estudiante' && !x.baneado && sec(x) === cur.sec);
+  return `<h2>Pasar lista</h2><div class="bar"><span><label for="au" style="display:inline">Clase </label><select id="au">${AS.map(a => `<option value="${a.id}" ${a.id === cur.id ? 'selected' : ''}>${esc(nombreUnidad(a.unidad))}, ${esc(nomSec(a.sec))}</option>`).join('')}</select></span>
+    <span><label for="af" style="display:inline">Fecha </label><input id="af" type="date" value="${fe}" style="width:auto"></span></div>` +
+    tabla(['Estudiante','Asistencia'], est.map(e => `<tr><td>${esc(e.nombre)}<br>${chips(e)}</td><td><select data-as="${e.ced}" aria-label="Asistencia de ${escAttr(e.nombre)}">${[['','Sin registrar'],['P','Presente'],['A','Ausente'],['J','Justificado']].map(([v, t]) => `<option value="${v}" ${(reg[e.ced] || '') === v ? 'selected' : ''}>${t}</option>`).join('')}</select></td></tr>`));
+}
+
+function catHtml(){
+  const cs = cat('carreras'), U = UNIDADES, SM = seccionesMeta(), AM = salonesMeta(), PM = periodosMeta();
+  const careerRows = carrerasMeta().map(x => `<tr><td>${esc(x.codigo)}</td><td>${esc(x.nombre)}</td><td style="white-space:nowrap"><button class="btn d sm ac" data-a="ecat" data-k="carrera" data-i="${escAttr(x.nombre)}">Editar</button><button class="btn d sm ac" data-a="dcat" data-k="carrera" data-i="${escAttr(x.nombre)}">Eliminar</button></td></tr>`).join('');
+  const secRows = SM.map((x,i) => `<tr><td>${esc(x.carrera)}</td><td>${esc(x.codigo)}</td><td>${esc(x.nombre)}</td><td style="white-space:nowrap"><button class="btn d sm ac" data-a="ecat" data-k="seccion" data-i="${i}">Editar</button><button class="btn d sm ac" data-a="dcat" data-k="seccion" data-i="${i}">Eliminar</button></td></tr>`).join('');
+  const unitRows = U.map((x,i) => `<tr><td>${esc(x[0])}</td><td>${esc(x[1])}</td><td>${esc(x[3]||'')}</td><td>${x[4]||1}</td><td>${x[2]||1}</td><td>${x[5]||1}</td><td style="white-space:nowrap"><button class="btn d sm ac" data-a="ecat" data-k="unidad" data-i="${i}">Editar</button><button class="btn d sm ac" data-a="dcat" data-k="unidad" data-i="${i}">Eliminar</button></td></tr>`).join('');
+  const roomRows = AM.map((x,i) => `<tr><td>${esc(x.nombre)}</td><td style="white-space:nowrap"><button class="btn d sm ac" data-a="ecat" data-k="salon" data-i="${i}">Editar</button><button class="btn d sm ac" data-a="dcat" data-k="salon" data-i="${i}">Eliminar</button></td></tr>`).join('');
+  const periodRows = PM.map((x,i) => `<tr><td>${esc(x.codigo)}</td><td>${esc(x.nombre)}</td><td>${x.activo ? 'Activo' : 'Inactivo'}</td><td style="white-space:nowrap"><button class="btn d sm ac" data-a="eperiodo" data-i="${i}">${x.activo ? 'Activo' : 'Activar'}</button><button class="btn d sm ac" data-a="ecat" data-k="periodo" data-i="${i}">Editar nombre</button><button class="btn d sm ac" data-a="dcat" data-k="periodo" data-i="${i}">Eliminar</button></td></tr>`).join('');
+  const form=(tipo,html,btn)=>`<form class="c fcat" data-k="${tipo}" style="max-width:620px;margin-bottom:12px">${html}<button class="btn d" style="margin-top:12px">${btn}</button></form>`;
+  return `<h2>Sistema y catálogos académicos</h2><p class="nota">Aquí se administran las estructuras que utiliza el portal: carreras, secciones, unidades curriculares, salones y períodos. Los cambios se guardan en Supabase.</p>
+    <h3>Carreras</h3>${careerRows ? tabla(['Código','Nombre','Acciones'],careerRows) : '<p class="vacio">No hay carreras.</p>'}
+    ${form('carreras','<label>Nombre de la carrera<input name="nombre" maxlength="120" required></label>','Agregar carrera')}
+    <h3>Secciones</h3>${secRows ? tabla(['Carrera','Código','Nombre','Acciones'],secRows) : '<p class="vacio">No hay secciones.</p>'}
+    ${form('secciones','<label>Carrera<select name="carrera">'+opts(cs)+'</select></label><label>Código de sección<input name="letra" maxlength="6" required></label>','Agregar sección')}
+    <h3>Unidades curriculares</h3>${unitRows ? tabla(['Código','Nombre','Carrera','Trayecto','Trimestre','UC','Acciones'],unitRows) : '<p class="vacio">No hay unidades curriculares.</p>'}
+    ${form('unidades','<label>Código<input name="cod" maxlength="30" required></label><label>Nombre<input name="nombre" maxlength="180" required></label><label>Carrera<select name="carrera">'+opts(cs)+'</select></label><label>Trayecto<input name="trayecto" type="number" min="1" max="4" value="1" required></label><label>Trimestre<input name="trim" type="number" min="1" max="12" value="1" required></label><label>Unidades de crédito<input name="uc" type="number" min="1" max="30" value="1" required></label>','Agregar unidad curricular')}
+    <h3>Salones</h3>${roomRows ? tabla(['Salón','Acciones'],roomRows) : '<p class="vacio">No hay salones.</p>'}
+    ${form('aulas','<label>Nombre del salón<input name="nombre" maxlength="80" required></label>','Agregar salón')}
+    <h3>Períodos académicos</h3>${periodRows ? tabla(['Código','Nombre','Estado','Acciones'],periodRows) : '<p class="vacio">No hay períodos.</p>'}
+    ${form('periodos','<label>Código del período (ej. 2026-T2)<input name="nombre" maxlength="17" required></label>','Agregar período')}
+    <p class="nota">Los códigos de unidades y períodos se mantienen estables porque otras tablas los utilizan como referencias. Para esos casos, la edición cambia los datos descriptivos sin romper las referencias.</p>`;
+}
+function bdHtml(){
+  const E = USUARIOS.filter(x => x.rol === 'estudiante'), N = notas(), g = k => sessionStorage.getItem(k) || '';
+  const imm = g('pt_imm'), imf = g('pt_imf'); sessionStorage.removeItem('pt_imm'); sessionStorage.removeItem('pt_imf');
+  const fc = g('pt_bdc'), fs = g('pt_bds'), ft = g('pt_bdt'), fq = g('pt_bdq').toLowerCase();
+  const F = E.filter(x => (!fc || x.carrera === fc) && (!fs || x.seccion === fs) && (!ft || String(x.trayecto) === ft) && (!fq || (x.nombre + ' ' + x.ced).toLowerCase().includes(fq)));
+  const cars = [...new Set([...cat('carreras'), ...E.map(x => x.carrera)])].sort(), secs = [...new Set(E.map(x => x.seccion))].sort();
+  const res = cars.map(c => { const e = E.filter(x => x.carrera === c); return e.length ? `<tr><td>${esc(c)}</td><td>${e.length}</td><td>${[...new Set(e.map(x => x.seccion))].sort().map(s => chip('Sección ' + s + ': ' + e.filter(x => x.seccion === s).length)).join('')}</td></tr>` : ''; }).join('');
+  const flt = (id, et, L, v) => `<span><label for="${id}" style="display:inline;margin-right:6px">${et}</label><select id="${id}"><option value="">Todos</option>${opts(L, v)}</select></span>`;
+  return `<h2>Base de datos de estudiantes</h2><p>${E.length} estudiantes registrados, ${F.length} con el filtro actual.</p>` + tabla(['Carrera','Estudiantes','Por sección'], [res]) +
+    `<div class="bar">${flt('bdc', 'Carrera', cars, fc)}${flt('bds', 'Sección', secs, fs)}${flt('bdt', 'Trayecto', ['1','2','3','4'], ft)}<span><input id="bdq" type="search" placeholder="Buscar nombre o cédula" value="${escAttr(fq)}" aria-label="Buscar" style="width:220px"></span></div>` +
+    tabla(['Cédula','Nombre','Carrera','Sección','Trayecto','Trimestre','Promedio','Estado','Acciones'], F.map(x => `<tr><td>${x.ced}</td><td>${esc(x.nombre)}</td><td>${esc(x.carrera)}</td><td>${esc(x.seccion)}</td><td>${esc(x.trayecto)}</td><td>${esc(x.trimestre)}</td><td>${prom(Object.values(N[x.ced] || {}))}</td><td>${x.baneado ? '<b class="err">Suspendida</b>' : 'Activa'}</td>
+      <td style="white-space:nowrap"><button class="btn d sm ac" data-a="ver" data-c="${x.ced}">Ver perfil</button><button class="btn d sm ac" data-a="edit" data-c="${x.ced}">Editar</button></td></tr>`)) +
+    `<div class="btns" style="margin:14px 0"><button class="btn d ac" data-a="csv">Descargar CSV de estudiantes</button></div>
+    <h2 style="margin-top:28px">Carga masiva de estudiantes</h2><p>Una fila por estudiante: cédula (6 a 10 dígitos), nombre, carrera (debe existir en Catálogos), sección, trayecto (1 a 4), trimestre (1 a 12) y contraseña (mín. 8 caracteres, obligatoria solo para estudiantes nuevos). Si la cédula ya existe, se actualizan sus datos y las celdas vacías se conservan. Usa comillas si un valor lleva comas. La primera fila puede ser el encabezado.</p>
+    <textarea id="imt" rows="7" style="max-width:720px" aria-label="Filas CSV" placeholder="cedula,nombre,carrera,seccion,trayecto,trimestre,contrasena&#10;10000010,María Pérez,Psicología Social,A,1,2,clave1234&#10;10000011,&quot;Pérez, José&quot;,Psicología Social,B,2,5,otraClave99&#10;10000003,,,,2,4,   (existente: solo actualiza trayecto y trimestre)">${esc(imf)}</textarea>
+    <div class="btns" style="margin-top:10px"><button class="btn d" id="imb" type="button">Importar</button></div>
+    <pre id="imm" role="alert" style="white-space:pre-wrap;margin-top:10px;font:inherit;font-size:.88rem" class="err">${esc(imm)}</pre>`;
+}
+
+function asgHtml(){
+  const P = USUARIOS.filter(x => x.rol === 'profesor'), A = asigsAll();
+  return `<h2>Nueva asignación</h2><form class="c" id="fas" style="max-width:560px"><label for="ap">Profesor</label><select id="ap">${P.map(p => `<option value="${p.ced}">${esc(p.nombre)}</option>`).join('')}</select>
+    <label for="asx">Carrera y sección</label><select id="asx">${todasSecs().map(x => `<option value="${escAttr(x)}">${esc(nomSec(x))}</option>`).join('')}</select>
+    <label for="aun">Unidad curricular</label><select id="aun">${UNIDADES.map(x => `<option value="${escAttr(x[0])}">${esc(x[1])}</option>`).join('')}</select>
+    <p class="err" id="am" role="alert" style="margin-top:8px"></p><button class="btn d" style="margin-top:12px">Asignar</button></form>
+    <h2 style="margin-top:28px">Asignaciones actuales (${A.length})</h2>` + (A.length ? tabla(['Profesor','Unidad','Carrera y sección',''], A.map(a => { const p = USUARIOS.find(x => x.ced === a.prof);
+    return `<tr><td>${esc(p ? p.nombre : a.prof)}</td><td>${esc(nombreUnidad(a.unidad))}</td><td>${esc(nomSec(a.sec))}</td><td><button class="btn d sm ac" data-a="da" data-i="${a.id}">Quitar</button></td></tr>`; })) : '<p class="vacio">No hay asignaciones.</p>');
+}
+
+function sisHtml(){
+  const est = USUARIOS.filter(x => x.rol === 'estudiante'), N = notas();
+  const promSeccion = l => { const v = l.flatMap(e => Object.values(N[e.ced] || {})); return v.length ? (v.reduce((a,b)=>a+b,0)/v.length).toFixed(1) : '—'; };
+  const filas = todasSecs().map(x => { const e=est.filter(y=>sec(y)===x), pr=USUARIOS.filter(y=>(y.secciones||[]).includes(x)).length; return `<tr><td>${esc(x.split('|')[0])}</td><td>${esc(x.split('|')[1])}</td><td>${e.length}</td><td>${pr}</td><td>${promSeccion(e)}</td></tr>`; });
+  return catHtml() + `<hr style="margin:36px 0;border:0;border-top:1px solid var(--bd)"><h2>Estado del sistema</h2>` + tabla(['Carrera','Sección','Estudiantes','Profesores','Promedio'], filas) +
+    `<p>Solicitudes pendientes: <b>${sols().filter(s=>s.estado==='Pendiente').length}</b>. Mensajes en los chats: <b>${LS.g('chat',[]).length}</b>.</p>
+    <h2 style="margin-top:28px">Respaldo de datos de interfaz</h2><p>El respaldo guarda únicamente caché y preferencias. La base de datos oficial permanece en Supabase.</p>
+    <textarea id="bkt" rows="5" aria-label="Respaldo" style="max-width:640px"></textarea>
+    <div class="btns" style="margin-top:10px"><button class="btn d ac" data-a="bk">Generar respaldo</button><button class="btn d ac" data-a="bi">Restaurar desde el texto</button></div><p class="err" id="bkm" role="alert" style="margin-top:8px"></p>`;
+}
+function portalHtml(){
+  const u = yo();
+  if (!u && sesion()) { /* sesión de una cuenta suspendida o eliminada: se cierra y se avisa */
+    const x = USUARIOS.find(z => z.id === sesion().id);
+    ['pt_ses','pt_ver','pt_edit','pt_tab','pt_sala'].forEach(k => sessionStorage.removeItem(k));
+    sessionStorage.setItem('pt_msg', x && x.baneado ? 'Tu cuenta ha sido suspendida.' : 'Tu sesión ya no es válida. Ingresa de nuevo.');
+  }
+  const msg = u ? '' : (sessionStorage.getItem('pt_msg') || ''); if (!u) sessionStorage.removeItem('pt_msg');
+  if (!u) return cab('Portal académico', 'Ingresa con tu correo institucional y tu contraseña.') + `<section><div class="w">
+    <form class="c" id="fl" style="max-width:420px"><h2>Iniciar sesión</h2>
+    <label for="lc">Correo institucional</label><input id="lc" type="email" autocomplete="username" placeholder="nombre@unelmlk.edu.ve" required>
+    <label for="lp">Contraseña</label><input id="lp" type="password" autocomplete="current-password" required>
+    <p class="err" id="le" role="alert" style="margin-top:10px;font-size:.9rem">${esc(msg)}</p>
+    <button class="btn d" style="margin-top:14px">Entrar</button></form></div></section>`;
+  const T = TABS[u.rol]; let tab = sessionStorage.getItem('pt_tab'); if (!T.some(t => t[0] === tab)) tab = T[0][0];
+  const cont = {perfil: () => cuerpoDe(u), notas: () => cuerpoDe(u), hor: () => horHtml(u), chat: () => chatHtml(u), usr: usrHtml, cms: cmsHtml, asg: asgHtml, doc: () => docHtml(u), bd: bdHtml, sol: () => solHtml(u), asis: () => asisHtml(u), sis: sisHtml}[tab]();
+  return cab('Portal académico', `${esc(u.nombre)}`) + `<section><div class="w"><div class="bar"><span id="rtstate" role="status" aria-live="polite">○ Conectando…</span><nav class="tabs" aria-label="Secciones del portal" style="margin:0">${T.map(t => `<button class="btn ${t[0] === tab ? 'p' : 'd'} sm ac" data-a="tab" data-c="${t[0]}">${t[1]}</button>`).join('')}</nav>
+    <button class="btn d" id="so">Cerrar sesión</button></div>${cont}</div></section>`;
+}
+
+RUTAS.portal = {t: 'Portal académico', h: portalHtml, after(){
+  const $ = i => document.getElementById(i), val = i => $(i).value.trim();
+  main.onclick = null;
+  const f = $('fl');
+  if (f) f.onsubmit = async ev => {
+    ev.preventDefault();
+    const e = $('le'); e.textContent = '';
+    try {
+      const email = val('lc').toLowerCase();
+      const { error } = await SB.auth.signInWithPassword({ email, password: $('lp').value });
+      if (error) { e.textContent = 'Correo o contraseña incorrectos.'; return; }
+      await cargarSupabase();
+      rlSet(RL0());
+      ir();
+    } catch (err) { console.error(err); e.textContent = 'No se pudo iniciar sesión. Verifica tu conexión e inténtalo de nuevo.'; }
+  };
+  const u = yo(); if (!u) return;
+  const adm = u.rol === 'admin', prof = u.rol === 'profesor', staff = adm || prof;
+  const vivo = () => { const x = yo(); if (x && x.rol === u.rol) return true; ir(); return false; };
+  const perfilId = ced => (USUARIOS.find(x => x.ced === ced) || {}).id;
+  const reloadRemote = async msg => { if(msg) console.info(msg); await cargarSupabase({ensureRealtime:false}); ir(); };
+  if ($('so')) $('so').onclick = async () => {
+    stopRealtime();
+    ['pt_ses','pt_ver','pt_edit','pt_tab','pt_sala'].forEach(k => sessionStorage.removeItem(k));
+    await SB.auth.signOut(); remoteMode = false; ir();
+  };
+  const cl = $('cl'); if (cl) cl.scrollTop = cl.scrollHeight;
+  if ($('hsel')) $('hsel').onchange = () => { sessionStorage.setItem('pt_hsec', $('hsel').value); ir(); };
+  if ($('dsel')) $('dsel').onchange = () => { sessionStorage.setItem('pt_dp', $('dsel').value); ir(); };
+  if ($('pp')) $('pp').onchange = () => { sessionStorage.setItem('pt_per', $('pp').value); ir(); };
+  if ($('sa')) $('sa').onchange = () => { sessionStorage.setItem('pt_sala', $('sa').value); ir(); };
+
+  document.querySelectorAll('input[data-c]').forEach(i => i.onchange = seguro(async () => {
+    if (!vivo() || !staff || (prof && !puede(u, i.dataset.c, i.dataset.u))) return;
+    const estudiante_id = perfilId(i.dataset.c), cod_unidad = i.dataset.u, periodo = i.dataset.p;
+    if (!estudiante_id) return alert('No se encontró el estudiante en la base de datos.');
+    const un = UNIDADES.find(x => x[0] === cod_unidad), valor = i.value === '' ? null : Math.min(20, Math.max(0, Number(i.value)));
+    try {
+      if (valor === null) {
+        const {error} = await SB.from('notas').delete().eq('estudiante_id', estudiante_id).eq('cod_unidad', cod_unidad).eq('periodo', periodo);
+        if (error) throw error;
+      } else {
+        const payload = {estudiante_id,cod_unidad,periodo,trayecto:+(un?.[4]||1),trimestre:+(un?.[2]||1),nota:valor};
+        const {data:old,error:e1} = await SB.from('notas').select('observacion').eq('estudiante_id',estudiante_id).eq('cod_unidad',cod_unidad).eq('periodo',periodo).maybeSingle();
+        if(e1) throw e1; payload.observacion = old?.observacion ?? null;
+        const {error}=await SB.from('notas').upsert(payload,{onConflict:'estudiante_id,cod_unidad,periodo'}); if(error) throw error;
+      }
+      await reloadRemote('Nota sincronizada');
+    } catch(err){ console.error(err); alert('No se pudo guardar la nota: '+(err.message||err)); await reloadRemote(); }
+  }));
+
+  document.querySelectorAll('input[data-o]').forEach(i => i.onchange = seguro(async () => {
+    if (!vivo() || !staff || (prof && !puede(u, i.dataset.o, i.dataset.u))) return;
+    const estudiante_id = perfilId(i.dataset.o), cod_unidad=i.dataset.u, periodo=i.dataset.p;
+    if(!estudiante_id) return alert('No se encontró el estudiante en la base de datos.');
+    try{
+      const {data:row,error:e1}=await SB.from('notas').select('id').eq('estudiante_id',estudiante_id).eq('cod_unidad',cod_unidad).eq('periodo',periodo).maybeSingle();
+      if(e1) throw e1;
+      if(!row){alert('Primero registra una nota para poder guardar una observación.');await reloadRemote();return;}
+      const {error}=await SB.from('notas').update({observacion:i.value.trim().slice(0,500)}).eq('id',row.id);if(error)throw error;
+      await reloadRemote('Observación sincronizada');
+    }catch(err){console.error(err);alert('No se pudo guardar la observación: '+(err.message||err));await reloadRemote();}
+  }));
+
+  document.querySelectorAll('[data-h]').forEach(i => i.onchange = seguro(async () => {
+    if(!vivo()) return;
+    const H=horarios(),h=H.find(x=>x.id===i.dataset.h),f=i.dataset.f;
+    if(!h||!canEd(u,h)||(!adm&&!['dia','ini','fin','tema','aula'].includes(f)))return;
+    const n=Object.assign({},h,{[f]:i.value.trim(),periodo:h.periodo||curPer()});
+    if(n.ini>=n.fin){alert('La hora de fin debe ser posterior a la de inicio.');return ir();}
+    const c=choque(n);if(c){alert(c);return ir();}
+    try{
+      const patch={};
+      if(f==='unidad'){const un2=UNIDADES.find(x=>x[0]===n.unidad);patch.cod_unidad=n.unidad;patch.trayecto=+(un2?.[4]||1);patch.trimestre=+(un2?.[2]||1);}else if(f==='dia')patch.dia=n.dia;else if(f==='ini')patch.hora_inicio=n.ini;else if(f==='fin')patch.hora_fin=n.fin;else if(f==='tema')patch.tema=n.tema.slice(0,160)||null;else if(f==='aula')patch.salon=n.aula||null;else if(f==='prof')patch.profesor_id=n.prof?perfilId(n.prof):null;else return;
+      const {error}=await SB.from('horarios').update(patch).eq('id',h.id);if(error)throw error;
+      await reloadRemote('Horario sincronizado');
+    }catch(err){console.error(err);alert('No se pudo guardar el horario: '+(err.message||err));await reloadRemote();}
+  }));
+
+  if($('fh'))$('fh').onsubmit=seguro(async ev=>{
+    ev.preventDefault();if(!adm||!vivo())return;
+    const secV=$('hs').value,unidad=$('hu').value,dia=$('hd').value,ini=val('hi'),fin=val('hf'),tema=val('ht'),profCed=$('hp').value,aula=$('ha').value;
+    const n={sec:secV,unidad,dia,ini,fin,tema,prof:profCed,aula,id:'__nuevo__'};
+    if(!n.sec||!n.unidad){$('hm').textContent='Elige sección y unidad curricular.';return;}
+    if(n.ini>=n.fin){$('hm').textContent='La hora de fin debe ser posterior a la de inicio.';return;}
+    const c=choque(n);if(c){$('hm').textContent=c;return;}
+    const [carrera,seccion]=secV.split('|'),un=UNIDADES.find(x=>x[0]===unidad),profesor_id=profCed?perfilId(profCed):null;
+    try{
+      const {error}=await SB.from('horarios').insert({carrera,seccion,trayecto:+(un?.[4]||1),trimestre:+(un?.[2]||1),dia,hora_inicio:ini,hora_fin:fin,cod_unidad:unidad,profesor_id,salon:aula||null,tema:tema.slice(0,160)||null,periodo:curPer()});
+      if(error)throw error;sessionStorage.setItem('pt_hsec',secV);await reloadRemote('Clase agregada');
+    }catch(err){console.error(err);$('hm').textContent='No se pudo guardar la clase: '+(err.message||err);}
+  });
+
+  if($('fch'))$('fch').onsubmit=seguro(async ev=>{
+    ev.preventDefault();if(!vivo())return;
+    const sala=$('sa').value,texto=val('ct');
+    if(!texto||!salas(u).some(r=>r.id===sala)||u.silenciado||u.baneado)return;
+    try{const {error}=await SB.from('chats').insert({sala,remitente_id:u.id,texto:texto.slice(0,2000),es_aviso:!!($('cav')&&$('cav').checked)});if(error)throw error;sessionStorage.setItem('pt_sala',sala);await reloadRemote('Mensaje enviado');}
+    catch(err){console.error(err);alert('No se pudo enviar el mensaje: '+(err.message||err));}
+  });
+
+  if($('fso'))$('fso').onsubmit=seguro(async ev=>{
+    ev.preventDefault();if(u.rol!=='estudiante'||!vivo())return;
+    try{const {error}=await SB.from('solicitudes').insert({estudiante_id:u.id,tipo:$('sot').value,destino:'Administración',motivo:$('som').value.trim(),estado:'Pendiente'});if(error)throw error;await reloadRemote('Solicitud guardada');}
+    catch(err){console.error(err);alert('No se pudo registrar la solicitud: '+(err.message||err));}
+  });
+
+  if($('au')){$('au').onchange=()=>{sessionStorage.setItem('pt_au',$('au').value);ir();};$('af').onchange=()=>{sessionStorage.setItem('pt_af',$('af').value);ir();};}
+  document.querySelectorAll('select[data-as]').forEach(i=>i.onchange=seguro(async()=>{
+    const as=asigsDe(u).find(x=>x.id===$('au').value),e=USUARIOS.find(x=>x.ced===i.dataset.as),fecha=$('af').value;
+    if(!prof||!as||!e||sec(e)!==as.sec||!fecha)return;
+    try{
+      if(i.value){const {error:iErr}=await SB.from('asistencias').upsert({estudiante_id:e.id,cod_unidad:as.unidad,fecha,estado:i.value},{onConflict:'estudiante_id,cod_unidad,fecha'});if(iErr)throw iErr;}
+      else {const {error:dErr}=await SB.from('asistencias').delete().eq('estudiante_id',e.id).eq('cod_unidad',as.unidad).eq('fecha',fecha);if(dErr)throw dErr;}
+      await reloadRemote('Asistencia sincronizada');
+    }catch(err){console.error(err);alert('No se pudo guardar la asistencia: '+(err.message||err));await reloadRemote();}
+  }));
+
+  main.onclick=async ev=>{
+    const b=ev.target.closest('.ac');if(!b)return;if(!vivo())return;
+    const a=b.dataset.a,c=b.dataset.c,i=b.dataset.i,t=USUARIOS.find(x=>x.ced===c);
+    if(a==='tab'){['pt_ver','pt_edit'].forEach(k=>sessionStorage.removeItem(k));sessionStorage.setItem('pt_tab',c);return ir();}
+    if(a==='volver'){sessionStorage.removeItem('pt_ver');sessionStorage.removeItem('pt_edit');return ir();}
+    if(a==='dm'){const m=LS.g('chat',[]).find(x=>x.id===i);if(!m||!(adm||m.ced===u.ced))return;try{const {error}=await SB.from('chats').delete().eq('id',i);if(error)throw error;await reloadRemote('Mensaje eliminado');}catch(err){console.error(err);alert('No se pudo borrar el mensaje: '+(err.message||err));}return;}
+    if(a==='dh'){if(!adm)return;try{const {error}=await SB.from('horarios').delete().eq('id',i);if(error)throw error;await reloadRemote('Clase eliminada');}catch(err){console.error(err);alert('No se pudo quitar la clase: '+(err.message||err));}return;}
+    if(!adm)return;
+    if(a==='da'){try{const {error}=await SB.from('asignaciones').delete().eq('id',i);if(error)throw error;await reloadRemote('Asignación eliminada');}catch(err){console.error(err);alert('No se pudo quitar la asignación: '+(err.message||err));}return;}
+    if(a==='dcat'){
+      const k=b.dataset.k;if(!confirm('¿Eliminar este elemento del catálogo? Si está siendo utilizado, Supabase impedirá la operación.'))return;
+      try{let body=null;
+        if(k==='carrera')body={accion:'eliminar',tipo:'carrera',nombre:i};
+        else if(k==='unidad'){const x=UNIDADES[+i];if(!x)return;body={accion:'eliminar',tipo:'unidad',codigo:x[0]};}
+        else if(k==='salon'){const x=salonesMeta()[+i];if(!x)return;body={accion:'eliminar',tipo:'salon',nombre:x.nombre};}
+        else if(k==='periodo'){const x=periodosMeta()[+i];if(!x)return;body={accion:'eliminar',tipo:'periodo',codigo:x.codigo};}
+        else if(k==='seccion'){const x=seccionesMeta()[+i];if(!x)return;body={accion:'eliminar',tipo:'seccion',carrera:x.carrera,codigo:x.codigo};}
+        if(!body)return;await catalogAction(body);await reloadRemote('Catálogo actualizado');
+      }catch(err){console.error(err);alert('No se pudo eliminar el elemento: '+(err.message||err));}return;
+    }
+    if(a==='ecat'){
+      const k=b.dataset.k;
+      try{
+        if(k==='carrera'){const actual=i,nombre=(prompt('Nuevo nombre de la carrera:',actual)||'').trim();if(!nombre||nombre===actual)return;await catalogAction({accion:'editar',tipo:'carrera',actual,nombre});}
+        else if(k==='unidad'){const x=UNIDADES[+i];if(!x)return;const nombre=(prompt('Nombre:',x[1])||'').trim();if(!nombre)return;const carrera=(prompt('Carrera:',x[3])||'').trim();const trayecto=Number(prompt('Trayecto (1-4):',x[4]||1));const trimestre=Number(prompt('Trimestre (1-12):',x[2]||1));const uc=Number(prompt('Unidades de crédito:',x[5]||1));await catalogAction({accion:'editar',tipo:'unidad',codigo:x[0],nombre,carrera,trayecto,trimestre,uc});}
+        else if(k==='seccion'){const x=seccionesMeta()[+i];if(!x)return;const carrera=(prompt('Carrera:',x.carrera)||'').trim();const codigo=(prompt('Código:',x.codigo)||'').trim();const nombre=(prompt('Nombre visible:',x.nombre)||'').trim();if(!carrera||!codigo)return;await catalogAction({accion:'editar',tipo:'seccion',id:x.id,carrera,codigo,nombre:nombre||('Sección '+codigo)});}
+        else if(k==='salon'){const x=salonesMeta()[+i];if(!x)return;const nombre=(prompt('Nuevo nombre del salón:',x.nombre)||'').trim();if(!nombre||nombre===x.nombre)return;await catalogAction({accion:'editar',tipo:'salon',actual:x.nombre,nombre});}
+        else if(k==='periodo'){const x=periodosMeta()[+i];if(!x)return;const nombre=(prompt('Nombre visible del período:',x.nombre)||'').trim();if(!nombre||nombre===x.nombre)return;await catalogAction({accion:'editar',tipo:'periodo',codigo:x.codigo,nombre});}
+        await reloadRemote('Catálogo actualizado');
+      }catch(err){console.error(err);alert('No se pudo editar el elemento: '+(err.message||err));}return;
+    }
+    if(a==='eperiodo'){
+      const x=periodosMeta()[+i];if(!x)return;try{await catalogAction({accion:'activar_periodo',codigo:x.codigo});await reloadRemote('Período activo actualizado');}catch(err){console.error(err);alert('No se pudo activar el período: '+(err.message||err));}return;
+    }
+    if(a==='csv'){const N=notas(),rows=[['cedula','nombre','carrera','seccion','trayecto','trimestre','promedio'],...USUARIOS.filter(x=>x.rol==='estudiante').map(x=>[x.ced,x.nombre,x.carrera,x.seccion,x.trayecto,x.trimestre,prom(Object.values(N[x.ced]||{}))])];descargarCSV('estudiantes.csv',rows);return;}
+    if(a==='sr'){const x=sols().find(y=>y.id===i);if(!x)return;const r=prompt(`Respuesta para el estudiante (${c}):`,x.resp||'');if(r===null)return;try{const {error}=await SB.from('solicitudes').update({estado:c,respuesta:r.trim().slice(0,5000)}).eq('id',i);if(error)throw error;await reloadRemote('Solicitud actualizada');}catch(err){console.error(err);alert('No se pudo actualizar la solicitud: '+(err.message||err));}return;}
+    if(a==='bk'){const d={exportado_en:new Date().toISOString(),nota:'El respaldo local ya no contiene contraseñas ni es fuente de verdad.',cache:{}};Object.keys(localStorage).filter(k=>k.startsWith('pt_')).forEach(k=>d.cache[k]=localStorage.getItem(k));$('bkt').value=JSON.stringify(d);$('bkt').select();$('bkm').textContent='Respaldo de caché generado. Los datos oficiales permanecen en Supabase.';return;}
+    if(a==='bi')return alert('La restauración directa desde texto está desactivada para evitar sobrescribir la base de datos y saltarse RLS. Usa las funciones administrativas del portal para importar o corregir datos.');
+    if(a==='vaciar'){if(!confirm('¿Vaciar todos los mensajes de esta sala? Esta acción se guardará en Supabase.'))return;const sala=$('sa').value;try{const {error}=await SB.from('chats').delete().eq('sala',sala);if(error)throw error;await reloadRemote('Sala vaciada');}catch(err){console.error(err);alert('No se pudo vaciar la sala: '+(err.message||err));}return;}
+    if(!t)return;
+    if(a==='ver'){sessionStorage.setItem('pt_tab','usr');sessionStorage.setItem('pt_ver',c);return ir();}
+    if(a==='edit'){sessionStorage.setItem('pt_tab','usr');sessionStorage.setItem('pt_edit',c);return ir();}
+    if(a==='cc')return cambiarCedula(t);
+    if(a==='mute'){try{await adminAction({accion:'silencio',id:t.id});await reloadRemote('Usuario silenciado/activado');}catch(err){console.error(err);alert('No se pudo cambiar el silencio: '+(err.message||err));}return;}
+    if(a==='ban'){try{await adminAction({accion:'estado',id:t.id,activo:!!t.baneado});await reloadRemote('Estado de cuenta actualizado');}catch(err){console.error(err);alert('No se pudo cambiar el estado: '+(err.message||err));}return;}
+    if(a==='del'){if(!confirm('¿Eliminar la cuenta de '+t.nombre+'? No se puede deshacer.'))return;try{await adminAction({accion:'eliminar',id:t.id});sessionStorage.removeItem('pt_edit');await reloadRemote('Cuenta eliminada');}catch(err){console.error(err);alert('No se pudo eliminar la cuenta: '+(err.message||err));}return;}
+  };
+
+  if(!adm)return;
+  document.querySelectorAll('.fcat').forEach(f=>f.onsubmit=seguro(async ev=>{
+    ev.preventDefault();const k=f.dataset.k,d=Object.fromEntries([...new FormData(f)].map(([a,b])=>[a,String(b).trim()]));
+    if(Object.values(d).some(v=>v.includes('|')))return alert('No uses el carácter | en los nombres.');
+    try{
+      if(k==='carreras')await catalogAction({accion:'crear',tipo:'carrera',nombre:d.nombre});
+      else if(k==='unidades')await catalogAction({accion:'crear',tipo:'unidad',codigo:d.cod,nombre:d.nombre,carrera:d.carrera,trayecto:+d.trayecto,trimestre:+d.trim,uc:+d.uc});
+      else if(k==='aulas')await catalogAction({accion:'crear',tipo:'salon',nombre:d.nombre});
+      else if(k==='periodos')await catalogAction({accion:'crear',tipo:'periodo',codigo:d.nombre});
+      else if(k==='secciones')await catalogAction({accion:'crear',tipo:'seccion',carrera:d.carrera,codigo:d.letra});
+      await reloadRemote('Catálogo actualizado');
+    }catch(err){console.error(err);alert('No se pudo guardar el catálogo: '+(err.message||err));}
+  }));
+
+  [['bdc','pt_bdc'],['bds','pt_bds'],['bdt','pt_bdt']].forEach(([id,k])=>{if($(id))$(id).onchange=()=>{sessionStorage.setItem(k,$(id).value);ir();};});if($('bdq'))$('bdq').onchange=()=>{sessionStorage.setItem('pt_bdq',$('bdq').value);ir();};
+
+  if($('imb'))$('imb').onclick=seguro(async()=>{
+    if(!vivo())return;$('imm').textContent='Procesando…';const L=$('imt').value.split(/\r?\n/).filter(x=>x.trim()),filas=[],malas=[];
+    for(let n=0;n<L.length;n++){const c=csvSplit(L[n]);if(n===0&&/^"?c[eé]dula/i.test(c[0]))continue;const ced=c[0]||'',nombre=c[1]||'',carrera=c[2]||'',seccion=c[3]||'',trayecto=c[4]||'',trimestre=c[5]||'',password=c[6]||'';if(!/^\d{6,12}$/.test(ced)){malas.push('Fila '+(n+1)+': cédula inválida');continue;}filas.push({_fila:n+1,cedula:ced,nombre,carrera,seccion,trayecto:trayecto?Number(trayecto):null,trimestre:trimestre?Number(trimestre):null,password});}
+    try{const data=await adminAction({accion:'importar',filas}),errores=(data.errores||[]).map(x=>'Fila '+x.fila+': '+x.mensaje),all=[...malas,...errores];sessionStorage.setItem('pt_imm','Resultado: '+(data.nuevos||0)+' nuevos, '+(data.actualizados||0)+' actualizados, '+all.length+' filas con error.'+(all.length?'\n'+all.join('\n'):''));if(all.length)sessionStorage.setItem('pt_imf',L.filter((_,idx)=>all.some(e=>e.startsWith('Fila '+(idx+1)+':'))).join('\n'));await reloadRemote('Importación completada');}
+    catch(err){$('imm').textContent='No se pudo importar: '+(err.message||err);}
+  });
+
+  if($('fas'))$('fas').onsubmit=seguro(async ev=>{
+    ev.preventDefault();const profCed=$('ap').value,secV=$('asx').value,unidad=$('aun').value,[carrera,seccion]=secV.split('|'),un=UNIDADES.find(x=>x[0]===unidad),profesor_id=perfilId(profCed);if(!profesor_id||!carrera||!seccion||!unidad){$('am').textContent='Completa todos los campos.';return;}
+    if(asigsAll().some(x=>x.prof===profCed&&x.sec===secV&&x.unidad===unidad&&x.periodo===curPer())){$('am').textContent='Esa asignación ya existe.';return;}
+    try{const {error}=await SB.from('asignaciones').insert({profesor_id,carrera,seccion,trayecto:+(un?.[4]||1),trimestre:+(un?.[2]||1),cod_unidad:unidad,periodo:curPer()});if(error)throw error;await reloadRemote('Asignación creada');}
+    catch(err){$('am').textContent='No se pudo guardar la asignación: '+(err.message||err);}
+  });
+
+  if($('fcu'))$('fcu').onsubmit=seguro(async ev=>{
+    ev.preventDefault();const m=$('um'),ced=val('uc'),password=$('up').value,rol=val('ur');if(!/^\d{6,12}$/.test(ced)){m.textContent='La cédula debe tener entre 6 y 12 dígitos.';return;}if(password.length<8){m.textContent='La contraseña debe tener al menos 8 caracteres.';return;}
+    try{const data=await adminAction({accion:'crear',cedula:ced,nombre:val('un'),rol,carrera:rol==='estudiante'?val('uca'):null,seccion:rol==='estudiante'?(val('use')||'A').toUpperCase():null,trayecto:rol==='estudiante'?(+val('utr')||1):null,trimestre:rol==='estudiante'?(+val('uti')||1):null,password});await reloadRemote(data?.ok?'Cuenta creada':'Cuenta procesada');}
+    catch(err){m.textContent=err.message||'No se pudo crear la cuenta.';}
+  });
+
+  if($('fed'))$('fed').onsubmit=seguro(async ev=>{
+    ev.preventDefault();const t=USUARIOS.find(x=>x.ced===$('fed').dataset.e),password=$('ep').value;if(!t)return;if(password&&password.length<8){$('em').textContent='La contraseña debe tener al menos 8 caracteres.';return;}
+    try{const body={accion:'editar',id:t.id,nombre:val('en')};if(t.ced!==u.ced)body.rol=$('er').value;if($('eca')){body.carrera=val('eca');body.seccion=(val('ese')||'A').toUpperCase();body.trayecto=+val('etr')||1;body.trimestre=+val('eti')||1;}if(password)body.password=password;await adminAction(body);sessionStorage.removeItem('pt_edit');await reloadRemote('Cuenta actualizada');}
+    catch(err){$('em').textContent=err.message||'No se pudo actualizar la cuenta.';}
+  });
+
+  if($('fn'))$('fn').onsubmit=seguro(async ev=>{ev.preventDefault();try{const {error}=await SB.from('anuncios').insert({titulo:val('nt'),cuerpo:val('nx'),autor:u.nombre,publico:true});if(error)throw error;await reloadRemote('Noticia publicada');}catch(err){alert('No se pudo publicar la noticia: '+(err.message||err));}});
+  document.querySelectorAll('.dn').forEach(x=>x.onclick=seguro(async()=>{const n=NOTICIAS[+x.dataset.i];if(!n?.id)return;try{const {error}=await SB.from('anuncios').delete().eq('id',n.id);if(error)throw error;await reloadRemote('Noticia eliminada');}catch(err){alert('No se pudo eliminar la noticia: '+(err.message||err));}}));
+}};
+
+/* ========================= SUPABASE: FUENTE DE VERDAD ========================= */
+const SUPABASE_URL = 'https://szqfsskzlqbiwoprgnhx.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = atob('c2JfcHVibGlzaGFibGVfX0kyajRRcnpjcjVGNXFscXRneFZYUV83X1gxSnBLRg==');
+const SB = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+});
+let remoteMode = false, remoteBusy = false, refreshQueued = false, realtimeChannel = null, realtimeReady = false, remoteRefreshTimer = 0, realtimeRetryTimer = 0;
+const setLocal = (k, v) => { try { localStorage.setItem('pt_' + k, JSON.stringify(v)); } catch (e) {} };
+const perfilLegacy = (p, as) => ({
+  id:p.id, ced:p.cedula, rol:p.rol, nombre:p.nombre, correo:p.correo || '',
+  carrera:p.carrera, seccion:p.seccion || (p.rol==='estudiante' ? 'A' : null),
+  trayecto:p.trayecto, trimestre:p.trimestre, silenciado:!!p.silenciado,
+  baneado:!!p.baneado, activo:p.activo !== false,
+  secciones:[...new Set((as||[]).filter(a=>a.profesor_id===p.id).map(a=>a.carrera+'|'+a.seccion))],
+  unidades:[...new Set((as||[]).filter(a=>a.profesor_id===p.id).map(a=>a.cod_unidad))]
+});
+const hora5 = t => String(t || '').slice(0,5);
+const tsMs = t => { const n = new Date(t).getTime(); return Number.isFinite(n) ? n : Date.now(); };
+const remoteError = x => { if (x?.error) throw x.error; return x?.data; };
+async function adminAction(body){
+  const {data,error} = await SB.functions.invoke('admin-usuarios', {body});
+  if (error) throw error;
+  if (data?.error) throw new Error(data.error);
+  return data;
+}
+async function catalogAction(body){
+  const {data,error} = await SB.functions.invoke('admin-catalogos-v2', {body});
+  if (error) throw error;
+  if (data?.error) throw new Error(data.error);
+  return data;
+}
+async function writeOrThrow(query){
+  const {data,error} = await query;
+  if(error) throw error;
+  return data;
+}
+function programarRefresco(){
+  if(!remoteMode) return;
+  if(remoteBusy){ refreshQueued=true; return; }
+  if(remoteRefreshTimer) return;
+  remoteRefreshTimer=setTimeout(async()=>{
+    remoteRefreshTimer=0;if(!remoteMode||remoteBusy)return;
+    try{await cargarSupabase({ensureRealtime:false});ir();}catch(e){console.error('Supabase realtime refresh',e);}
+  },250);
+}
+async function cargarSupabase({ensureRealtime=true}={}){
+  if(remoteBusy){ refreshQueued = true; return; }
+  remoteBusy = true;
+  try {
+    const {data:{session}} = await SB.auth.getSession();
+    if (!session) {
+      remoteMode=false;
+      USUARIOS=[]; NOTICIAS=[]; NOTAS_MEM={}; OBS_MEM={};
+      return;
+    }
+    const base = await Promise.all([
+      SB.from('perfiles_directorio').select('*').order('nombre'),
+      SB.from('perfiles').select('*').eq('id', session.user.id).maybeSingle(),
+      SB.from('carreras').select('*').order('nombre'),
+      SB.from('secciones_academicas').select('*').order('carrera').order('codigo'),
+      SB.from('unidades').select('*').order('cod'),
+      SB.from('salones').select('*').order('nombre'),
+      SB.from('periodos').select('*').order('codigo'),
+      SB.from('asignaciones').select('*'),
+      SB.from('horarios').select('*'),
+      SB.from('notas').select('*'),
+      SB.from('anuncios').select('*').order('creado_en',{ascending:false}),
+      SB.from('solicitudes').select('*').order('creado_en',{ascending:false}),
+      SB.from('chats').select('*').order('creado_en',{ascending:true}).limit(500),
+      SB.from('asistencias').select('*').order('fecha')
+    ]);
+    const firstErr = base.find(x=>x.error); if(firstErr) throw firstErr.error;
+    const [dir,own,ca,se,un,sa,pe,as,ho,no,an,so,ch,at] = base;
+    const profilesById = new Map((dir.data||[]).map(p=>[p.id,p]));
+    if(own.data) profilesById.set(own.data.id, {...profilesById.get(own.data.id), ...own.data});
+    const profiles=[...profilesById.values()];
+    const assignments=as.data||[];
+    USUARIOS = profiles.map(p=>perfilLegacy(p,assignments));
+    setLocal('usuarios',USUARIOS);
+    setLocal('carreras',(ca.data||[]).map(x=>x.nombre));
+    setLocal('carreras_meta',ca.data||[]);
+    setLocal('secciones',(se.data||[]).map(x=>x.carrera+'|'+x.codigo));
+    setLocal('secciones_meta',se.data||[]);
+    setLocal('unidades',(un.data||[]).map(x=>[x.cod,x.nom,x.trimestre,x.carrera,x.trayecto,x.uc]));
+    setLocal('aulas',(sa.data||[]).map(x=>x.nombre));
+    setLocal('aulas_meta',sa.data||[]);
+    setLocal('periodos',(pe.data||[]).map(x=>x.codigo));
+    setLocal('periodos_meta',pe.data||[]);
+    const activePeriod=(pe.data||[]).find(x=>x.activo)?.codigo;
+    if(activePeriod) localStorage.setItem('pt_periodo_actual',activePeriod);
+    setLocal('asigs',assignments.map(a=>({id:a.id,prof:(profiles.find(p=>p.id===a.profesor_id)||{}).cedula||a.profesor_id,sec:a.carrera+'|'+a.seccion,unidad:a.cod_unidad,periodo:a.periodo}))); 
+    setLocal('horarios',(ho.data||[]).map(h=>({id:h.id,sec:h.carrera+'|'+h.seccion,unidad:h.cod_unidad,dia:h.dia,ini:hora5(h.hora_inicio),fin:hora5(h.hora_fin),aula:h.salon||'',tema:h.tema||'',prof:(profiles.find(p=>p.id===h.profesor_id)||{}).cedula||'',periodo:h.periodo}))); 
+    const nm={}, om={};
+    for(const n of (no.data||[])){
+      const c=(profiles.find(p=>p.id===n.estudiante_id)||{}).cedula;
+      if(!c) continue;
+      (nm[c] ||= {})[n.cod_unidad+'|'+n.periodo]=Number(n.nota);
+      if(n.observacion) (om[c] ||= {})[n.cod_unidad+'|'+n.periodo]=n.observacion;
+    }
+    NOTAS_MEM=nm; OBS_MEM=om; setLocal('hnotas',nm); setLocal('hobs',om);
+    NOTICIAS=(an.data||[]).map(n=>({id:n.id,titulo:n.titulo,texto:n.cuerpo,fecha:new Date(n.creado_en).toLocaleDateString('es-VE')})); setLocal('noticias',NOTICIAS);
+    setLocal('sols',(so.data||[]).map(x=>({id:x.id,ced:(profiles.find(p=>p.id===x.estudiante_id)||{}).cedula||x.estudiante_id,tipo:x.tipo,texto:x.motivo,estado:x.estado,resp:x.respuesta||'',ts:tsMs(x.creado_en)})));
+    setLocal('chat',(ch.data||[]).map(x=>({id:x.id,uid:x.remitente_id,sala:x.sala,ced:(profiles.find(p=>p.id===x.remitente_id)||{}).cedula||'',nombre:x.remitente_nombre||((profiles.find(p=>p.id===x.remitente_id)||{}).nombre)||'Usuario',texto:x.texto,aviso:!!x.es_aviso,ts:tsMs(x.creado_en)})));
+    const AA={}; for(const x of (at.data||[])){ const c=(profiles.find(p=>p.id===x.estudiante_id)||{}).cedula; if(c) (AA[x.cod_unidad+'|'+x.fecha] ||= {})[c]=x.estado; } setLocal('asis',AA);
+    const me=profiles.find(p=>p.id===session.user.id);
+    if(me?.rol==='admin'){
+      const audit=await SB.from('auditoria').select('*').order('creado_en',{ascending:false}).limit(30);
+      if(!audit.error) setLocal('bitacora',(audit.data||[]).map(x=>new Date(x.creado_en).toLocaleString('es-VE')+' - '+x.accion+' · '+x.tabla_afectada));
+    } else setLocal('bitacora',[]);
+    sessionStorage.setItem('pt_ses',JSON.stringify({id:session.user.id}));
+    remoteMode=true;
+    UNIDADES=cat('unidades');
+    if(ensureRealtime) await startRealtime();
+  } finally {
+    remoteBusy=false;
+    if(refreshQueued){ refreshQueued=false; programarRefresco(); }
+  }
+}
+async function startRealtime(){
+  if(!remoteMode||realtimeChannel)return;
+  try{const {data:{session}}=await SB.auth.getSession();if(session?.access_token)SB.realtime.setAuth(session.access_token);}catch(e){console.warn('Realtime auth',e);}
+  const tables=['anuncios','asignaciones','asistencias','carreras','chats','horarios','notas','perfiles','periodos','salones','secciones_academicas','solicitudes','unidades'];
+  const ch=SB.channel('unelmlk-portal-db');
+  tables.forEach(table=>ch.on('postgres_changes',{event:'*',schema:'public',table},()=>programarRefresco()));
+  ch.subscribe(status=>{
+    realtimeReady=status==='SUBSCRIBED';
+    const nodes=document.querySelectorAll('#rtstate');nodes.forEach(el=>el.textContent=realtimeReady?'● En tiempo real':(status==='CHANNEL_ERROR'||status==='TIMED_OUT'?'⚠ Realtime · reintentando…':'○ Conectando…'));
+    if(status==='CHANNEL_ERROR'||status==='TIMED_OUT'){
+      console.warn('Supabase Realtime',status);
+      if(!realtimeRetryTimer){realtimeRetryTimer=setTimeout(()=>{realtimeRetryTimer=0;if(remoteMode){stopRealtime();startRealtime();}},4000);}
+    }
+  });
+  realtimeChannel=ch;
+}
+function stopRealtime(){
+  realtimeReady=false;if(remoteRefreshTimer){clearTimeout(remoteRefreshTimer);remoteRefreshTimer=0;}
+  if(realtimeRetryTimer){clearTimeout(realtimeRetryTimer);realtimeRetryTimer=0;}
+  if(realtimeChannel){SB.removeChannel(realtimeChannel);realtimeChannel=null;}
+}
+/* =========================================================================== */
+
+const main = document.getElementById('contenido');
+function ir(){
+  const k = (location.hash.replace(/^#\/?/, '') || '').split('?')[0];
+  const r = RUTAS[k] || RUTAS[''];
+  main.innerHTML = typeof r.h === 'function' ? r.h() : r.h;
+  document.title = r.t === 'Inicio' ? TITULO0 : r.t + ' · UNELMLK · Universidad Nacional Experimental de Lara';
+  document.querySelectorAll('#nav a').forEach(a => {
+    const on = a.getAttribute('href') === '#/' + k;
+    on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+  });
+  window.scrollTo(0, 0);
+  main.focus({preventScroll: true});
+  if (r.after) r.after();
+  document.querySelectorAll('#rtstate').forEach(el => el.textContent = realtimeReady ? '● En tiempo real' : '○ Conectando…');
+  const f = document.getElementById('fc');
+  if (f) f.onsubmit = ev => {
+    ev.preventDefault();
+    const cuerpo = `${document.getElementById('m').value}\n\n${document.getElementById('n').value} (${document.getElementById('e').value})`;
+    location.href = `mailto:${CORREO}?subject=${encodeURIComponent('Consulta desde el sitio web')}&body=${encodeURIComponent(cuerpo)}`;
+    document.getElementById('fs').textContent = 'Se abrió tu aplicación de correo. Envía el mensaje desde allí.';
+  };
+}
+window.addEventListener('hashchange', ir);
+
+async function iniciarPortal(){
+  try {
+    const {data:{session}} = await SB.auth.getSession();
+    if (session) { await cargarSupabase(); }
+  } catch (e) { console.error(e); }
+  ir();
+}
+SB.auth.onAuthStateChange(async(event,session)=>{
+  if(event==='SIGNED_IN'&&session){stopRealtime();await cargarSupabase({ensureRealtime:true});ir();}
+  if(event==='TOKEN_REFRESHED'&&session){try{SB.realtime.setAuth(session.access_token);}catch(e){}}
+  if(event==='USER_UPDATED'&&session){await cargarSupabase({ensureRealtime:false});ir();}
+  if(event==='SIGNED_OUT'){stopRealtime();remoteMode=false;ir();}
+});
+iniciarPortal();
+
+const guardarTema = t => { try { localStorage.setItem('tema', t); } catch (e) { try { sessionStorage.setItem('tema', t); } catch (e2) {} } };
+const leerTema = () => { for (const st of [() => localStorage, () => sessionStorage]) { try { const t = st().getItem('tema'); if (t === 'dark' || t === 'light') return t; } catch (e) {} } return null; };
+document.getElementById('tema').onclick = () => {
+  const r = document.documentElement;
+  const oscuro = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  r.dataset.theme = oscuro ? 'light' : 'dark';
+  guardarTema(r.dataset.theme);
+};
+{ const t = leerTema(); if (t) document.documentElement.dataset.theme = t; }
+</script>
+</body>
+</html>
