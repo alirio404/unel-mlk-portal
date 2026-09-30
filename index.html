@@ -286,7 +286,7 @@ const CAT0 = {
   periodos: [],
   secciones: []
 };
-const cat = k => LS.g(k, CAT0[k]);
+const cat = k => { const v = LS.g(k, CAT0[k]); return Array.isArray(v) ? v : CAT0[k]; };
 let UNIDADES = cat('unidades'); /* [código, nombre, trimestre del plan, carrera] */
 const perDe = un => { const P = cat('periodos'), x = UNIDADES.find(y => y[0] === un); return P[((x && x[2]) || 1) - 1] || P[0]; };
 const mig = o => Object.fromEntries(Object.entries(o).map(([c, m]) => [c, Object.fromEntries(Object.entries(m).map(([u, v]) => [u + '|' + perDe(u), v]))]));
@@ -522,7 +522,7 @@ function cmsHtml(){
 const TIPOS = ['Constancia de estudios','Constancia de notas','Reclamo de calificación','Cambio de sección','Justificativo médico','Reposición de evaluación','Solicitud de beca'];
 const sols = () => LS.g('sols', []);
 const asigsAll = () => { let a = LS.g('asigs', null);
-  if (!a) { a = USUARIOS.filter(x => x.rol === 'profesor').flatMap(p => (p.secciones || []).flatMap(s => (p.unidades || []).map(un => ({id: rnd(), prof: p.ced, sec: s, unidad: un})))); LS.s('asigs', a); }
+  if (!Array.isArray(a)) { a = USUARIOS.filter(x => x && x.rol === 'profesor').flatMap(p => (Array.isArray(p.secciones) ? p.secciones : []).flatMap(s => (Array.isArray(p.unidades) ? p.unidades : []).map(un => ({id: rnd(), prof: p.ced, sec: s, unidad: un})))); LS.s('asigs', a); }
   return a; };
 const asigsDe = u => asigsAll().filter(a => a.prof === u.ced);
 const secsDe = u => [...new Set(asigsDe(u).map(a => a.sec))].sort();
@@ -610,15 +610,39 @@ function asgHtml(){
 }
 
 function sisHtml(){
-  const est = USUARIOS.filter(x => x.rol === 'estudiante'), N = notas();
-  const promSeccion = l => { const v = l.flatMap(e => Object.values(N[e.ced] || {})); return v.length ? (v.reduce((a,b)=>a+b,0)/v.length).toFixed(1) : '—'; };
-  const filas = todasSecs().map(x => { const e=est.filter(y=>sec(y)===x), pr=USUARIOS.filter(y=>(y.secciones||[]).includes(x)).length; return `<tr><td>${esc(x.split('|')[0])}</td><td>${esc(x.split('|')[1])}</td><td>${e.length}</td><td>${pr}</td><td>${promSeccion(e)}</td></tr>`; });
-  return catHtml() + `<hr style="margin:36px 0;border:0;border-top:1px solid var(--bd)"><h2>Estado del sistema</h2>` + tabla(['Carrera','Sección','Estudiantes','Profesores','Promedio'], filas) +
-    `<p>Solicitudes pendientes: <b>${sols().filter(s=>s.estado==='Pendiente').length}</b>. Mensajes en los chats: <b>${LS.g('chat',[]).length}</b>.</p>
-    <h2 style="margin-top:28px">Respaldo de datos de interfaz</h2><p>El respaldo guarda únicamente caché y preferencias. La base de datos oficial permanece en Supabase.</p>
-    <textarea id="bkt" rows="5" aria-label="Respaldo" style="max-width:640px"></textarea>
-    <div class="btns" style="margin-top:10px"><button class="btn d ac" data-a="bk">Generar respaldo</button><button class="btn d ac" data-a="bi">Restaurar desde el texto</button></div><p class="err" id="bkm" role="alert" style="margin-top:8px"></p>`;
+  try{
+    const usuarios=Array.isArray(USUARIOS)?USUARIOS:[];
+    const cars=Array.isArray(carrerasMeta())?carrerasMeta():[];
+    const secs=Array.isArray(seccionesMeta())?seccionesMeta():[];
+    const units=Array.isArray(UNIDADES)?UNIDADES:[];
+    const rooms=Array.isArray(salonesMeta())?salonesMeta():[];
+    const periods=Array.isArray(periodosMeta())?periodosMeta():[];
+    const est=usuarios.filter(x=>x&&x.rol==='estudiante'), N=notas()||{};
+    const rows=(r,h)=>r.length?tabla(h,r):'<p class="vacio">No hay registros.</p>';
+    const names=cars.map(x=>x&&x.nombre).filter(Boolean);
+    const careerRows=cars.map(x=>`<tr><td>${esc(x&&x.codigo)}</td><td>${esc(x&&x.nombre)}</td><td><button class="btn d sm ac" data-a="ecat" data-k="carrera" data-i="${escAttr(x&&x.nombre||'')}">Editar</button> <button class="btn d sm ac" data-a="dcat" data-k="carrera" data-i="${escAttr(x&&x.nombre||'')}">Eliminar</button></td></tr>`);
+    const secRows=secs.map((x,i)=>`<tr><td>${esc(x&&x.carrera)}</td><td>${esc(x&&x.codigo)}</td><td>${esc(x&&x.nombre)}</td><td><button class="btn d sm ac" data-a="ecat" data-k="seccion" data-i="${i}">Editar</button> <button class="btn d sm ac" data-a="dcat" data-k="seccion" data-i="${i}">Eliminar</button></td></tr>`);
+    const unitRows=units.map((x,i)=>`<tr><td>${esc(x&&x[0])}</td><td>${esc(x&&x[1])}</td><td>${esc(x&&x[3])}</td><td>${x&&x[4]||1}</td><td>${x&&x[2]||1}</td><td>${x&&x[5]||1}</td><td><button class="btn d sm ac" data-a="ecat" data-k="unidad" data-i="${i}">Editar</button> <button class="btn d sm ac" data-a="dcat" data-k="unidad" data-i="${i}">Eliminar</button></td></tr>`);
+    const roomRows=rooms.map((x,i)=>`<tr><td>${esc(x&&x.nombre)}</td><td><button class="btn d sm ac" data-a="ecat" data-k="salon" data-i="${i}">Editar</button> <button class="btn d sm ac" data-a="dcat" data-k="salon" data-i="${i}">Eliminar</button></td></tr>`);
+    const periodRows=periods.map((x,i)=>`<tr><td>${esc(x&&x.codigo)}</td><td>${esc((x&&x.nombre)|| (x&&x.codigo))}</td><td>${x&&x.activo?'Activo':'Inactivo'}</td><td><button class="btn d sm ac" data-a="eperiodo" data-i="${i}">${x&&x.activo?'Activo':'Activar'}</button> <button class="btn d sm ac" data-a="ecat" data-k="periodo" data-i="${i}">Editar nombre</button> <button class="btn d sm ac" data-a="dcat" data-k="periodo" data-i="${i}">Eliminar</button></td></tr>`);
+    const form=(tipo,html,btn)=>`<form class="c fcat" data-k="${tipo}" style="max-width:620px;margin-bottom:12px">${html}<button class="btn d" type="submit" style="margin-top:12px">${btn}</button></form>`;
+    let summary=[]; try{for(const x of todasSecs()){const e=est.filter(y=>sec(y)===x),pr=usuarios.filter(y=>(Array.isArray(y.secciones)?y.secciones:[]).includes(x)).length;summary.push(`<tr><td>${esc(x.split('|')[0])}</td><td>${esc(x.split('|')[1])}</td><td>${e.length}</td><td>${pr}</td><td>${(()=>{const v=e.flatMap(z=>Object.values(N[z.ced]||{}).map(Number).filter(Number.isFinite));return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1):'—';})()}</td></tr>`);}}catch(e){console.warn('Resumen Sistema',e);}
+    return `<h2>Sistema y catálogos académicos</h2><p class="nota">Panel administrativo de las tablas maestras. Los cambios se guardan en Supabase.</p>
+      <h3>Carreras</h3>${rows(careerRows,['Código','Nombre','Acciones'])}
+      ${form('carreras','<label>Nombre de la carrera<input name="nombre" maxlength="120" required></label>','Agregar carrera')}
+      <h3>Secciones</h3>${rows(secRows,['Carrera','Código','Nombre','Acciones'])}
+      ${form('secciones','<label>Carrera<select name="carrera">${opts(names)}</select></label><label>Código de sección<input name="letra" maxlength="6" required></label>','Agregar sección')}
+      <h3>Unidades curriculares</h3>${rows(unitRows,['Código','Nombre','Carrera','Trayecto','Trimestre','UC','Acciones'])}
+      ${form('unidades','<label>Código<input name="cod" maxlength="30" required></label><label>Nombre<input name="nombre" maxlength="180" required></label><label>Carrera<select name="carrera">${opts(names)}</select></label><label>Trayecto<input name="trayecto" type="number" min="1" max="4" value="1" required></label><label>Trimestre<input name="trim" type="number" min="1" max="12" value="1" required></label><label>Unidades de crédito<input name="uc" type="number" min="1" max="30" value="1" required></label>','Agregar unidad curricular')}
+      <h3>Salones</h3>${rows(roomRows,['Salón','Acciones'])}
+      ${form('aulas','<label>Nombre del salón<input name="nombre" maxlength="80" required></label>','Agregar salón')}
+      <h3>Períodos académicos</h3>${rows(periodRows,['Código','Nombre','Estado','Acciones'])}
+      ${form('periodos','<label>Código del período (ej. 2026-T2)<input name="nombre" maxlength="17" required></label>','Agregar período')}
+      <hr style="margin:36px 0;border:0;border-top:1px solid var(--bd)"><h2>Resumen académico</h2>${rows(summary,['Carrera','Sección','Estudiantes','Profesores','Promedio'])}
+      <p>Solicitudes pendientes: <b>${Array.isArray(sols())?sols().filter(x=>x.estado==='Pendiente').length:0}</b>. Mensajes: <b>${Array.isArray(LS.g('chat',[]))?LS.g('chat',[]).length:0}</b>.</p>`;
+  }catch(err){console.error('Error cargando Sistema',err);return '<h2>Sistema</h2><p class="err">No se pudo cargar el panel de sistema. La sesión permanece activa.</p><p class="nota">Recarga la página para sincronizar nuevamente los catálogos desde Supabase.</p>'; }
 }
+
 function portalHtml(){
   const u = yo();
   if (!u && sesion()) { /* sesión de una cuenta suspendida o eliminada: se cierra y se avisa */
@@ -996,7 +1020,7 @@ const main = document.getElementById('contenido');
 function ir(){
   const k = (location.hash.replace(/^#\/?/, '') || '').split('?')[0];
   const r = RUTAS[k] || RUTAS[''];
-  main.innerHTML = typeof r.h === 'function' ? r.h() : r.h;
+  try { main.innerHTML = typeof r.h === 'function' ? r.h() : r.h; } catch (err) { console.error('Error renderizando ruta', k, err); main.innerHTML = `<div class="pageh"><div class="w"><h1>Error de carga</h1><p>Esta sección encontró un error al renderizarse. La sesión no se ha cerrado.</p></div></div><section><div class="w"><p class="err">Revisa la consola del navegador para el detalle técnico.</p><button class="btn d" type="button" onclick="location.reload()">Recargar</button></div></section>`; }
   document.title = r.t === 'Inicio' ? TITULO0 : r.t + ' · UNELMLK · Universidad Nacional Experimental de Lara';
   document.querySelectorAll('#nav a').forEach(a => {
     const on = a.getAttribute('href') === '#/' + k;
